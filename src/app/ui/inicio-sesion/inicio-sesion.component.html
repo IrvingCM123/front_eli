@@ -1,0 +1,33 @@
+<app-alerta-pantalla *ngIf="mostrarAlertaPantalla" [messageToShow]="tipoAlerta" [messageText]="mensajeAlerta"
+  id="error"></app-alerta-pantalla>
+
+<main>
+  <section [ngClass]="{ blurred: ocultarPantalla }">
+    <section>
+      <div></div>
+
+      <div >
+        <h3 id="Titulo_Formulario">Iniciar Sesión</h3>
+
+        <div class="form-group">
+          <div class="form-wrapper" style="position: relative">
+            <i class="fa fa-key"></i>
+          </div>
+          <input class="form-control" id="txt-input" type="email" placeholder="@UsuarioDemo: admin@hotmail.com"
+            [value]="correoUsuario" (input)="almacenarUsuario($event)" required />
+        </div>
+
+        <div class="form-group">
+          <div class="form-wrapper" style="position: relative">
+            <i class="fa fa-key"></i>
+          </div>
+          <input class="form-control" type="password" id="pwd" name="password" placeholder="@ContraseñaDemo: demo"
+            [value]="contrasenaUsuario" (input)="almacenarContrasena($event)" required />
+        </div>
+        <button class="log-in" (click)="iniciarSesion()" id="btnIniciarSesion">
+          Iniciar Sesión
+        </button>
+      </div>
+    </section>
+  </section>
+</main>

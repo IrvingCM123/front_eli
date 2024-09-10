@@ -1,0 +1,18 @@
+<input type="text" [(ngModel)]="productoBuscar" (ngModelChange)="buscarProductoNombre(productoBuscar)" placeholder="Buscar producto" />
+
+<ul *ngIf="productosObtenidos instanceof Array && productosObtenidos.length > 0">
+  <li *ngFor="let producto of productosObtenidos">
+    {{ producto.producto_nombre }}
+    $ {{ producto.producto_precio }}
+  </li>
+</ul>
+
+<p *ngIf="productosObtenidos === false">No se pudieron obtener los productos. Intente de nuevo más tarde.</p>
+
+<select [(ngModel)]="categoriaBuscar" (ngModelChange)="buscarProductosCategoria(categoriaBuscar)">
+  <option value="">Todas las categorías</option> <!-- Opción para seleccionar todas las categorías -->
+  <option *ngFor="let categoria of categorias" [value]="categoria">{{ categoria }}</option>
+</select>
+
+<button (click)="ordenarMayorMenor()">Mayor precio</button>
+<button (click)="ordenarMenorMayor()">Menor precio</button>

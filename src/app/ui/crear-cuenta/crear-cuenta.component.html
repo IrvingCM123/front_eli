@@ -1,0 +1,52 @@
+<app-alerta-pantalla *ngIf="mostrarAlertaPantalla" [messageToShow]="tipoAlerta" [messageText]="mensajeAlerta"
+  id="error"></app-alerta-pantalla>
+
+<main>
+  <section [ngClass]="{ blurred: ocultarPantalla }">
+    <section>
+      <div></div>
+
+      <div >
+        <h3 id="Titulo_Formulario">Crear Cuenta</h3>
+
+        <div class="form-group">
+          <div class="form-wrapper" style="position: relative">
+            <i class="fa fa-key"></i>
+          </div>
+          <input class="form-control" id="txt-input" type="text" placeholder="Nombre"
+            [value]="objeto_Cuenta.Nombre" (input)="almacenarNombre($event)" required />
+        </div>
+
+        <div class="form-group">
+          <div class="form-wrapper" style="position: relative">
+            <i class="fa fa-key"></i>
+          </div>
+          <input class="form-control" id="txt-input" type="text" placeholder="Apellidos"
+            [value]="objeto_Cuenta.Apellidos" (input)="almacenarApellidos($event)" required />
+        </div>
+
+        <div class="form-group">
+          <div class="form-wrapper" style="position: relative">
+            <i class="fa fa-key"></i>
+          </div>
+          <input class="form-control" id="txt-input" type="email" placeholder="Correo"
+            [value]="objeto_Cuenta.Correo_electronico" (input)="almacenarCorreo($event)" required />
+        </div>
+
+        <div class="form-group">
+          <div class="form-wrapper" style="position: relative">
+            <i class="fa fa-key"></i>
+          </div>
+          <input class="form-control" id="txt-input" type="password" placeholder="@UsuarioDemo: admin@hotmail.com"
+            [value]="objeto_Cuenta.Contrasena" (input)="almacenarContrasena($event)" required />
+        </div>
+
+        <button class="log-in" (click)="crearCuenta()" id="btnIniciarSesion">
+          Crear Cuenta
+        </button>
+
+        
+      </div>
+    </section>
+  </section>
+</main>
