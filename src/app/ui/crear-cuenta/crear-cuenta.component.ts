@@ -1,23 +1,23 @@
 import { crearCuentaInterface } from 'src/app/common/interfaces/crearCuenta.interface';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { crearCuentaUseCase } from 'src/app/domain/registro/crearCuenta.use-case';
-import { mensajeCrearCuenta } from 'src/app/common/enums/mensajes.enum';
-import { enumTipoAlerta } from 'src/app/common/enums/tipoAlerta.enum';
-import { Subject } from 'rxjs';
+import { tiposRol } from 'src/app/common/enums/tiposRol.enum';
 import { claseCrearCuenta } from './methods/crear-cuenta.class';
+import { claseMostrarAlerta } from 'src/app/common/services/alerta.service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-crear-cuenta',
   templateUrl: './crear-cuenta.component.html',
   styleUrls: ['./crear-cuenta.component.css'],
+  providers: [claseCrearCuenta, claseMostrarAlerta]
 })
-export class CrearCuentaComponent {
+export class CrearCuentaComponent implements OnInit {
 
   constructor(
-    private router: Router,
     private crearCuentaUseCase: crearCuentaUseCase,
-    private claseCrearCuenta: claseCrearCuenta
+    private claseCrearCuenta: claseCrearCuenta,
+    private claseMostrarAlerta: claseMostrarAlerta,
   ) {}
 
   objeto_Cuenta: crearCuentaInterface = {
@@ -28,37 +28,37 @@ export class CrearCuentaComponent {
     cuenta_rol: '',
   };
 
-  private consultaTerminada = new Subject<boolean>();
+  tiposRol: string[] = Object.values(tiposRol);
 
-  mostrarAlertaPantalla: boolean = false;
-  mensajeAlerta: string = '';
-  tipoAlerta: enumTipoAlerta = enumTipoAlerta.alertaConfirmacion;
-  ocultarPantalla: boolean = false;
+  codigoValidacion: string = '';
+
+  async ngOnInit() {
+    await this.obtenerCodigoValidacion();
+  }
 
   async crearCuenta() {
 
+    const loading = await this.claseMostrarAlerta.crearLoading('Creando cuenta...');
+
     try {
+      const alerta: any = await this.claseMostrarAlerta.mostrarAlertaValidacion('Validación', this.codigoValidacion);
 
-      const resultado = await this.claseCrearCuenta.crearCuenta( this.objeto_Cuenta );
-
-      if (resultado) {
-        this.mostrarAelrta(mensajeCrearCuenta.crearCuentaExitoso, enumTipoAlerta.alertaConfirmacion, true, true);
-        this.consultaTerminada.next(true);
-        this.vaciarDatos();
-        this.router.navigate(['/iniciar-sesion']);
+      if (alerta == true ){
+        await loading.present();
+        const resultado = await this.claseCrearCuenta.crearCuenta( this.objeto_Cuenta );
+        console.log(resultado);
+        if (resultado) {
+          this.vaciarDatos();
+          await this.claseMostrarAlerta.mostrarAlertaRuta('Cuenta creada', 'La cuenta ha sido creada con éxito', 'iniciarSesion');
+        } else {
+        }
+        loading.dismiss();
       } else {
-        this.mostrarAelrta(mensajeCrearCuenta.crearCuentaFallido, enumTipoAlerta.alertaError, true, true);
-        this.consultaTerminada.next(true);
+        await alerta.body;
       }
-
     } catch (error) {
-
-      setTimeout(() => { this.mostrarAelrta(mensajeCrearCuenta.crearCuentaFallido, enumTipoAlerta.alertaError, true, false); }, 1500);
-
-    } finally {
-
-      this.consultaTerminada.subscribe(() => { this.mostrarAelrta('', enumTipoAlerta.alertaConfirmacion, false, false); });
-
+      loading.dismiss();
+      await this.claseMostrarAlerta.mostrarAlerta('Error', 'Error al crear la cuenta');
     }
   }
 
@@ -69,6 +69,8 @@ export class CrearCuentaComponent {
     this.objeto_Cuenta.Contrasena = '';
     this.objeto_Cuenta.cuenta_rol = '';
   }
+
+
 
   async validarDatosLlenos() {
 
@@ -86,11 +88,8 @@ export class CrearCuentaComponent {
 
   }
 
-  private mostrarAelrta( mensaje: string, tipoAlerta: enumTipoAlerta, mostrarAlerta: boolean, ocultarPantalla: boolean ) {
-    this.mostrarAlertaPantalla = mostrarAlerta;
-    this.mensajeAlerta = mensaje;
-    this.tipoAlerta = tipoAlerta;
-    this.ocultarPantalla = ocultarPantalla;
+  async obtenerCodigoValidacion(){
+    this.codigoValidacion = await firstValueFrom(this.crearCuentaUseCase.obtenerCodigoValidacion());
   }
 
   almacenarNombre(event: Event) { this.objeto_Cuenta.Nombre = (event.target as HTMLInputElement).value; }

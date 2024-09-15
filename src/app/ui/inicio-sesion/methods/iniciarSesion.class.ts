@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class claseIniciarSesion {
-  
+
   constructor(
     private inicioSesionUseCase: inicioSesionUseCase,
     private cacheServicio: Cache_Service,
@@ -16,15 +16,17 @@ export class claseIniciarSesion {
 
     try {
       const resultado = await this.inicioSesionUseCase.iniciarSesion(datosInicioSesion).toPromise();
-
       if (resultado?.status == 500) {
-        return false;
+        return resultado.mensaje;
       } else {
         this.cacheServicio.guardar_DatoLocal('token', resultado?.access_Token);
-        return true;
+        return resultado;
       }
     } catch (error) {
-      return false;
+      return {
+        status: 500,
+        mensaje: 'Ha ocurrido un error al iniciar sesión'
+      }
     }
   }
 }

@@ -17,9 +17,10 @@ export class claseCrearCuenta {
       cuenta_rol: crearCuenta.cuenta_rol
     }
 
+    console.log(nueva_cuenta, 'nueva cuenta');
     try {
       const resultado = await this.crearCuentaUseCase.crearCuenta(nueva_cuenta).toPromise();
-
+      console.log(resultado, 'resultado');
       if (resultado?.status == 500) {
         return false;
       } else {

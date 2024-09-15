@@ -14,4 +14,9 @@ export class crearCuentaUseCase {
   crearCuenta(crearCuenta: crearCuentaEntity): Observable<recibirDatosCuentaInterface> {
     return this._crearCuentaPuerto.crearCuenta(crearCuenta);
   }
+
+  obtenerCodigoValidacion(): Observable<string> {
+    return this._crearCuentaPuerto.obtenerCodigoValidacion();
+  }
+
 }

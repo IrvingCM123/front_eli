@@ -1,1 +1,8 @@
-<p>visualizar-producto works!</p>
+<div *ngIf="productoObtenido">
+  <h2>{{ productoObtenido.producto_nombre }}</h2>
+  <p>Precio: {{ productoObtenido.producto_precio }}</p>
+</div>
+
+<div *ngIf="!productoObtenido">
+  <p>El producto no se ha encontrado o hubo un error al obtenerlo.</p>
+</div>

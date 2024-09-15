@@ -42,6 +42,7 @@ export class Cache_Service {
   }
 
   Actualizar_Login(loggedIn: boolean) {
+    this.guardar_DatoLocal('loggedIn', loggedIn);
     this.loggedInSubject.next(loggedIn);
   }
 

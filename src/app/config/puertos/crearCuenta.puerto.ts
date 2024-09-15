@@ -4,4 +4,5 @@ import { recibirDatosCuentaInterface } from "src/app/common/interfaces/crearCuen
 
 export abstract class crearCuentaPuerto {
   abstract crearCuenta(crearCuenta: crearCuentaEntity): Observable<recibirDatosCuentaInterface>;
+  abstract obtenerCodigoValidacion(): Observable<string>;
 }

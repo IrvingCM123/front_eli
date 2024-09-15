@@ -1,33 +1,41 @@
-<app-alerta-pantalla *ngIf="mostrarAlertaPantalla" [messageToShow]="tipoAlerta" [messageText]="mensajeAlerta"
-  id="error"></app-alerta-pantalla>
+<body class="contenedor">
 
-<main>
-  <section [ngClass]="{ blurred: ocultarPantalla }">
-    <section>
-      <div></div>
 
-      <div >
-        <h3 id="Titulo_Formulario">Iniciar Sesión</h3>
+  <main class="cajaMenu">
+    <header class="imagen_contorno">
+      <img src="assets/image/Logo.jpg" alt="">
+    </header>
 
-        <div class="form-group">
-          <div class="form-wrapper" style="position: relative">
-            <i class="fa fa-key"></i>
-          </div>
-          <input class="form-control" id="txt-input" type="email" placeholder="@UsuarioDemo: admin@hotmail.com"
-            [value]="correoUsuario" (input)="almacenarUsuario($event)" required />
-        </div>
+    <article class="datos_contorno">
 
-        <div class="form-group">
-          <div class="form-wrapper" style="position: relative">
-            <i class="fa fa-key"></i>
-          </div>
-          <input class="form-control" type="password" id="pwd" name="password" placeholder="@ContraseñaDemo: demo"
-            [value]="contrasenaUsuario" (input)="almacenarContrasena($event)" required />
-        </div>
-        <button class="log-in" (click)="iniciarSesion()" id="btnIniciarSesion">
-          Iniciar Sesión
-        </button>
+      <div class="datos">
+        <label for=""> Correo Electronico </label>
+        <input class="form-control" id="txt-input" type="email" placeholder="@UsuarioDemo: admin@hotmail.com"
+        [value]="correoUsuario" (input)="almacenarUsuario($event)" required />
       </div>
-    </section>
-  </section>
-</main>
+
+      <div class="datos">
+        <label for=""> Contraseña </label>
+        <input class="form-control" type="password" id="pwd" name="password" placeholder="@ContraseñaDemo: demo"
+        [value]="contrasenaUsuario" (input)="almacenarContrasena($event)" required />
+      </div>
+
+    </article>
+
+    <footer class="footer">
+
+      <section class="boton_IniciarSesion">
+        <button (click)="iniciarSesion()"> Iniciar Sesion </button>
+      </section>
+
+      <section class="informacion_Registro">
+        <a href="crearCuenta"> Registrarse </a>
+      </section>
+
+    </footer>
+
+
+  </main>
+
+
+</body>

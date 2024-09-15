@@ -1,0 +1,13 @@
+/* styles.css o styles.scss */
+.NoLoggin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 97vh;
+  width: 98vw;
+}
+
+.Loggin {
+  /* Estilos para cuando loggin es true */
+  background-color: green;
+}

@@ -1,18 +1,66 @@
-<input type="text" [(ngModel)]="productoBuscar" (ngModelChange)="buscarProductoNombre(productoBuscar)" placeholder="Buscar producto" />
+<div class="container text-center">
 
-<ul *ngIf="productosObtenidos instanceof Array && productosObtenidos.length > 0">
-  <li *ngFor="let producto of productosObtenidos">
-    {{ producto.producto_nombre }}
-    $ {{ producto.producto_precio }}
-  </li>
-</ul>
+  <div class="inputs row justify-content-around" id="opciones">
 
-<p *ngIf="productosObtenidos === false">No se pudieron obtener los productos. Intente de nuevo más tarde.</p>
+    <input class="col-5" type="text" [(ngModel)]="productoBuscar" (ngModelChange)="buscarProductoNombre(productoBuscar)"
+      placeholder="Buscar producto" />
 
-<select [(ngModel)]="categoriaBuscar" (ngModelChange)="buscarProductosCategoria(categoriaBuscar)">
-  <option value="">Todas las categorías</option> <!-- Opción para seleccionar todas las categorías -->
-  <option *ngFor="let categoria of categorias" [value]="categoria">{{ categoria }}</option>
-</select>
+    <select class="col-3" [(ngModel)]="categoriaBuscar" (ngModelChange)="buscarProductosCategoria(categoriaBuscar)">
+      <option value="">Todas las categorías</option>
+      <option *ngFor="let categoria of categorias" [value]="categoria">{{ categoria }}</option>
+    </select>
 
-<button (click)="ordenarMayorMenor()">Mayor precio</button>
-<button (click)="ordenarMenorMayor()">Menor precio</button>
+    <button class="col-1" (click)="ordenarMayorMenor()">Mayor precio</button>
+    <button class="col-1" (click)="ordenarMenorMayor()">Menor precio</button>
+
+  </div>
+
+  <div class="row justify-content-around">
+
+    <input id="menuDesplegable" class="col-5" type="text" [(ngModel)]="productoBuscar"
+      (ngModelChange)="buscarProductoNombre(productoBuscar)" placeholder="Buscar producto" />
+
+    <div class="hamburger col-4" #hamburger (click)="toggleNav()">
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+
+  </div>
+
+  <div class="row" style="padding-top: 1%;">
+    <div class="col">
+      <ul *ngIf="productosObtenidos instanceof Array && productosObtenidos.length > 0">
+        <li *ngFor="let producto of productosObtenidos">
+          <span (click)="enviarIdProductoSeleccionado(producto.id_Producto)">
+            {{producto.id_Producto}}
+            {{ producto.producto_nombre }}
+            $ {{ producto.producto_precio }}
+          </span>
+        </li>
+      </ul>
+
+      <p *ngIf="productosObtenidos === false">No se pudieron obtener los productos. Intente de nuevo más tarde.</p>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="menubar" #filtros>
+  <div class="container text-center">
+
+    <div class="inputs row">
+      <select class="col-5" [(ngModel)]="categoriaBuscar" (ngModelChange)="buscarProductosCategoria(categoriaBuscar)">
+        <option value="">Todas las categorías</option>
+        <option *ngFor="let categoria of categorias" [value]="categoria">{{ categoria }}</option>
+      </select>
+      <div class="w-100"></div>
+      <button class="col-1" (click)="ordenarMayorMenor()">Mayor precio</button>
+      <div class="w-100"></div>
+      <button class="col-1" (click)="ordenarMenorMayor()">Menor precio</button>
+
+    </div>
+
+  </div>
+</div>

@@ -1,1 +1,12 @@
-<p>proveedores works!</p>
+<input type="text" [(ngModel)]="proveedorBuscar" (ngModelChange)="buscarProveedorNombre(proveedorBuscar)"
+  placeholder="Buscar proveedor" />
+
+<ul *ngIf="proveedoresObtenidos instanceof Array && proveedoresObtenidos.length > 0">
+  <li *ngFor="let proveedor of proveedoresObtenidos">
+    <span (click)="enviarIdProveedorSeleccionado(proveedor.id_Proveedor)">
+      {{proveedor.id_Proveedor}}
+      {{ proveedor.Nombre }}
+      {{ proveedor.Telefono }}
+    </span>
+  </li>
+</ul>

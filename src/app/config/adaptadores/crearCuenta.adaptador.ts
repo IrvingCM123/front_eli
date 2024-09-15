@@ -11,11 +11,15 @@ import { recibirDatosCuentaInterface } from "src/app/common/interfaces/crearCuen
 })
 export class crearCuentaAdaptador implements crearCuentaPuerto {
 
-    apiUrl = environment.apiUrlLocal + "auth/register";
+    apiUrl = environment.apiUrlLocal + "auth/";
 
     constructor(private readonly _http: HttpClient) { }
 
     crearCuenta(crearCuenta: crearCuentaEntity): Observable<recibirDatosCuentaInterface> {
-        return this._http.post<recibirDatosCuentaInterface>( this.apiUrl, crearCuenta);
+        return this._http.post<recibirDatosCuentaInterface>( this.apiUrl + 'register', crearCuenta);
+    }
+
+    obtenerCodigoValidacion(): Observable<string> {
+        return this._http.get<string>(this.apiUrl + 'obtenerCodigo', { responseType: 'text' as 'json' });
     }
 }

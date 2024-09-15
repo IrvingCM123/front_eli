@@ -2,6 +2,7 @@ import { Cache_Service } from 'src/app/common/services/cache.Service';
 import { inventarioUseCase } from 'src/app/domain/inventario/inventario.use-case';
 import { inventarioEntity } from 'src/app/domain/inventario/inventario.entity';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class claseObtenerProductos {
@@ -9,6 +10,9 @@ export class claseObtenerProductos {
     private inventarioUseCase: inventarioUseCase,
     private cacheServicio: Cache_Service
   ) {}
+
+  private productoID = new BehaviorSubject<number | null>(null);
+  public productoID$ = this.productoID.asObservable();
 
   public async devolverProductos() {
     let productos;
@@ -102,5 +106,10 @@ export class claseObtenerProductos {
       return false;
     }
   }
+
+  public async enviarIdProductoSeleccionado(id: number | string): Promise<void> {
+    this.productoID.next(id as number);
+  }
+
 
 }

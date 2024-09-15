@@ -1,0 +1,30 @@
+<div *ngIf="proveedorObtenido">
+  <h2>{{ proveedorObtenido.proveedor_nombre }}</h2>
+
+  <!-- Formulario que contiene los inputs -->
+  <form [formGroup]="proveedorForm" (ngSubmit)="guardarCambios()">
+    <label for="telefono">Teléfono:</label>
+    <input
+      id="telefono"
+      formControlName="proveedor_telefono"
+      [disabled]="!editMode"
+    />
+
+    <label for="correo">Correo:</label>
+    <input
+      id="correo"
+      formControlName="proveedor_correo"
+      [disabled]="!editMode"
+    />
+
+    <!-- Botón para habilitar la edición -->
+    <button type="button" (click)="habilitarEdicion()" *ngIf="!editMode">Editar</button>
+
+    <!-- Botón para guardar cambios -->
+    <button type="submit" *ngIf="editMode">Guardar</button>
+  </form>
+</div>
+
+<div *ngIf="!proveedorObtenido">
+  <p>El proveedor no se ha encontrado o hubo un error al obtenerlo.</p>
+</div>

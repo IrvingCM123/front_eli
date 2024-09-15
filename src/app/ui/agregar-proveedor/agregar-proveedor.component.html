@@ -1,0 +1,37 @@
+<section>
+
+  <input class="form-control" type="email" [value]="proveedor_Informacion.Nombre"
+  (input)="almacenarProveedorNombre($event)" required />
+
+  <input class="form-control" type="email" [value]="proveedor_Informacion.Direccion"
+  (input)="almacenarProveedorDireccion($event)" required />
+
+  <input class="form-control" type="email" [value]="proveedor_Informacion.Telefono"
+  (input)="almacenarProveedorTelefono($event)" required />
+
+  <input class="form-control" type="email" [value]="proveedor_Informacion.Email"
+  (input)="almacenarProveedorEmail($event)" required />
+
+  <input class="form-control" type="email" [value]="proveedor_Informacion.Url_catalogo"
+  (input)="almacenarProveedorUrlCatalogo($event)" required />
+
+  <input class="form-control" type="email" [value]="proveedor_Informacion.Direccion"
+  (input)="almacenarProveedorDireccion($event)" required />
+
+  <input class="form-control" type="email" [value]="proveedor_Informacion.id_Proveedor_Banco.proveedor_cuenta_bancaria"
+  (input)="almacenarProveedorTelefono($event)" required />
+
+  <input class="form-control" type="email" [value]="proveedor_Informacion.id_Proveedor_Banco.proveedor_nombre_banco"
+  (input)="almacenarProveedorEmail($event)" required />
+
+  <input class="form-control" type="email" [value]="proveedor_Informacion.id_Proveedor_Banco.proveedor_nombre_beneficiario"
+  (input)="almacenarProveedorUrlCatalogo($event)" required />
+
+  <input class="form-control" type="email" [value]="proveedor_Informacion.id_Proveedor_Banco.proveedor_tipo_transaccion"
+  (input)="almacenarProveedorTipoTransaccion($event)" required />
+
+  <button (click)="agregarProveedor()">
+
+  </button>
+
+</section>

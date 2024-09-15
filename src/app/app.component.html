@@ -1,1 +1,11 @@
-<router-outlet> </router-outlet>
+<div *ngIf="loggin">
+  <app-nav-bar> </app-nav-bar>
+</div>
+
+<div [ngClass]="{'NoLoggin': !loggin, '.container-xxl': loggin}">
+  <router-outlet> </router-outlet>
+</div>
+
+<div *ngIf="loggin">
+  <app-footer> </app-footer>
+</div>
