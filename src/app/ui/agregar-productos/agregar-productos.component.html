@@ -1,1 +1,71 @@
-<p>agregar-productos works!</p>
+<div class="container" [ngClass]="{ 'flipped': isFlipped }">
+  <button class="toggle-btn" (click)="toggleFlip()">Girar</button>
+
+  <main class="form-section">
+    <section class="input-group mb-3">
+      <span class="input-group-text">Nombre</span>
+      <input type="text" class="form-control" [(ngModel)]="datosFormulario.nombre" name="nombre" />
+    </section>
+
+    <section class="input-group mb-3">
+      <span class="input-group-text">Categoría</span>
+      <input class="form-control" list="datalistOptions" id="exampleDataList"  [(ngModel)]="datosFormulario.categoria" name="categoria">
+      <datalist id="datalistOptions">
+        <option value="San Francisco">
+        <option value="New York">
+        <option value="Seattle">
+        <option value="Los Angeles">
+        <option value="Chicago">
+      </datalist>
+    </section>
+
+    <section class="input-group mb-3">
+      <span class="input-group-text">Proveedor</span>
+      <input type="text" class="form-control" [(ngModel)]="datosFormulario.proveedor" name="proveedor" />
+    </section>
+
+    <section class="input-group mb-3">
+      <span class="input-group-text">Precio</span>
+      <span class="input-group-text">$</span>
+      <input type="text" class="form-control" [(ngModel)]="datosFormulario.precio" name="precio" />
+    </section>
+
+    <section class="input-group mb-3">
+      <span class="input-group-text">Cantidad</span>
+      <input type="text" class="form-control" [(ngModel)]="datosFormulario.cantidad" name="cantidad" />
+    </section>
+
+    <section class="mb-3">
+      <input class="form-control form-control-sm" id="formFileSm" type="file" (change)="almacenarImagen($event)"
+        name="imagen" />
+    </section>
+
+    <section>
+      <button type="button">Success</button>
+    </section>
+
+  </main>
+
+  <main class="card-section">
+    <div class="card">
+      <div class="card-img-holder">
+        <img [src]="datosFormulario.imagen" alt="Imagen Producto">
+      </div>
+      <h3 class="blog-title"> {{datosFormulario.nombre}} </h3>
+      <span class="blog-time"> {{datosFormulario.proveedor}} </span>
+      <p class="description">
+        El producto {{datosFormulario.nombre}} es un producto de la categoría {{datosFormulario.categoria}} y tiene un
+        precio de ${{datosFormulario.precio}}.
+      </p>
+      <div class="options">
+        <span>
+          {{datosFormulario.categoria}}
+        </span>
+        <span>
+          $ {{datosFormulario.precio}}
+        </span>
+      </div>
+    </div>
+
+  </main>
+</div>

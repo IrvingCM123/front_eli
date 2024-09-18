@@ -25,7 +25,7 @@ export class InventarioComponent implements OnInit, AfterViewInit {
   enviarIdProducto!: number | string;
 
   @ViewChild('hamburger') mobileFiltros!: ElementRef;
-  @ViewChild('filtros') filtros!: ElementRef;
+  @ViewChild('menubar') filtros!: ElementRef;
 
   isMenuOpen = false;
 
@@ -50,6 +50,13 @@ export class InventarioComponent implements OnInit, AfterViewInit {
   public async buscarProductoNombre(nombre: string): Promise<void> {
     this.productosObtenidos = await this.claseObtenerProductos.buscarProductoNombre(nombre);
   }
+
+  public async realizarBusqueda(): Promise<void> {
+    if (this.productoBuscar) {
+      this.productosObtenidos = await this.claseObtenerProductos.buscarProductoNombre(this.productoBuscar);
+    }
+  }
+
 
   public async obtenerCategorias(): Promise<void> {
     this.categorias = await this.claseObtenerProductos.obtenerCategorias();
@@ -88,6 +95,5 @@ export class InventarioComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    throw new Error('Method not implemented.');
   }
 }

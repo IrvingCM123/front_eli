@@ -15,10 +15,10 @@
 
   </div>
 
-  <div class="row justify-content-around">
+  <div class="row justify-content-evenly">
 
     <input id="menuDesplegable" class="col-5" type="text" [(ngModel)]="productoBuscar"
-      (ngModelChange)="buscarProductoNombre(productoBuscar)" placeholder="Buscar producto" />
+      (ngModelChange)="buscarProductoNombre(productoBuscar)" (keydown.enter)="realizarBusqueda()" placeholder="Buscar producto" />
 
     <div class="hamburger col-4" #hamburger (click)="toggleNav()">
       <span class="line"></span>
@@ -47,11 +47,11 @@
 
 </div>
 
-<div class="menubar" #filtros>
+<div class="menubar" #menubar>
   <div class="container text-center">
 
-    <div class="inputs row">
-      <select class="col-5" [(ngModel)]="categoriaBuscar" (ngModelChange)="buscarProductosCategoria(categoriaBuscar)">
+    <div class="inputs_responsive row">
+      <select [(ngModel)]="categoriaBuscar" (ngModelChange)="buscarProductosCategoria(categoriaBuscar)">
         <option value="">Todas las categorías</option>
         <option *ngFor="let categoria of categorias" [value]="categoria">{{ categoria }}</option>
       </select>
