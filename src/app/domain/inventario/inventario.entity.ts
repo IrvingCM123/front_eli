@@ -5,6 +5,7 @@ export class inventarioEntity {
     public producto_categoria: string,
     public producto_precio: number,
     public producto_stock: number,
-    public producto_proveedor: any
+    public producto_proveedor: any,
+    public producto_imagen: string
   ) {}
 }

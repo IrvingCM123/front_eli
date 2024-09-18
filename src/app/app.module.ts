@@ -28,6 +28,9 @@ import { FooterComponent } from './ui/footer/footer.component';
 
 import { IonicModule } from '@ionic/angular';
 import { VisualizarProveedorComponent } from './ui/visualizar-proveedor/visualizar-proveedor.component';
+import { CarouselModule } from 'primeng/carousel';
+import { ButtonModule } from 'primeng/button';
+import { TagModule } from 'primeng/tag';
 
 
 @NgModule({
@@ -55,7 +58,9 @@ import { VisualizarProveedorComponent } from './ui/visualizar-proveedor/visualiz
     FormsModule,
     CommonModule,
     IonicModule.forRoot(),
-
+    CarouselModule,
+    ButtonModule,
+    TagModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

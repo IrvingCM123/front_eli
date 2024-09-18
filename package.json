@@ -20,8 +20,12 @@
     "@angular/platform-browser": "^14.1.0",
     "@angular/platform-browser-dynamic": "^14.1.0",
     "@angular/router": "^14.1.0",
+    "@coreui/angular": "^5.2.17",
     "@ionic/angular": "^7.8.6",
     "dotenv": "^16.4.5",
+    "primeflex": "2.0.0",
+    "primeicons": "5.0.0",
+    "primeng": "^14.2.3",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

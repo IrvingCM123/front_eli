@@ -32,13 +32,13 @@ export class AgregarProductosComponent implements OnInit {
     const reader = new FileReader();
 
     reader.onload = () => {
-      // Guardamos la imagen en formato base64
       this.datosFormulario.imagen = reader.result as string;
       console.log('Imagen en Base64:', this.datosFormulario.imagen);
     };
 
-    // Leer el archivo como una URL en Base64
     reader.readAsDataURL(file);
   }
+
+ 
 
 }

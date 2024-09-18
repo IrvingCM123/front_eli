@@ -29,19 +29,34 @@
   </div>
 
   <div class="row" style="padding-top: 1%;">
+
+    <!--
     <div class="col">
-      <ul *ngIf="productosObtenidos instanceof Array && productosObtenidos.length > 0">
-        <li *ngFor="let producto of productosObtenidos">
+      <ul *ngIf="productosObtenidos1 instanceof Array && productosObtenidos1.length > 0">
+        <li *ngFor="let producto of productosObtenidos1">
           <span (click)="enviarIdProductoSeleccionado(producto.id_Producto)">
             {{producto.id_Producto}}
-            {{ producto.producto_nombre }}
-            $ {{ producto.producto_precio }}
+            {{ producto.Nombre }}
+            $ {{ producto.Precio }}
           </span>
         </li>
       </ul>
 
-      <p *ngIf="productosObtenidos === false">No se pudieron obtener los productos. Intente de nuevo más tarde.</p>
+      <p *ngIf="productosObtenidos1.length == 0 ">No se pudieron obtener los productos. Intente de nuevo más tarde.</p>
     </div>
+    -->
+
+    <p-carousel [value]="productosObtenidos1" styleClass="custom-carousel" [autoplayInterval]="3000" [circular]="true" [numVisible]="3" [numScroll]="1" [responsiveOptions]="responsiveOptions">
+      <ng-template pTemplate="header">
+          <h5>Vertical</h5>
+      </ng-template>
+      <ng-template let-producto pTemplate="item">
+        <div class="product-item">
+          {{producto.producto_nombre}}
+        </div>
+      </ng-template>
+
+  </p-carousel>
 
   </div>
 
