@@ -1,0 +1,17 @@
+<p-virtualScroller [value]="proveedoresObtenidos" scrollHeight="450px" [itemSize]="100" >
+  <ng-template pTemplate="header" > Proveedores </ng-template>
+  <ng-template let-proveedor pTemplate="item">
+    <div class="product-item" (click) = "enviarProveedorSeleccionado(proveedor)" >
+      <div class="product-list-detail">
+        <h5 class="mb-2">{{ proveedor.proveedor_Nombre }}</h5>
+        <h6 style="font-weight: 400;"> {{ proveedor.proveedor_Email }}</h6>
+      </div>
+      <div class="product-list-action">
+        <h6 class="mb-2">{{ proveedor.proveedor_Telefono }}</h6>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template let-product pTemplate="loadingItem">
+    <p-skeleton height="90px" [style]="{ 'margin-top': '10px' }"></p-skeleton>
+  </ng-template>
+</p-virtualScroller>

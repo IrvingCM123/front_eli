@@ -1,0 +1,28 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+<body>
+  <div class="wrapper">
+    <div class="title">
+      Inicio de Sesión
+    </div>
+    <form action="#">
+      <div class="field">
+        <input id="txt-input" type="email" [value]="correoUsuario" (input)="almacenarUsuario($event)" required />
+        <label>Correo de Usuario</label>
+      </div>
+      <div class="field">
+        <input type="password" id="pwd" name="password" [value]="contrasenaUsuario"
+          (input)="almacenarContrasena($event)" required />
+        <label>Contraseña</label>
+      </div>
+      <div class="btn">
+        <div class="inner"></div>
+        <button (click)="iniciarSesion()">Iniciar Sesion</button>
+      </div>
+
+      <div class="signup-link">
+        ¿No tiene Cuenta? Sólicitela a su Administrador <a href="crearCuenta">Registrar</a>
+      </div>
+    </form>
+  </div>
+</body>

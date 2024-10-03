@@ -1,0 +1,88 @@
+<div class="container" [ngClass]="{ 'flipped': isFlipped }">
+  <button class="toggle-btn" (click)="toggleFlip()">Girar</button>
+
+  <main class="form-section">
+    <section class="input-group mb-3">
+      <span class="input-group-text">Nombre</span>
+      <input type="text" class="form-control" [(ngModel)]="datosFormulario.proveedor_Nombre" name="nombre" />
+    </section>
+
+    <section class="input-group mb-3">
+      <span class="input-group-text">Direccion</span>
+      <input class="form-control" [(ngModel)]="datosFormulario.proveedor_Direccion" name="categoria">
+    </section>
+
+    <section class="input-group mb-3">
+      <span class="input-group-text">Telefono</span>
+      <input type="number" class="form-control" [(ngModel)]="datosFormulario.proveedor_Telefono" name="precio" />
+    </section>
+
+    <section class="input-group mb-3">
+      <span class="input-group-text">Correo Electronico</span>
+      <input type="text" class="form-control" [(ngModel)]="datosFormulario.proveedor_Email" name="cantidad" />
+    </section>
+
+    <section class="input-group mb-3">
+      <span class="input-group-text">URL Catalogo</span>
+      <span class="input-group-text">Opcional</span>
+      <input type="text" class="form-control" [(ngModel)]="datosFormulario.proveedor_Catalogo" name="cantidad" />
+    </section>
+
+    <section class="ContornoMostrar">
+      <p class="lead"> Mostrar Información Financiera  </p>
+      <p-selectButton class="boton" [options]="stateOptions" [(ngModel)]="mostrarBoolean" optionLabel="label" optionValue="value"></p-selectButton>
+    </section>
+
+    <main *ngIf="mostrarBoolean">
+      <section class="input-group mb-3">
+        <span class="input-group-text">Cuenta Bancaria</span>
+        <input class="form-control" [(ngModel)]="datosFormulario.proveedorBanco_CuentaBancaria" name="categoria">
+      </section>
+
+      <section class="input-group mb-3">
+        <span class="input-group-text">Nombre del Banco</span>
+        <input type="number" class="form-control" [(ngModel)]="datosFormulario.proveedorBanco_NombreBanco" name="precio" />
+      </section>
+
+      <section class="input-group mb-3">
+        <span class="input-group-text">Nombre Beneficiario</span>
+        <input type="text" class="form-control" [(ngModel)]="datosFormulario.proveedorBanco_NombreBeneficiario" name="cantidad" />
+      </section>
+
+      <section class="input-group mb-3">
+        <span class="input-group-text">Tipo Transaccio</span>
+        <input type="text" class="form-control" list="tiposTransaccion" [(ngModel)]="datosFormulario.proveedorBanco_TipoTransaccion" name="cantidad" />
+        <datalist id="tiposTransaccion">
+          <option *ngFor="let tipos of tipoTransaccion" [value]="tipos">
+        </datalist>
+      </section>
+    </main>
+
+    <section>
+      <button type="button" (click)="agregarProveedor()">Success</button>
+    </section>
+
+  </main>
+
+  <main class="card-section">
+    <div class="card">
+      <div class="card-img-holder">
+        <h3 class="blog-title"> {{datosFormulario.proveedor_Nombre}} </h3>
+      </div>
+      <h3 class="blog-title"> {{datosFormulario.proveedor_Telefono}} </h3>
+      <span class="blog-time"> {{datosFormulario.proveedor_Email}} </span>
+      <p class="description">
+        El proveedor {{datosFormulario.proveedor_Nombre}} se encuentra en {{datosFormulario.proveedor_Direccion}}.
+      </p>
+      <div class="options">
+        <span>
+          Número de cuenta bancaria: {{datosFormulario.proveedorBanco_CuentaBancaria}} en el banco {{datosFormulario.proveedorBanco_NombreBanco}}
+        </span>
+        <span>
+          Beneficiario: {{datosFormulario.proveedorBanco_NombreBeneficiario}}
+        </span>
+      </div>
+    </div>
+
+  </main>
+</div>

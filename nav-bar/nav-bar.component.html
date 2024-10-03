@@ -1,0 +1,101 @@
+<body>
+  <nav class="nav">
+    <div class="logo">
+      <img src="https://firebasestorage.googleapis.com/v0/b/novedades-68953.appspot.com/o/klipartz.com.png?alt=media&token=09a6747a-e545-4222-840b-8879c97b65b2" alt="logo" />
+      <h1>Novedades y Hogar</h1>
+    </div>
+
+    <ul>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle">Proveedor</a>
+        <ul class="dropdown-menu">
+          <li><a href="proveedores">Mostrar</a></li>
+          <li><a href="agregar-proveedor">Agregar</a></li>
+        </ul>
+      </li>
+
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle">Productos</a>
+        <ul class="dropdown-menu">
+          <li><a href="inventario">Mostrar</a></li>
+          <li><a href="agregar-producto">Agregar</a></li>
+        </ul>
+      </li>
+
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle">Ventas</a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Mostrar</a></li>
+          <li><a href="#">Vender</a></li>
+          <li><a href="#">Gráficas</a></li>
+        </ul>
+      </li>
+
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle">Compras</a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Mostrar</a></li>
+          <li><a href="#">Ordenar</a></li>
+          <li><a href="#">Gráficas</a></li>
+        </ul>
+      </li>
+
+    </ul>
+    <div class="hamburger" #hamburger (click)="toggleNav()">
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+  </nav>
+
+  <div class="menubar" #menubar>
+    <ul>
+      <div>
+        Productos
+        <li>
+          <a href="inventario">Mostrar Producto</a>
+        </li>
+        <li>
+          <a href="agregar-producto">Agregar Producto</a>
+        </li>
+      </div>
+
+      <div>
+        Proveedores
+        <li>
+          <a href="proveedores">Mostrar Proveedores</a>
+        </li>
+        <li>
+          <a href="agregar-proveedor">Agregar Proveedores</a>
+        </li>
+      </div>
+
+      <div>
+        Ventas
+        <li>
+          <a href="inventario">Mostrar Ventas</a>
+        </li>
+        <li>
+          <a href="agregar-producto">Vender</a>
+        </li>
+        <li>
+          <a href="agregar-producto">Gráficas</a>
+        </li>
+      </div>
+
+      <div>
+        Compras
+        <li>
+          <a href="inventario">Mostrar Compras</a>
+        </li>
+        <li>
+          <a href="agregar-producto">Ordenar</a>
+        </li>
+        <li>
+          <a href="agregar-producto">Gráficas</a>
+        </li>
+      </div>
+
+    </ul>
+  </div>
+</body>

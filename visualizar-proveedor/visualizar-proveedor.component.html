@@ -1,0 +1,63 @@
+<section class="contenedor">
+	<div class="card text-center">
+		<div class="card-header">
+			<h3> Proveedor ID: <span> {{ proveedorSeleccionado.proveedor_ID }} </span> </h3>
+			<button *ngIf="!modoEdicion" class="btn btn-primary" (click)="habilitarEdicion()">Editar</button>
+			<span *ngIf="modoEdicion" class="p-buttonset">
+				<button pButton type="button"  (click)="guardarCambios()" icon="pi pi-check"></button>
+				<button pButton type="button" icon="pi pi-trash"></button>
+				<button pButton type="button" (click)="cancelarEdicion()" icon="pi pi-times"></button>
+			</span>
+		</div>
+		<div class="card-body">
+			<h5 class="card-title">
+				<span *ngIf="!modoEdicion"> {{ proveedorSeleccionado.proveedor_Nombre }} </span>
+				<input *ngIf="modoEdicion" pInputText type="text" [(ngModel)]="proveedorSeleccionado.proveedor_Nombre" />
+			</h5>
+			<p class="card-text">
+				El proveedor
+				<span class="span" *ngIf="!modoEdicion"> {{ proveedorSeleccionado.proveedor_Nombre }} </span>
+				<input *ngIf="modoEdicion" pInputText type="text" [(ngModel)]="proveedorSeleccionado.proveedor_Nombre" />
+				se encuentra en
+				<span class="span" *ngIf="!modoEdicion"> {{ proveedorSeleccionado.proveedor_Direccion }} </span>
+				<input *ngIf="modoEdicion" pInputText type="text" [(ngModel)]="proveedorSeleccionado.proveedor_Direccion" />
+				. Puede contactar a
+				<span class="span" *ngIf="!modoEdicion"> {{ proveedorSeleccionado.proveedor_Nombre }} </span>
+				al teléfono
+				<span class="span" *ngIf="!modoEdicion"> {{ proveedorSeleccionado.proveedor_Telefono }} </span>
+				<input *ngIf="modoEdicion" pInputText type="text" [(ngModel)]="proveedorSeleccionado.proveedor_Telefono" />
+				o al correo electrónico
+				<span class="span" *ngIf="!modoEdicion"> {{ proveedorSeleccionado.proveedor_Email }} </span>
+				<input *ngIf="modoEdicion" pInputText type="email" [(ngModel)]="proveedorSeleccionado.proveedor_Email" />
+				.
+			</p>
+
+			<p-fieldset legend="Información Bancaria" [toggleable]="true" [collapsed]="true">
+				<p> 
+					Cuenta Bancaria: 
+					<span class="span" *ngIf="!modoEdicion"> {{ proveedorSeleccionado?.proveedorBanco_ID?.proveedorBanco_CuentaBancaria ?? 'Sin Información' }} </span>
+					<input *ngIf="modoEdicion" pInputText type="text" [(ngModel)]="proveedorSeleccionado.proveedorBanco_ID.proveedorBanco_CuentaBancaria" />
+				</p>
+				<p> 
+					Nombre Banco: 
+					<span class="span" *ngIf="!modoEdicion"> {{ proveedorSeleccionado?.proveedorBanco_ID?.proveedorBanco_NombreBanco ?? 'Sin Información' }} </span>
+					<input *ngIf="modoEdicion" pInputText type="text" [(ngModel)]="proveedorSeleccionado.proveedorBanco_ID.proveedorBanco_NombreBanco" />
+				</p>
+				<p> 
+					Beneficiario: 
+					<span class="span" *ngIf="!modoEdicion"> {{ proveedorSeleccionado?.proveedorBanco_ID?.proveedorBanco_NombreBeneficiario ?? 'Sin Información' }} </span>
+					<input *ngIf="modoEdicion" pInputText type="text" [(ngModel)]="proveedorSeleccionado.proveedorBanco_ID.proveedorBanco_NombreBeneficiario" />
+				</p>
+				<p> 
+					Forma de pago: 
+					<span class="span" *ngIf="!modoEdicion"> {{ proveedorSeleccionado?.proveedorBanco_ID?.proveedorBanco_TipoTransaccion ?? 'Sin Información' }} </span>
+					<input *ngIf="modoEdicion" pInputText type="text" [(ngModel)]="proveedorSeleccionado.proveedorBanco_ID.proveedorBanco_TipoTransaccion" />
+				</p>
+			</p-fieldset>
+		</div>
+		<div class="card-footer text-muted"> 
+			Registrado el: 
+			<span> {{ proveedorSeleccionado.proveedor_FechaCreacion }} </span> 
+		</div>
+	</div>
+</section>

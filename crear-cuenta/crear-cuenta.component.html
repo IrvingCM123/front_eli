@@ -1,0 +1,47 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+<body>
+  <div class="wrapper">
+    <div class="title">
+      Crear Cuenta
+    </div>
+    <form action="#">
+      <div class="field">
+        <input class="form-control" type="text" [value]="objeto_Cuenta.Nombre" (input)="almacenarNombre($event)" required />
+        <label>Nombre de Usuario</label>
+      </div>
+      <div class="field">
+        <input class="form-control" type="text" [value]="objeto_Cuenta.Apellidos"
+        (input)="almacenarApellidos($event)" required />
+        <label>Apellido de Usuario</label>
+      </div>
+      <div class="field">
+        <input class="form-control" type="email"
+        [value]="objeto_Cuenta.Correo_electronico" (input)="almacenarCorreo($event)" required />
+        <label>Correo de Usuario</label>
+      </div>
+      <div class="field">
+        <input class="form-control" type="password"
+        [value]="objeto_Cuenta.Contrasena" (input)="almacenarContrasena($event)" required />
+        <label>Contraseña</label>
+      </div>
+      <div class="field">
+        <select class="form-control" (change)="onSelectChange($event)" (input)="almacenarRol($event)" [(ngModel)]="objeto_Cuenta.cuenta_rol">
+          <option value="" disabled selected>Rol Cuenta</option>
+          <option *ngFor="let rol of tiposRol" [value]="rol">{{rol}}</option>
+        </select>
+        <label>Rol</label>
+      </div>
+      <div class="btn">
+        <div class="inner"></div>
+        <button class="log-in" (click)="crearCuenta()" id="btnIniciarSesion">
+          Crear Cuenta
+        </button>
+      </div>
+
+      <div class="signup-link">
+        ¿Ya cuenta con su correo? <a href="iniciarSesion">Iniciar Sesión</a>
+      </div>
+    </form>
+  </div>
+</body>
