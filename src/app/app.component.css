@@ -1,0 +1,21 @@
+html, body {
+  height: 100%; /* Asegura que el html y body ocupen toda la altura */
+  margin: 0; /* Elimina los márgenes por defecto */
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Asegura que el contenedor principal ocupe al menos la altura de la pantalla */
+}
+
+.main-content {
+  flex: 1; /* Permite que el contenido principal ocupe el espacio disponible */
+}
+
+.footer {
+  background-color: purple;
+  color: white;
+  font-weight: 500;
+  font-size: 100%;
+}

@@ -1,0 +1,14 @@
+<!-- Si el usuario está logueado, se mostrará la barra de navegación del sistema -->
+<div *ngIf="loggin">
+  <app-nav-bar> </app-nav-bar>
+</div>
+
+<!-- El usuario esté o no logueado, se mostrará el conetenido correspondiente a la ruta, con un estilo correspondiente -->
+<div [ngClass]="{'NoLoggin': !loggin, '.container-xxl': loggin}">
+  <router-outlet> </router-outlet>
+</div>
+
+<!-- Si el usuario está logueado, se mostrará el pie de página del sistema -->
+<div *ngIf="loggin">
+  <app-footer> </app-footer>
+</div>
