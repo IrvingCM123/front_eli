@@ -15,7 +15,7 @@ export class VisualizarProveedorComponent implements OnInit {
   proveedorSeleccionado: proveedorEntity | any;  // Almacena el proveedor seleccionado
   modoEdicion: boolean = false;  // Variable para controlar el modo de edición
   proveedorBackup: proveedorEntity | any;  // Variable para almacenar los datos originales
-
+  formaPago: any;
 
   constructor(
     private claseProveedor: claseProveedor,
@@ -23,12 +23,12 @@ export class VisualizarProveedorComponent implements OnInit {
     private claseAlerta: claseMostrarAlerta
   ) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     console.log('Visualizar proveedor');
     this.claseProveedor.proveedorID$.subscribe((id) => {
       this.proveedorSeleccionado = this.cacheServicio.obtener_DatoLocal('proveedorSeleccionado');
     } );
-    console.log(this.proveedorSeleccionado);
+    await this.obtenerFormasPago();
   }
 
   habilitarEdicion(): void {
@@ -42,11 +42,10 @@ export class VisualizarProveedorComponent implements OnInit {
     loading.present();
     this.modoEdicion = false;
     this.proveedorBackup = null;
-    console.log(this.proveedorSeleccionado);
-    // Aquí puedes hacer la llamada al servicio para guardar los cambios
+    this.proveedorSeleccionado.proveedor_Telefono = Number(this.proveedorSeleccionado.proveedor_Telefono);
     const resultado = await this.claseProveedor.actualizarProveedor(this.proveedorSeleccionado);
-
-    if (resultado.status === 201) {
+    console.log(resultado);
+    if (resultado.status == 201) {
       loading.dismiss();
       await this.claseAlerta.mostrarAlertaRuta('Éxito', resultado.mensaje, '/proveedores');
     } else {
@@ -62,6 +61,11 @@ export class VisualizarProveedorComponent implements OnInit {
       this.proveedorBackup = null;
     }
     this.modoEdicion = false;
+  }
+
+  async obtenerFormasPago(): Promise<void> {
+    this.formaPago = await this.claseProveedor.obtenerFormasPago();
+    console.log(this.formaPago);
   }
 
 }

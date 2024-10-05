@@ -112,8 +112,21 @@ export class claseProveedor {
     this.cacheServicio.guardar_DatoLocal('proveedorSeleccionado', proveedor);
   }
 
-  async actualizarProveedor(proveedor: proveedorEntity) {
+  async obtenerFormasPago() {
+    try {
+      const resultado: any = (await this.proveedorUseCase.obtenerTiposTransaccion().toPromise()) ?? null;
+      if (resultado.length > 0) {
+        return resultado;
+      } else {
+        return [];
+      }
+    } catch (error) {
+      return [];
+    }
+  }
 
+  async actualizarProveedor(proveedor: proveedorEntity) {
+    console.log(proveedor);
     const proveedor_ID = proveedor.proveedor_ID;
     // Eliminar el campo proveedor_ID de la variable proveedor
     delete proveedor.proveedor_ID;
@@ -123,6 +136,7 @@ export class claseProveedor {
     try {
       // Realizar la petición PUT a la API para actualizar los datos del proveedor
       const resultado: any = (await this.proveedorUseCase.actualizarProveedor( Number(proveedor_ID), objetoProveedor).toPromise()) ?? null;
+      console.log(resultado);
       // Si existen los datos en la respuesta de la petición, guardar los datos en la caché local y retornar los datos
       if (resultado.status === 201) {
         return {

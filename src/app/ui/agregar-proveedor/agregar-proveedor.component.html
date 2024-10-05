@@ -36,12 +36,12 @@
     <main *ngIf="mostrarBoolean">
       <section class="input-group mb-3">
         <span class="input-group-text">Cuenta Bancaria</span>
-        <input class="form-control" [(ngModel)]="datosFormulario.proveedorBanco_CuentaBancaria" name="categoria">
+        <input class="form-control" type="number" [(ngModel)]="datosFormulario.proveedorBanco_CuentaBancaria" name="categoria">
       </section>
 
       <section class="input-group mb-3">
         <span class="input-group-text">Nombre del Banco</span>
-        <input type="number" class="form-control" [(ngModel)]="datosFormulario.proveedorBanco_NombreBanco" name="precio" />
+        <input type="text" class="form-control" [(ngModel)]="datosFormulario.proveedorBanco_NombreBanco" name="precio" />
       </section>
 
       <section class="input-group mb-3">
@@ -50,11 +50,10 @@
       </section>
 
       <section class="input-group mb-3">
-        <span class="input-group-text">Tipo Transaccio</span>
-        <input type="text" class="form-control" list="tiposTransaccion" [(ngModel)]="datosFormulario.proveedorBanco_TipoTransaccion" name="cantidad" />
-        <datalist id="tiposTransaccion">
-          <option *ngFor="let tipos of tipoTransaccion" [value]="tipos">
-        </datalist>
+        <span class="input-group-text">Tipo Transaccion </span>
+        <select  class="form-control" pInputText  [(ngModel)]="datosFormulario.proveedorBanco_TipoTransaccion"  id="">
+          <option *ngFor="let tipos of tipoTransaccion" [value]="tipos"> {{ tipos }} </option>
+        </select>
       </section>
     </main>
 

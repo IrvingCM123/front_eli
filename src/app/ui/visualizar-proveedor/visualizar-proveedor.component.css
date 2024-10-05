@@ -79,6 +79,11 @@ input {
   width: fit-content
 }
 
+select {
+  width: fit-content;
+  font-size: 90%;
+}
+
 button {
   height: 40%;
   width: 30%;

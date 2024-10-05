@@ -25,7 +25,7 @@
 				<span class="span" *ngIf="!modoEdicion"> {{ proveedorSeleccionado.proveedor_Nombre }} </span>
 				al teléfono
 				<span class="span" *ngIf="!modoEdicion"> {{ proveedorSeleccionado.proveedor_Telefono }} </span>
-				<input *ngIf="modoEdicion" pInputText type="text" [(ngModel)]="proveedorSeleccionado.proveedor_Telefono" />
+				<input *ngIf="modoEdicion" pInputText type="number" [(ngModel)]="proveedorSeleccionado.proveedor_Telefono" />
 				o al correo electrónico
 				<span class="span" *ngIf="!modoEdicion"> {{ proveedorSeleccionado.proveedor_Email }} </span>
 				<input *ngIf="modoEdicion" pInputText type="email" [(ngModel)]="proveedorSeleccionado.proveedor_Email" />
@@ -36,7 +36,7 @@
 				<p> 
 					Cuenta Bancaria: 
 					<span class="span" *ngIf="!modoEdicion"> {{ proveedorSeleccionado?.proveedorBanco_ID?.proveedorBanco_CuentaBancaria ?? 'Sin Información' }} </span>
-					<input *ngIf="modoEdicion" pInputText type="text" [(ngModel)]="proveedorSeleccionado.proveedorBanco_ID.proveedorBanco_CuentaBancaria" />
+					<input *ngIf="modoEdicion" pInputText type="number" [(ngModel)]="proveedorSeleccionado.proveedorBanco_ID.proveedorBanco_CuentaBancaria" />
 				</p>
 				<p> 
 					Nombre Banco: 
@@ -51,7 +51,9 @@
 				<p> 
 					Forma de pago: 
 					<span class="span" *ngIf="!modoEdicion"> {{ proveedorSeleccionado?.proveedorBanco_ID?.proveedorBanco_TipoTransaccion ?? 'Sin Información' }} </span>
-					<input *ngIf="modoEdicion" pInputText type="text" [(ngModel)]="proveedorSeleccionado.proveedorBanco_ID.proveedorBanco_TipoTransaccion" />
+					<select *ngIf="modoEdicion" pInputText [(ngModel)]="proveedorSeleccionado.proveedorBanco_ID.proveedorBanco_TipoTransaccion" id="">
+						<option *ngFor="let forma of formaPago" [value]="forma"> {{ forma }} </option>
+					</select>
 				</p>
 			</p-fieldset>
 		</div>
