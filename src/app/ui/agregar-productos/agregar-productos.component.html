@@ -9,29 +9,27 @@
 
     <section class="input-group mb-3">
       <span class="input-group-text">Categoría</span>
-      <input class="form-control" list="categoriaProductos" [(ngModel)]="datosFormulario.producto_Categoria" name="categoria">
-      <datalist id="categoriaProductos">
-        <option *ngFor="let categoria of categoriaProductos" [value]="categoria">
-      </datalist>
+      <select class="form-control" [(ngModel)]="datosFormulario.producto_Categoria" name="categoria">
+        <option *ngFor="let categoria of categoriaProductos" [value]="categoria">{{ categoria }}</option>
+      </select>
     </section>
-
+    
     <section class="input-group mb-3">
       <span class="input-group-text">Proveedor</span>
-      <input type="text" class="form-control"  list="proveedorProductos"  [(ngModel)]="datosFormulario.producto_ProveedorID" name="proveedor" />
-      <datalist id="proveedorProductos">
-        <option *ngFor="let proveedor of proveedoresProductos" [value]="proveedor.proveedor_Nombre">
-      </datalist>
-    </section>
+      <select class="form-control" [(ngModel)]="datosFormulario.producto_ProveedorID" name="proveedor">
+        <option *ngFor="let proveedor of proveedoresProductos" [value]="proveedor.proveedor_Nombre">{{ proveedor.proveedor_Nombre }}</option>
+      </select>
+    </section>    
 
     <section class="input-group mb-3">
       <span class="input-group-text">Precio</span>
       <span class="input-group-text">$</span>
-      <input type="text" class="form-control" [(ngModel)]="datosFormulario.producto_Precio" name="precio" />
+      <input type="number" class="form-control" [(ngModel)]="datosFormulario.producto_Precio" name="precio" />
     </section>
 
     <section class="input-group mb-3">
       <span class="input-group-text">Cantidad</span>
-      <input type="text" class="form-control" [(ngModel)]="datosFormulario.producto_stock" name="cantidad" />
+      <input type="number" class="form-control" [(ngModel)]="datosFormulario.producto_stock" name="cantidad" />
     </section>
 
     <section class="mb-3">
