@@ -165,8 +165,9 @@ export class claseObtenerProductos {
   }
 
   // Método para enviar el ID del producto seleccionado a otros componentes
-  public async enviarIdProductoSeleccionado(id: number | string): Promise<void> {
-    this.productoID.next(id as number);
+  public async enviarIdProductoSeleccionado(producto: any): Promise<void> {
+    this.productoID.next(producto);
+    this.cacheServicio.guardar_DatoLocal('productoSeleccionado', producto);
   }
 
 }

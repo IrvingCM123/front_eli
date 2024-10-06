@@ -1,1 +1,67 @@
-<p>visualizar-producto works!</p>
+<div class="container" [ngClass]="{ 'flipped': isFlipped }">
+	<button class="toggle-btn" (click)="toggleFlip()">Girar</button>
+  
+	<main class="form-section">
+	  <section class="input-group mb-3">
+		<span class="input-group-text">Nombre</span>
+		<input type="text" class="form-control" [(ngModel)]="informacionInventario.inventario_ProductoID.producto_Nombre" name="nombre" />
+	  </section>
+  
+	  <section class="input-group mb-3">
+		<span class="input-group-text">Categoría</span>
+		<select class="form-control" [(ngModel)]="informacionInventario.inventario_ProductoID.producto_Categoria" name="categoria">
+		  <option *ngFor="let categoria of categoriaProductos" [value]="categoria">{{ categoria }}</option>
+		</select>
+	  </section>
+	  
+	  <section class="input-group mb-3">
+		<span class="input-group-text">Proveedor</span>
+		<select class="form-control" [(ngModel)]="informacionInventario.inventario_ProductoID.producto_ProveedorID.proveedor_Nombre" name="proveedor">
+			<option disabled [value]=""> {{ informacionInventario.inventario_ProductoID.producto_ProveedorID.proveedor_Nombre }} </option>
+		  <option *ngFor="let proveedor of proveedoresProductos" [value]="proveedor.proveedor_Nombre">{{ proveedor.proveedor_Nombre }}</option>
+		</select>
+	  </section>    
+  
+	  <section class="input-group mb-3">
+		<span class="input-group-text">Precio</span>
+		<span class="input-group-text">$</span>
+		<input type="number" class="form-control" [(ngModel)]="informacionInventario.inventario_ProductoID.producto_Precio" name="precio" />
+	  </section>
+  
+	  <section class="mb-3">
+		<input class="form-control form-control-sm" id="formFileSm" type="file" (change)="almacenarImagen($event)"
+		  name="imagen" />
+	  </section>
+  
+	  <section>
+		<button type="button" (click)="ActualizarProducto()">Actualizar</button>
+		<button *ngIf="informacionInventario.inventario_ProductoID.producto_Status != 'INACTIVO' " style="margin-left: 2%;" type="button" (click)="EliminarProducto()">Eliminar</button>
+		<button *ngIf="informacionInventario.inventario_ProductoID.producto_Status == 'INACTIVO' " style="margin-left: 2%;" type="button" (click)="EliminarProducto()">Eliminar</button>
+	  </section>
+  
+	</main>
+  
+	<main class="card-section">
+	  <div class="card">
+		<div class="card-img-holder">
+		  <img [src]="informacionInventario.inventario_ProductoID.producto_ImagenURL" alt="Imagen Producto">
+		</div>
+		<h3 class="blog-title"> {{informacionInventario.inventario_ProductoID.producto_Nombre}} </h3>
+		<span class="blog-time"> {{informacionInventario.inventario_ProductoID.producto_ProveedorID.proveedor_Nombre}} </span>
+		<p class="description">
+		  El producto pertenece a la categoría {{informacionInventario.inventario_ProductoID.producto_Categoria}} y tiene un
+		  precio de ${{informacionInventario.inventario_ProductoID.producto_Precio}}.
+		</p>
+		<div class="options">
+		  <span>
+			Cantidad {{informacionInventario.inventario_Cantidad}}
+		  </span>
+		  <span>
+			Status {{informacionInventario.inventario_Status}}
+		  </span>
+		</div>
+	  </div>
+  
+	</main>
+  </div>
+  

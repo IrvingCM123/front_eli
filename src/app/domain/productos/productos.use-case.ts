@@ -27,8 +27,8 @@ export class ProductosUseCase {
   }
 
   // Método para actualizar un producto en el inventario, recibiendo un objeto de tipo ProductoEntity y retornando un objeto de tipo ProductoEntity
-  actualizarProducto(producto: ProductoEntity): Observable<ProductoEntity> {
-    return this._productosPuerto.actualizarProducto(producto);
+  actualizarProducto(productoID: number, producto: ProductoEntity): Observable<ProductoEntity> {
+    return this._productosPuerto.actualizarProducto(productoID, producto);
   }
 
   // Método para eliminar un producto del inventario, recibiendo un ID de tipo number y retornando un objeto de tipo void

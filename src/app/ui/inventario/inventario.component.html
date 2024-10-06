@@ -15,11 +15,11 @@
     </ng-template>
     <ng-template let-product pTemplate="listItem">
       <div class="p-col-12" >
-        <div class="product-list-item" (click)="enviarIdProductoSeleccionado(product.inventario_ID)">
+        <div class="product-list-item" (click)="enviarIdProductoSeleccionado(product)">
           <img src={{product.inventario_ProductoID.producto_ImagenURL}} [alt]="product.name"/>
           <div class="product-list-detail">
             <div class="product-name">{{product.inventario_ProductoID.producto_Nombre}}</div>
-            <div class="product-description">{{product.inventario_Status}} </div>
+            <div class="product-description">{{product.inventario_ProductoID.producto_Status}} </div>
             <i class="pi pi-tag product-category-icon"></i><span
               class="product-category">{{product.inventario_ProductoID.producto_Categoria}}</span>
           </div>
@@ -32,11 +32,11 @@
     </ng-template>
     <ng-template let-product pTemplate="gridItem">
       <div class="col-12 md:col-4">
-        <div class="product-grid-item card" (click)="enviarIdProductoSeleccionado(product.inventario_ID)">
+        <div class="product-grid-item card" (click)="enviarIdProductoSeleccionado(product)">
           <div class="product-grid-item-top">
             <div>
               <i class="pi pi-tag product-category-icon"></i>
-              <span class="product-category">{{product.inventario_ProductoID.producto_Categoria}}</span>
+              <span class="product-category">{{product.inventario_ProductoID.producto_Status}}</span>
             </div>
             <span [class]="'product-badge status-' + product.inventario_Status.toLowerCase()">{{product.inventario_Status}}</span>
           </div>

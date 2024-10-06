@@ -48,9 +48,11 @@ export class claseProveedor {
 
   // Método para buscar un proveedor por su nombre en la base de datos
   async buscarProveedorNombre(nombre: string): Promise<proveedorEntity[]> {
+    console.log(nombre);
     try {
       // Obtener los proveedores de la caché local
-      const proveedor: proveedorEntity[] = (await this.cacheServicio.obtener_DatoLocal('proveedores')) ?? [];
+      let proveedor: any = await this.devolverProveedores();
+      proveedor = proveedor.resultado
       // Si existen los datos en la caché local, filtrar los proveedores por el nombre del proveedor
       if (proveedor.length > 0 && nombre) {
         // Filtrar los proveedores por el nombre del proveedor y retornar los proveedores filtrados
@@ -126,7 +128,6 @@ export class claseProveedor {
   }
 
   async actualizarProveedor(proveedor: proveedorEntity) {
-    console.log(proveedor);
     const proveedor_ID = proveedor.proveedor_ID;
     // Eliminar el campo proveedor_ID de la variable proveedor
     delete proveedor.proveedor_ID;

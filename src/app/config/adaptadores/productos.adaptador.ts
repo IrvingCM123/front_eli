@@ -32,8 +32,8 @@ export class productosAdaptador implements ProductosPuerto {
   }
 
   // Método que actualiza un producto en el inventario, recibiendo un objeto de tipo ProductoEntity y realizando una petición PUT a la API
-  actualizarProducto(producto: ProductoEntity): Observable<ProductoEntity> {
-    return this._http.put<ProductoEntity>( this.apiUrl, producto);
+  actualizarProducto(productoID: number, producto: ProductoEntity): Observable<ProductoEntity> {
+    return this._http.put<ProductoEntity>( this.apiUrl + productoID, producto);
   }
 
   // Método que elimina un producto del inventario, recibiendo un ID de tipo number y realizando una petición DELETE a la API

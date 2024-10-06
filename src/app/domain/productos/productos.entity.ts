@@ -26,25 +26,25 @@ export class obtenerProductosInventario {
 // Declaración de la subentidad que se utilizara en la entidad ProductoEntity para mostrar los detalles del producto 
 export class ProductoEntity {
   constructor(
-    public producto_ID: number,
-    public producto_Nombre: string,
-    public producto_Categoria: string,
-    public producto_Precio: string,
-    public producto_Status: string,
-    public producto_ImagenURL: string,
-    public producto_ProveedorID: Proveedor
+    public producto_ID?: number,
+    public producto_Nombre?: string,
+    public producto_Categoria?: string,
+    public producto_Precio?: string,
+    public producto_Status?: string,
+    public producto_ImagenURL?: string,
+    public producto_ProveedorID?: Proveedor
   ) {}
 }
 
 // Declaración de la subentidad que se utilizara en la entidad ProductoEntity para mostrar el proveedor del producto
 class Proveedor {
   constructor(
-    public proveedor_ID: number,
-    public proveedor_Nombre: string,
-    public proveedor_Direccion: string,
-    public proveedor_Telefono: string,
-    public proveedor_Email: string,
-    public proveedor_Catalogo: string,
-    public proveedor_FechaCreacion: Date
+    public proveedor_ID?: number,
+    public proveedor_Nombre?: string,
+    public proveedor_Direccion?: string,
+    public proveedor_Telefono?: string,
+    public proveedor_Email?: string,
+    public proveedor_Catalogo?: string,
+    public proveedor_FechaCreacion?: string
   ) {}
 }

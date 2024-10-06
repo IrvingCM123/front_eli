@@ -52,10 +52,9 @@ export class InventarioComponent implements OnInit {
   }
 
   // Método que se ejecuta al seleccionar un producto del inventario
-  async enviarIdProductoSeleccionado(id: number | string): Promise<void> {
-    console.log(id);
-    //this.claseObtenerProductos.enviarIdProductoSeleccionado(id);
-    //this.router.navigate(['/visualizarProducto']);
+  async enviarIdProductoSeleccionado(producto: any): Promise<void> {
+    this.claseObtenerProductos.enviarIdProductoSeleccionado(producto);
+    this.router.navigate(['/visualizarproducto']);
   }
 
   // Método que obtiene los productos del inventario
@@ -63,6 +62,7 @@ export class InventarioComponent implements OnInit {
     try {
       // Llamado al método que obtiene los productos del inventario declarado en la subclase
       this.productosObtenidos = await this.claseObtenerProductos.devolverProductos();
+      console.log(this.productosObtenidos); 
     } catch (error) {
       this.productosObtenidos = false;
     }

@@ -40,7 +40,6 @@ export class InicioSesionComponent {
     try {
       // Se ejecuta el método de iniciar sesión, enviando el correo y la contraseña del usuario
       const resultado: any = await this.claseIniciarSesion.iniciarSesion(this.correoUsuario, this.contrasenaUsuario);
-
       // Se evalúa el resultado obtenido de la petición a la API, si el status es 201, se muestra una alerta de inicio de sesión exitoso
       if (Number(resultado.status) === 201) {
         // Se oculta el loading de la pantalla, indicando que la acción ha finalizado
@@ -50,11 +49,11 @@ export class InicioSesionComponent {
         await this.claseMostrarAlerta.mostrarAlertaLogin(resultado.mensaje, 'Inicio de sesión exitoso', 'inventario', true);
 
       // Si el status es 500, se muestra una alerta de error en el inicio de sesión
-      } else if (Number(resultado.status) === 500) {
+      } else {
         // Se oculta el loading de la pantalla, indicando que la acción ha finalizado
         await loading.dismiss();
         // Se muestra una alerta de error en el inicio de sesión
-        this.claseMostrarAlerta.mostrarAlerta('Error', resultado.mensaje);
+        this.claseMostrarAlerta.mostrarAlerta('Error', resultado.mensaje ?? resultado);
       }
     } catch (error) {
       // Si ocurre un error en la petición a la API, se muestra una alerta de error en el inicio de sesión

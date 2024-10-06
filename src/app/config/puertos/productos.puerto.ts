@@ -10,7 +10,7 @@ export abstract class ProductosPuerto {
   // Método que crea un producto en el inventario, recibiendo un objeto de tipo crearProductoEntity y retornando un objeto de tipo crearProductoEntity
   abstract crearProducto(producto: crearProductoEntity): Observable<crearProductoEntity>;
   // Método que actualiza un producto en el inventario, recibiendo un objeto de tipo ProductoEntity y retornando un objeto de tipo ProductoEntity
-  abstract actualizarProducto(producto: ProductoEntity): Observable<ProductoEntity>;
+  abstract actualizarProducto(productoID: number, producto: ProductoEntity): Observable<ProductoEntity>;
   // Método que elimina un producto del inventario, recibiendo un ID de tipo number y retornando un objeto de tipo void
   abstract eliminarProducto(productoID: number): Observable<void>;
   // Método para obtener las categorias de los productos, necesarias para la creación de un producto en el inventario y estableciendo sugerencias en el campo de categoría
