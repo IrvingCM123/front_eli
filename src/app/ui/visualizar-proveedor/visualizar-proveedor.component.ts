@@ -65,7 +65,20 @@ export class VisualizarProveedorComponent implements OnInit {
 
   async obtenerFormasPago(): Promise<void> {
     this.formaPago = await this.claseProveedor.obtenerFormasPago();
-    console.log(this.formaPago);
+  }
+
+  async eliminarProveedor(): Promise<void> {
+    const loading = await this.claseAlerta.crearLoading('Eliminando proveedor...');
+    loading.present();
+    const resultado = await this.claseProveedor.eliminarProveedor(this.proveedorSeleccionado.proveedor_ID);
+    console.log(resultado);
+    if (resultado.status == 201) {
+      loading.dismiss();
+      await this.claseAlerta.mostrarAlertaRuta('Éxito', resultado.mensaje, '/proveedores');
+    } else {
+      loading.dismiss();
+      await this.claseAlerta.mostrarAlerta('Error', resultado.mensaje);
+    }
   }
 
 }

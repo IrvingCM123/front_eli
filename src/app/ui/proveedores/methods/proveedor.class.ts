@@ -137,7 +137,6 @@ export class claseProveedor {
     try {
       // Realizar la petición PUT a la API para actualizar los datos del proveedor
       const resultado: any = (await this.proveedorUseCase.actualizarProveedor( Number(proveedor_ID), objetoProveedor).toPromise()) ?? null;
-      console.log(resultado);
       // Si existen los datos en la respuesta de la petición, guardar los datos en la caché local y retornar los datos
       if (resultado.status === 201) {
         return {
@@ -154,6 +153,30 @@ export class claseProveedor {
       return {
         status: 500,
         mensaje: error?.error?.message ?? 'Error al actualizar el proveedor'
+      }
+    }
+  }
+
+  async eliminarProveedor(proveedorID: number) {
+    try {
+      // Realizar la petición DELETE a la API para eliminar el proveedor según el ID del proveedor
+      const resultado: any = (await this.proveedorUseCase.eliminarProveedor(proveedorID).toPromise()) ?? null;
+      // Si existen los datos en la respuesta de la petición, guardar los datos en la caché local y retornar los datos
+      if (resultado.status == 201) {
+        return {
+          status: 201,
+          mensaje: resultado.mensaje
+        }
+      } else {
+        return {
+          status: 500,
+          mensaje: resultado.mensaje
+        }
+      }
+    } catch (error: any) {
+      return {
+        status: 500,
+        mensaje: error?.error?.message ?? 'Error al eliminar el proveedor'
       }
     }
   }

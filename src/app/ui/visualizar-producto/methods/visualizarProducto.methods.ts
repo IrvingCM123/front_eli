@@ -31,20 +31,29 @@ export class claseVisualizarProducto {
 
 	// Método para actualizar la información del producto seleccionado en el inventario
 	async ActualizarProducto(producto: Inventario) {
-		// Se almacena solo la información del producto, sin la información del inventario ni del proveedor, a través de la desestructuración de objetos
-		const productoActualizado: ProductoEntity = { ...producto.inventario_ProductoID }
-		// Se obtiene el proveedor completo según el nombre del proveedor del producto
-		const proveedor = await this.claseProveedor.buscarProveedorNombre(producto.inventario_ProductoID.producto_ProveedorID.proveedor_Nombre);
-		// Se extrae la información del proveedor del arreglo de proveedores obtenido
-		productoActualizado.producto_ProveedorID = proveedor[0];
-		// Se extrae el ID del producto para actualizar el producto en la base de datos
-		const productoID = producto.inventario_ProductoID.producto_ID;
-		// Se elimina la propiedad del producto que no se necesita actualizar
-		delete productoActualizado.producto_ID;
-		// Se actualiza el producto en la base de datos con el ID del producto y la información actualizada
-		const resultado = await this.productosUseCase.actualizarProducto(productoID, productoActualizado).toPromise();
-		// Se retorna el resultado de la actualización del producto
-		return resultado;
+		try {
+			// Se almacena solo la información del producto, sin la información del inventario ni del proveedor, a través de la desestructuración de objetos
+			const productoActualizado: ProductoEntity = { ...producto.inventario_ProductoID }
+			// Se obtiene el proveedor completo según el nombre del proveedor del producto
+			const proveedor = await this.claseProveedor.buscarProveedorNombre(producto.inventario_ProductoID.producto_ProveedorID.proveedor_Nombre);
+			// Se extrae la información del proveedor del arreglo de proveedores obtenido
+			productoActualizado.producto_ProveedorID = proveedor[0].proveedor_Nombre;
+			// Se extrae el ID del producto para actualizar el producto en la base de datos
+			const productoID = producto.inventario_ProductoID.producto_ID;
+			// Se elimina la propiedad del producto que no se necesita actualizar
+			delete productoActualizado.producto_ID;
+			delete productoActualizado.producto_ProveedorID;
+			// Se actualiza el producto en la base de datos con el ID del producto y la información actualizada
+			const resultado = await this.productosUseCase.actualizarProducto(productoID, productoActualizado).toPromise();
+			console.log(resultado);
+			// Se retorna el resultado de la actualización del producto
+			return resultado;
+		} catch (error: any) {
+			return {
+				status: 500,
+				mensaje: error.error.message
+			}
+		}
 	}
 
 	// Método para eliminar un producto del inventario
@@ -53,4 +62,12 @@ export class claseVisualizarProducto {
 		const resultado = await this.productosUseCase.eliminarProducto(productoID).toPromise();
 		return resultado;
 	}
+
+	// Método para activar un producto en el inventario
+	async ActivarProducto(productoID: number) {
+		// Se activa el producto en el inventario según el ID del producto
+		const resultado = await this.productosUseCase.activarProducto(productoID).toPromise();
+		return resultado;
+	}
+
 }

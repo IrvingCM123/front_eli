@@ -13,15 +13,7 @@
 		  <option *ngFor="let categoria of categoriaProductos" [value]="categoria">{{ categoria }}</option>
 		</select>
 	  </section>
-	  
-	  <section class="input-group mb-3">
-		<span class="input-group-text">Proveedor</span>
-		<select class="form-control" [(ngModel)]="informacionInventario.inventario_ProductoID.producto_ProveedorID.proveedor_Nombre" name="proveedor">
-			<option disabled [value]=""> {{ informacionInventario.inventario_ProductoID.producto_ProveedorID.proveedor_Nombre }} </option>
-		  <option *ngFor="let proveedor of proveedoresProductos" [value]="proveedor.proveedor_Nombre">{{ proveedor.proveedor_Nombre }}</option>
-		</select>
-	  </section>    
-  
+	    
 	  <section class="input-group mb-3">
 		<span class="input-group-text">Precio</span>
 		<span class="input-group-text">$</span>
@@ -36,7 +28,7 @@
 	  <section>
 		<button type="button" (click)="ActualizarProducto()">Actualizar</button>
 		<button *ngIf="informacionInventario.inventario_ProductoID.producto_Status != 'INACTIVO' " style="margin-left: 2%;" type="button" (click)="EliminarProducto()">Eliminar</button>
-		<button *ngIf="informacionInventario.inventario_ProductoID.producto_Status == 'INACTIVO' " style="margin-left: 2%;" type="button" (click)="EliminarProducto()">Eliminar</button>
+		<button *ngIf="informacionInventario.inventario_ProductoID.producto_Status == 'INACTIVO' " style="margin-left: 2%;" type="button" (click)="ActivarProducto()">Activar</button>
 	  </section>
   
 	</main>
@@ -56,8 +48,11 @@
 		  <span>
 			Cantidad {{informacionInventario.inventario_Cantidad}}
 		  </span>
-		  <span>
+		  <span *ngIf="informacionInventario.inventario_ProductoID.producto_Status != 'INACTIVO' " >
 			Status {{informacionInventario.inventario_Status}}
+		  </span>
+		  <span *ngIf="informacionInventario.inventario_ProductoID.producto_Status == 'INACTIVO' " >
+			Producto Inactivo
 		  </span>
 		</div>
 	  </div>

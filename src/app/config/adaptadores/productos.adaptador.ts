@@ -41,6 +41,11 @@ export class productosAdaptador implements ProductosPuerto {
     return this._http.delete<void>( this.apiUrl + productoID);
   }
 
+  // Método que activa un producto en el inventario, recibiendo un ID de tipo number y realizando una petición PUT a la API
+  activarProducto(productoID: number): Observable<void> {
+    return this._http.put<void>( this.apiUrl + "activarProducto/" + productoID, {});
+  }
+
   // Método que obtiene los productos del inventario realizando una petición GET a la API y retornando un array de objetos de tipo obtenerProductosInventario
   obtenerProductos(): Observable<obtenerProductosInventario[]> {
     return this._http.get<obtenerProductosInventario[]>( this.apiUrl);

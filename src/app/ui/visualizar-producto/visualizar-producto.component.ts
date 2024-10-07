@@ -33,7 +33,7 @@ export class VisualizarProductoComponent implements OnInit {
     producto_ID: 0,
     producto_Nombre: '',
     producto_Categoria: '',
-    producto_Precio: '',
+    producto_Precio: 0,
     producto_Status: '',
     producto_ImagenURL: '',
     producto_ProveedorID: this.informacionProveedor
@@ -106,11 +106,18 @@ export class VisualizarProductoComponent implements OnInit {
     await loading.present();
 
     try {
-      const resultado = await this.claseVisualizarProd.ActualizarProducto(this.informacionInventario);
+      this.informacionInventario.inventario_ProductoID.producto_Precio = Number(this.informacionInventario.inventario_ProductoID.producto_Precio);
+      const resultado: any = await this.claseVisualizarProd.ActualizarProducto(this.informacionInventario);
       console.log(resultado); 
       // Mostrar un mensaje de alerta indicando que el producto ha sido agregado correctamente
       await loading.dismiss();
-      //this.claseAlerta.mostrarAlertaRuta('Producto agregado', 'El producto ha sido agregado correctamente', '/inventario');
+
+      if ( resultado.status == 500 ) {
+        this.claseAlerta.mostrarAlerta('Error', resultado.mensaje);
+      } else {
+        this.claseAlerta.mostrarAlertaRuta('Producto actualizado', resultado.mensaje, '/inventario');
+      }
+
     } catch (error) {
       // Mostrar un mensaje de alerta en caso de error al agregar el producto
       await loading.dismiss();
@@ -122,7 +129,6 @@ export class VisualizarProductoComponent implements OnInit {
     this.informacionInventario = await this.claseVisualizarProd.ObtenerProducto();
     const proveedorInfo: any = this.informacionInventario.inventario_ProductoID.producto_ProveedorID;
     this.informacionInventario.inventario_ProductoID.producto_ProveedorID = proveedorInfo[0];
-    console.log(this.informacionInventario);
   }
 
   async EliminarProducto() {
@@ -130,12 +136,37 @@ export class VisualizarProductoComponent implements OnInit {
     await loading.present();
 
     try {
-      const resultado = await this.claseVisualizarProd.EliminarProducto(this.informacionInventario.inventario_ProductoID.producto_ID);
+      const resultado: any = await this.claseVisualizarProd.EliminarProducto(this.informacionInventario.inventario_ProductoID.producto_ID);
       await loading.dismiss();
-      this.claseAlerta.mostrarAlertaRuta('Producto eliminado', 'El producto ha sido eliminado correctamente', '/inventario');
+      
+      if ( resultado.status == 500 ) {
+      this.claseAlerta.mostrarAlerta('Error', resultado.mensaje);
+      } else {
+        this.claseAlerta.mostrarAlertaRuta('Producto eliminado', resultado.mensaje, '/inventario');
+      }
     } catch (error) {
       await loading.dismiss();
       this.claseAlerta.mostrarAlerta('Error', 'Ha ocurrido un error al eliminar el producto');
+    }
+  }
+
+  async ActivarProducto() {
+    const loading = await this.claseAlerta.crearLoading('Activando producto...');
+    await loading.present();
+
+    try {
+      const resultado: any = await this.claseVisualizarProd.ActivarProducto(this.informacionInventario.inventario_ProductoID.producto_ID);
+      await loading.dismiss();
+
+      if ( resultado.status == 500 ) {
+        this.claseAlerta.mostrarAlerta('Error', resultado.mensaje);
+      } else {
+        this.claseAlerta.mostrarAlertaRuta('Producto activado', resultado.mensaje, '/inventario');
+      }
+
+    } catch (error) {
+      await loading.dismiss();
+      this.claseAlerta.mostrarAlerta('Error', 'Ha ocurrido un error al activar el producto');
     }
   }
 

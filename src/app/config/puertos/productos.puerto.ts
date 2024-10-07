@@ -13,6 +13,8 @@ export abstract class ProductosPuerto {
   abstract actualizarProducto(productoID: number, producto: ProductoEntity): Observable<ProductoEntity>;
   // Método que elimina un producto del inventario, recibiendo un ID de tipo number y retornando un objeto de tipo void
   abstract eliminarProducto(productoID: number): Observable<void>;
+  // Método que activa un producto en el inventario, recibiendo un ID de tipo number y retornando un objeto de tipo void
+  abstract activarProducto(productoID: number): Observable<void>;
   // Método para obtener las categorias de los productos, necesarias para la creación de un producto en el inventario y estableciendo sugerencias en el campo de categoría
   abstract obtenerCategoriaProductos(): Observable<string[]>;
 }

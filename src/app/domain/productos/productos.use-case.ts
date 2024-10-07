@@ -36,6 +36,11 @@ export class ProductosUseCase {
     return this._productosPuerto.eliminarProducto(productoID);
   }
 
+  // Método para activar un producto en el inventario, recibiendo un ID de tipo number y retornando un objeto de tipo void
+  activarProducto(productoID: number): Observable<void> {
+    return this._productosPuerto.activarProducto(productoID);
+  }
+
   // Método para obtener las categorias de los productos, necesarias para la creación de un producto en el inventario y estableciendo sugerencias en el campo de categor
   obtenerCategoriaProductos(): Observable<string[]> {
     return this._productosPuerto.obtenerCategoriaProductos();

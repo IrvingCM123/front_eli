@@ -25,7 +25,7 @@
           </div>
           <div class="product-list-action">
             <span class="product-price">${{product.inventario_ProductoID.producto_Precio}}</span>
-            <span [class]="'product-badge status-' + product.inventario_Status.toLowerCase()">{{product.inventario_Status}}</span>
+            <span  *ngIf="product.inventario_ProductoID.producto_Status != 'INACTIVO' "  [class]="'product-badge status-' + product.inventario_Status.toLowerCase()">{{product.inventario_Status}}</span>
           </div>
         </div>
       </div>
@@ -38,7 +38,7 @@
               <i class="pi pi-tag product-category-icon"></i>
               <span class="product-category">{{product.inventario_ProductoID.producto_Status}}</span>
             </div>
-            <span [class]="'product-badge status-' + product.inventario_Status.toLowerCase()">{{product.inventario_Status}}</span>
+            <span  *ngIf="product.inventario_ProductoID.producto_Status != 'INACTIVO' " [class]="'product-badge status-' + product.inventario_Status.toLowerCase()">{{product.inventario_Status}}</span>
           </div>
           <div class="product-grid-item-content">
             <img src={{product.inventario_ProductoID.producto_ImagenURL}} [alt]="product.name"/>

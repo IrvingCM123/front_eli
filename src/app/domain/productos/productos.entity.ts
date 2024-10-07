@@ -29,10 +29,10 @@ export class ProductoEntity {
     public producto_ID?: number,
     public producto_Nombre?: string,
     public producto_Categoria?: string,
-    public producto_Precio?: string,
+    public producto_Precio?: string | number,
     public producto_Status?: string,
     public producto_ImagenURL?: string,
-    public producto_ProveedorID?: Proveedor
+    public producto_ProveedorID?: Proveedor | number | string,
   ) {}
 }
 

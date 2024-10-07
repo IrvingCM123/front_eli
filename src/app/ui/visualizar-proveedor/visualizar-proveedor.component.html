@@ -5,7 +5,7 @@
 			<button *ngIf="!modoEdicion" class="btn btn-primary" (click)="habilitarEdicion()">Editar</button>
 			<span *ngIf="modoEdicion" class="p-buttonset">
 				<button pButton type="button"  (click)="guardarCambios()" icon="pi pi-check"></button>
-				<button pButton type="button" icon="pi pi-trash"></button>
+				<button pButton type="button" (click)="eliminarProveedor()" icon="pi pi-trash"></button>
 				<button pButton type="button" (click)="cancelarEdicion()" icon="pi pi-times"></button>
 			</span>
 		</div>
