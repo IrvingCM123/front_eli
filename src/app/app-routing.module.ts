@@ -16,6 +16,7 @@ import { AgregarProductosComponent } from './ui/agregar-productos/agregar-produc
 import { AgregarProveedorComponent } from './ui/agregar-proveedor/agregar-proveedor.component';
 import { VisualizarProveedorComponent } from './ui/visualizar-proveedor/visualizar-proveedor.component';
 import { VisualizarProductoComponent } from './ui/visualizar-producto/visualizar-producto.component';
+import { VenderProductosComponent } from './ui/vender-productos/vender-productos.component';
 
 // Rutas de navegación del sistema
 const routes: Routes = [
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'agregar-proveedor', component: AgregarProveedorComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
   { path: 'visualizarproveedor', component: VisualizarProveedorComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN', 'SECRE'] } },
   { path: 'visualizarproducto', component: VisualizarProductoComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN', 'SECRE'] } },
+  { path: 'venderproductos', component: VenderProductosComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
   { path: 'proveedores', component: ProveedoresComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN', 'SECRE'] } },
   // Ruta por defecto para la redirección al inicio de sesión
   { path: '', redirectTo: 'iniciarSesion', pathMatch: 'full' }

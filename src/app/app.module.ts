@@ -83,6 +83,13 @@ import {RippleModule} from 'primeng/ripple';
 import { VirtualScrollerModule } from 'primeng/virtualscroller';
 import { SkeletonModule } from 'primeng/skeleton';
 import { FieldsetModule, } from 'primeng/fieldset';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import {TableModule} from 'primeng/table';
+import {ToastModule} from 'primeng/toast';
+import {ProgressBarModule} from 'primeng/progressbar';
+import {SliderModule} from 'primeng/slider';
+import {MultiSelectModule} from 'primeng/multiselect';
+import {ContextMenuModule} from 'primeng/contextmenu';
 
 // Módulo para las animaciones de Angular
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -91,6 +98,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from 'src/environments/environment';
 import { VisualizarProveedorComponent } from './ui/visualizar-proveedor/visualizar-proveedor.component';
 import { VisualizarProductoComponent } from './ui/visualizar-producto/visualizar-producto.component';
+import { VenderProductosComponent } from './ui/vender-productos/vender-productos.component';
+import { ventaPuerto } from './config/puertos/venta.puerto';
+import { ventaAdaptador } from './config/adaptadores/venta.adaptador';
 
 // Importación de los servicios de los puertos y adaptadores
 @NgModule({
@@ -111,6 +121,7 @@ import { VisualizarProductoComponent } from './ui/visualizar-producto/visualizar
     FooterComponent,
     VisualizarProveedorComponent,
     VisualizarProductoComponent,
+    VenderProductosComponent,
   ],
   // Importación de los módulos necesarios para el funcionamiento de la aplicación
   imports: [
@@ -137,6 +148,13 @@ import { VisualizarProductoComponent } from './ui/visualizar-producto/visualizar
     VirtualScrollerModule,
     SkeletonModule,
     FieldsetModule,
+    AutoCompleteModule,
+    TableModule,
+    ToastModule,
+    ProgressBarModule,
+    SliderModule,
+    MultiSelectModule,
+    ContextMenuModule
   ],
   // Proveedores de los servicios de los puertos y adaptadores
   providers: [
@@ -147,7 +165,8 @@ import { VisualizarProductoComponent } from './ui/visualizar-producto/visualizar
     { provide: inventarioPuerto, useClass: inventarioAdaptador},
     { provide: crearCuentaPuerto, useClass: crearCuentaAdaptador},
     { provide: ProductosPuerto, useClass: productosAdaptador},
-    { provide: ProveedorPuerto, useClass: proveedorAdaptador}
+    { provide: ProveedorPuerto, useClass: proveedorAdaptador},
+    { provide: ventaPuerto, useClass: ventaAdaptador}
   ],
   bootstrap: [AppComponent]
 })

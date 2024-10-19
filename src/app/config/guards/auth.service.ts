@@ -28,4 +28,10 @@ export class AuthService {
     // Retornar el rol del usuario
     return decodedToken.role;
   }
+
+  obtenerIdUsuario(): number | null {
+    const token: string = localStorage.getItem('token') || '';
+    const decodedToken: any = jwt_decode(token);
+    return decodedToken.ID;
+  }
 }

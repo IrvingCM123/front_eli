@@ -1,0 +1,79 @@
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+<main class="contenedor">
+
+	<body class="tarjeta">
+
+		<header class="card-header">
+
+			<section>
+				<span class="p-input-icon-left">
+					<i class="pi pi-search"></i>
+					<p-autoComplete [(ngModel)]="producto_Buscar_Nombre" (completeMethod)="buscarProductoNombre($event)"
+						[suggestions]="productosFiltrados" field="inventario_ProductoID.producto_Nombre"
+						(onSelect)="productoSeleccionado($event)">
+					</p-autoComplete>
+				</span>
+			</section>
+
+		</header>
+
+		<article class="card-body">
+			<section class="productos" *ngIf="productos_Venta.length > 0">
+				<div class="tabla">
+					<table class="table">
+					  <thead>
+						<tr>
+						  <th>#</th>
+						  <th>Nombre Producto</th>
+						  <th>Precio</th>
+						  <th>Cantidad</th>
+						  <th>Subtotal</th>
+						  <th>Eliminar</th>
+						</tr>
+					  </thead>
+					  <tbody>
+						<tr async *ngFor="let producto of productos_Venta; let i = index">
+						  <th scope="row">{{ i + 1 }}</th>
+						  <td>{{ producto.productoVenta_NombreProducto }}</td>
+						  <td> $ {{ producto.productoVenta_PrecioProducto }}</td>
+						  <td>
+							<input style="font-size: 95%; font-weight: 600" class="input_productos"
+								   id="input_cantidad-producto" #inputDinamicoCantidad type="number"
+								   [(ngModel)]="producto.productoVenta_CantidadProducto" (change)="actualizarSubtotal(producto)"
+								   min="1" />
+						  </td>
+						  <td>	$ {{ producto.productoVenta_SubtotalVenta }} </td>
+						  <td>
+							<img src="assets/basura.png" #botonEliminarProducto alt="" (click)="eliminar_VentaProducto(producto)" style="width: 15%;">
+						  </td>
+						</tr>
+					  </tbody>
+					</table>
+				  </div>
+				  
+			</section>
+		</article>
+
+		<footer class="card-footer">
+			<section class="ticket">
+				<div class="total_venta">
+					<p>
+						Total:
+						<span style="color: rgb(18, 20, 137); font-weight: 600; font-size: 120%">
+							$ {{ total_Venta }}
+						</span>
+					</p>
+				</div>
+
+				<button id="botonRealizarVenta" class="generar_ticket" (click)="realizarVenta()" >
+					Realizar Venta
+				</button>
+
+
+			</section>
+		</footer>
+
+	</body>
+
+</main>

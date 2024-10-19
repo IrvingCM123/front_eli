@@ -171,4 +171,62 @@ export class claseMostrarAlerta {
       alerta.present();
     });
   }
+
+  public async mostrarAlertaVenta(titulo: string): Promise<{ nombre: string, correo: string } | false> {
+
+    // Se crea una promesa que recibe un resolve y un reject para manejar la respuesta de la alerta
+    return new Promise(async (resolve, reject) => {
+  
+      // Se crea la alerta con el título recibido y inputs para el nombre y el correo electrónico
+      const alerta: any = await this.alertController.create({
+        header: titulo,
+        message: 'Ingrese su nombre y correo electrónico',
+        inputs: [
+          {
+            name: 'nombre',
+            type: 'text',
+            placeholder: 'Ingrese su nombre'
+          },
+          {
+            name: 'correo',
+            type: 'email',
+            placeholder: 'Ingrese su correo electrónico'
+          }
+        ],
+        buttons: [
+          {
+            text: 'Sin Datos',
+            role: 'cancel',
+            handler: () => {
+              resolve(false);
+            }
+          },
+          {
+            text: 'Aceptar',
+            handler: async (data) => {
+              const { nombre, correo } = data;
+  
+              // Validar que ambos campos no estén vacíos
+              if (nombre && correo) {
+                resolve({ nombre, correo });
+              } else {
+                // Mostrar una alerta de error si alguno de los campos está vacío
+                const alertError = await this.alertController.create({
+                  header: 'Error',
+                  message: 'Por favor ingrese ambos datos.',
+                  buttons: ['Aceptar']
+                });
+                await alertError.present();
+                resolve(false);
+              }
+            }
+          }
+        ]
+      });
+  
+      // Se muestra la alerta en el componente que lo mandó a llamar
+      alerta.present();
+    });
+  }
+  
 }

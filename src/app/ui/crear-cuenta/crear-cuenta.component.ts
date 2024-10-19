@@ -63,7 +63,7 @@ export class CrearCuentaComponent implements OnInit {
     try {
       // Llamada al método de una alerta de validación, permitiendo que el usuario ingrese el código de validación y autorizar la creación de la cuenta
       const alerta: any = await this.claseMostrarAlerta.mostrarAlertaValidacion('Validación', this.codigoValidacion);
-
+      console.log(alerta, 'alerta');
       // Si el usuario ingresa el código de validación correspondiente, se procede a la creación de la cuenta
       if (alerta == true ){
 
@@ -74,21 +74,20 @@ export class CrearCuentaComponent implements OnInit {
         const resultado: any = await this.claseCrearCuenta.crearCuenta( this.objeto_Cuenta );
 
         // Si la creación de la cuenta es exitosa, se muestra un mensaje de alerta indicando que la cuenta ha sido creada con éxito
-        if (resultado.status == true) {
-
+        if (resultado.status == 201) {
           // Vaciar los datos de la cuenta para permitir al usuario ingresar nuevos datos
           this.vaciarDatos();
-
           // Mostrar un mensaje de alerta indicando que la cuenta ha sido creada con éxito
           await this.claseMostrarAlerta.mostrarAlertaRuta('Cuenta creada', 'La cuenta ha sido creada con éxito', 'iniciarSesion');
+        } else {
+            // Si ocurre un error al crear la cuenta, se muestra un mensaje de alerta indicando que ha ocurrido un error
+            await this.claseMostrarAlerta.mostrarAlerta('Error', resultado.message);
         }
-          await this.claseMostrarAlerta.mostrarAlerta('Error', resultado.message);
         // Ocultar el mensaje de carga al finalizar la creación de la cuenta
         loading.dismiss();
       } else {
-
         // Si el usuario no ingresa el código de validación correspondiente, se muestra un mensaje de alerta indicando que la cuenta no ha sido creada
-        await alerta.body;
+        await this.claseMostrarAlerta.mostrarAlerta('Error', 'Código de validación incorrecto');
       }
     } catch (error) {
 

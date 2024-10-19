@@ -94,16 +94,15 @@ export class AgregarProductosComponent implements OnInit {
       // Convertir los campos de stock y precio del producto a tipo número para almacenarlos en la base de datos
       this.datosFormulario.producto_stock = Number(this.datosFormulario.producto_stock);
       this.datosFormulario.producto_Precio = Number(this.datosFormulario.producto_Precio);
-      console.log(this.datosFormulario);
       // Llamar al método crearProducto del caso de uso de productos para agregar un producto en el inventario
       await this.productosUseCase.crearProducto(this.datosFormulario).toPromise();
       // Mostrar un mensaje de alerta indicando que el producto ha sido agregado correctamente
       await loading.dismiss();
       this.claseAlerta.mostrarAlertaRuta('Producto agregado', 'El producto ha sido agregado correctamente', '/inventario');
-    } catch (error) {
+    } catch (error: any) {
       // Mostrar un mensaje de alerta en caso de error al agregar el producto
       await loading.dismiss();
-      this.claseAlerta.mostrarAlerta('Error', 'Ha ocurrido un error al agregar el producto');
+      this.claseAlerta.mostrarAlerta('Error', error?.error?.message || error?.message);
     }
   }
 }

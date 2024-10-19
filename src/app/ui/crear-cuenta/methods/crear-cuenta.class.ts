@@ -27,14 +27,20 @@ export class claseCrearCuenta {
 
     // Llamada al caso de uso para la creación de una cuenta de usuario, utilizando la nueva cuenta creada
     try {
-      const resultado = await this.crearCuentaUseCase.crearCuenta(nueva_cuenta).toPromise();
-
+      const resultado: any = await this.crearCuentaUseCase.crearCuenta(nueva_cuenta).toPromise();
+      console.log(resultado, 'resultado');
       // Si el resultado es incorrecto, se retorna un false para gestionar el mensaje de error en la clase principal
-      if (resultado?.status == 500) {
-        return false;
+      if (resultado?.status == 201) {
+        return {
+          status: resultado.status,
+          message: resultado.mensaje
+        };
       } else {
         // Si el resultado es correcto, se retorna un true para gestionar el mensaje de éxito en la clase principal
-        return true;
+        return {
+          status: resultado.status,
+          message: resultado.mensaje
+        }
       }
     } catch (error: any) {
       return {
