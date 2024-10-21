@@ -82,6 +82,7 @@ export class VenderProductosComponent implements OnInit {
   async realizarVenta(): Promise<void> {
     const loading = await this.claseMostrarAlerta.crearLoading('Realizando venta');
     const datos: any = await this.claseMostrarAlerta.mostrarAlertaVenta('Datos de la venta');
+    loading.present();
     this.objeto_Venta.venta_EstadoVenta = 'PAGADO';
     this.objeto_Venta.cuenta_ID = this.authService.obtenerIdUsuario() || 0;
     this.objeto_Venta.detalleVenta_TotalProductosVendidos = this.productos_Venta.length;
@@ -90,6 +91,7 @@ export class VenderProductosComponent implements OnInit {
     this.objeto_Venta.detalleVentaNombreCliente = datos.nombre || '';
     this.objeto_Venta.producto_ID = this.productos_Venta;
     const resultado: any = await this.ventaUseCase.registrarVenta(this.objeto_Venta).toPromise();
+    console.log(resultado);
     if (resultado.status == 201) {
       this.vaciarDatos();
       await this.claseMostrarAlerta.mostrarAlertaRuta('Venta realizada', 'La venta ha sido realizada con éxito', 'inventario');
