@@ -4,10 +4,8 @@ import { By } from '@angular/platform-browser';
 import { CrearCuentaComponent } from './crear-cuenta.component';
 import { claseMostrarAlerta } from 'src/app/common/services/alerta.service';
 import { claseCrearCuenta } from './methods/crear-cuenta.class';
-import { ProductosPuerto } from 'src/app/config/puertos/productos.puerto';
-import { inventarioPuerto } from 'src/app/config/puertos/inventario.puerto';
-import { ProveedorPuerto } from 'src/app/config/puertos/proveedor.puerto';
 import { crearCuentaPuerto } from 'src/app/config/puertos/crearCuenta.puerto';
+import { of } from 'rxjs';
 
 describe('CrearCuentaComponent', () => {
   let component: CrearCuentaComponent;
@@ -18,9 +16,10 @@ describe('CrearCuentaComponent', () => {
   beforeEach(async () => {
     const alertaSpy = jasmine.createSpyObj('claseMostrarAlerta', ['mostrarAlerta', 'mostrarAlertaValidacion', 'mostrarAlertaRuta']);
     const crearCuentaSpy = jasmine.createSpyObj('claseCrearCuenta', ['crearCuenta']);
-    
-    // Mock para crearCuentaPuerto
-    const crearCuentaPuertoSpy = jasmine.createSpyObj('crearCuentaPuerto', ['metodoQueNecesitas']);
+    console.log(crearCuentaSpy.crearCuenta, "crearCuentaSpy.crearCuenta");
+    crearCuentaSpy.crearCuenta.and.returnValue(of({ status: 500, message: 'Error' }));
+
+    const crearCuentaPuertoSpy = jasmine.createSpyObj('crearCuentaPuerto', [ 'obtenerCodigoValidacion']);
   
     await TestBed.configureTestingModule({
       declarations: [CrearCuentaComponent],
@@ -99,7 +98,7 @@ describe('CrearCuentaComponent', () => {
 
     mostrarAlertaService.mostrarAlertaValidacion.and.returnValue(Promise.resolve(true));
     crearCuentaService.crearCuenta.and.returnValue(Promise.resolve({ status: 400, message: 'Cuenta ya existe' }));
-
+    console.log(crearCuentaService.crearCuenta, "crearCuentaService.crearCuenta");
     await component.crearCuenta();
 
     expect(crearCuentaService.crearCuenta).toHaveBeenCalled();
