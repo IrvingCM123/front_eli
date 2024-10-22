@@ -2,31 +2,29 @@
 
 <body>
   <div class="wrapper">
-    <div class="title">
-      Crear Cuenta
-    </div>
+    <div class="title" id="crearCuentaTitulo">Crear Cuenta</div>
     <form action="#">
       <div class="field">
-        <input class="form-control" type="text" [value]="objeto_Cuenta.Nombre" (input)="almacenarNombre($event)" required name="nombre"/>
+        <input id="formNombreUsuario" class="form-control" type="text" [value]="objeto_Cuenta.Nombre" (input)="almacenarNombre($event)" required name="nombre"/>
         <label>Nombre de Usuario</label>
       </div>
       <div class="field">
-        <input class="form-control" type="text" [value]="objeto_Cuenta.Apellidos"
+        <input id="formApellidoUsuario" class="form-control" type="text" [value]="objeto_Cuenta.Apellidos"
         (input)="almacenarApellidos($event)" required name="apellidos"/>
         <label>Apellido de Usuario</label>
       </div>
       <div class="field">
-        <input class="form-control" type="email"
+        <input id="formCorreoUsuario" class="form-control" type="email"
         [value]="objeto_Cuenta.Correo_electronico" (input)="almacenarCorreo($event)" required name="correo"/>
         <label>Correo de Usuario</label>
       </div>
       <div class="field">
-        <input class="form-control" type="password"
+        <input id="formContrasenaUsuario" class="form-control" type="password"
         [value]="objeto_Cuenta.Contrasena" (input)="almacenarContrasena($event)" required  name="contrasena"/>
         <label>Contraseña</label>
       </div>
       <div class="field">
-        <select class="form-control" (change)="onSelectChange($event)" (input)="almacenarRol($event)" [(ngModel)]="objeto_Cuenta.cuenta_rol" name="rol">
+        <select id="formRolCuenta" class="form-control" (change)="onSelectChange($event)" (input)="almacenarRol($event)" [(ngModel)]="objeto_Cuenta.cuenta_rol" name="rol">
           <option value="" disabled selected>Rol Cuenta</option>
           <option *ngFor="let rol of tiposRol" [value]="rol">{{rol}}</option>
         </select>
@@ -34,7 +32,7 @@
       </div>
       <div class="btn">
         <div class="inner"></div>
-        <button class="log-in" (click)="crearCuenta()" id="btnIniciarSesion">
+        <button  class="log-in" (click)="crearCuenta()" id="btnIniciarSesion">
           Crear Cuenta
         </button>
       </div>

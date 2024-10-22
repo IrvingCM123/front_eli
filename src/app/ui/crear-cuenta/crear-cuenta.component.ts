@@ -63,13 +63,10 @@ export class CrearCuentaComponent implements OnInit {
     try {
       // Llamada al método de una alerta de validación, permitiendo que el usuario ingrese el código de validación y autorizar la creación de la cuenta
       const alerta: any = await this.claseMostrarAlerta.mostrarAlertaValidacion('Validación', this.codigoValidacion);
-      console.log(alerta, 'alerta');
       // Si el usuario ingresa el código de validación correspondiente, se procede a la creación de la cuenta
       if (alerta == true ){
-
         // Presentar el mensaje de carga para la creación de la cuenta para indicar al usuario que se está procesando la solicitud
         await loading.present();
-        console.log(this.objeto_Cuenta, 'objeto cuenta');
         // Llamada al método para la creación de la cuenta, utilizando el objeto de la cuenta con los datos ingresados por el usuario
         const resultado: any = await this.claseCrearCuenta.crearCuenta( this.objeto_Cuenta );
 
