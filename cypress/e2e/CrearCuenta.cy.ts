@@ -1,6 +1,6 @@
-describe('My First Test', () => {
+describe('Pruebas de Crear Cuenta', () => {
 
-	it('Should visit the login page', () => {
+	it('Mostrar titulo de crear Cuenta', () => {
 		cy.visit('/crearCuenta');
 		cy.url().should('includes', 'crearCuenta');
 		cy.get('#crearCuentaTitulo').should('be.visible');
@@ -38,22 +38,6 @@ describe('My First Test', () => {
 		cy.get('.alert-input').type('05082002');
 		cy.get('.alert-button-inner').contains('Aceptar').click();
 		cy.intercept('POST', '/servidor/auth/register', {statusCode: 201, body: { status: 201, message: 'La cuenta ha sido creada con éxito' }	}).as('crearCuenta');
-	});
-
-	it('El sistema le solicitará al usuario ingresar el código de validación para crear la cuenta, pero ingresará el código incorrecto', () => {
-		cy.visit('/crearCuenta');
-		cy.url().should('include', 'crearCuenta');
-		cy.get('#crearCuentaTitulo').should('be.visible');
-		cy.get('#crearCuentaTitulo').should('have.text', 'Crear Cuenta');
-		cy.get('#formNombreUsuario').type('Eli');
-		cy.get('#formApellidoUsuario').type('Galindo');
-		cy.get('#formCorreoUsuario').type('EliGalindo@Gmail.com');
-		cy.get('#formContrasenaUsuario').type('EliGalindo123');
-		cy.get('#formRolCuenta').select('ADMIN');
-		cy.get('#btnIniciarSesion').click();
-		cy.get('.alert-input').type('05082004');
-		cy.get('.alert-button-inner').contains('Aceptar').click();
-		cy.get('.alert-message').contains('Código de validación incorrecto');
 	});
 
 	it('El usuario solo llenará el input de "Nombre Usuario" solicitado por el sistema', () => {
@@ -130,6 +114,30 @@ describe('My First Test', () => {
 		cy.get('.alert-input').type('05082002');
 		cy.get('.alert-button-inner').contains('Aceptar').click();
 		cy.intercept('POST', '/servidor/auth/register', {statusCode: 201, body: { status: 201, message: 'La cuenta ha sido creada con éxito' }	}).as('crearCuenta');
+	});
+
+	it('El sistema le solicitará al usuario ingresar el código de validación para crear la cuenta, pero ingresará el código incorrecto', () => {
+		cy.visit('/crearCuenta');
+		cy.url().should('include', 'crearCuenta');
+		cy.get('#crearCuentaTitulo').should('be.visible');
+		cy.get('#crearCuentaTitulo').should('have.text', 'Crear Cuenta');
+		cy.get('#formNombreUsuario').type('Eli');
+		cy.get('#formApellidoUsuario').type('Galindo');
+		cy.get('#formCorreoUsuario').type('EliGalindo@Gmail.com');
+		cy.get('#formContrasenaUsuario').type('EliGalindo123');
+		cy.get('#formRolCuenta').select('ADMIN');
+		cy.get('#btnIniciarSesion').click();
+		cy.get('.alert-input').type('05082004');
+		cy.get('.alert-button-inner').contains('Aceptar').click();
+		cy.get('.alert-message').contains('Código de validación incorrecto');
+	});
+
+	it('El usuario realizar click en el botón de Login permitiendo Iniciar Sesión', () => {
+		cy.visit('/crearCuenta');
+		cy.url().should('include', 'crearCuenta');
+		cy.get('#crearCuentaTitulo').should('be.visible');
+		cy.get('#crearCuentaTitulo').should('have.text', 'Crear Cuenta');
+		cy.get('#iniciarSesion').click();
 	});
 
 });

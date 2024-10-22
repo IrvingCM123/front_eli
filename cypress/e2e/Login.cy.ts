@@ -1,30 +1,71 @@
-describe('My First Test', () => {
+describe('Pruebas de Iniciar Sesion', () => {
 
-	it('Should visit the login page', () => {
-	  cy.visit('/iniciarSesion');
-	  cy.url().should('includes', 'login');
-	  cy.get('#loginFormTitle').should('be.visible');
-	  cy.get('#loginFormTitle').should('have.text', 'Login Form');
-	  cy.get('#loginFormEmailInputValue').should('not.exist');
-	  cy.get('#loginFormPasswordInputValue').should('not.exist');
+	it('Mostrar titulo de iniciar sesion', () => {
+		cy.visit('/iniciarSesion');
+		cy.url().should('includes', 'iniciarSesion');
+		cy.get('#iniciarSesionTitulo').should('be.visible');
+		cy.get('#iniciarSesionTitulo').should('have.text', 'Inicio de Sesión');
 	});
-  
-	it('Should enter valid email and password and redirect to the dashboard', () => {
-	  cy.visit('/login');
-	  cy.url().should('includes', 'login');
-	  cy.get('#loginFormEmailInput').type('partha@gmail.com');
-	  cy.get('#loginFormPasswordInput').type('Parth@123');
-	  cy.get('#loginFormSubmitButton').click();
-	  cy.get('#loginFormEmailInputValue').should('be.visible');
-	  cy.get('#loginFormEmailInputValue').should(
-		'have.text',
-		'Email: partha@gmail.com'
-	  );
-	  cy.get('#loginFormPasswordInputValue').should('be.visible');
-	  cy.get('#loginFormPasswordInputValue').should(
-		'have.text',
-		'Password: Parth@123'
-	  );
+
+	it('El usuario llenará los input de "Correo Usuario" y "Contraseña" solicitados por el sistema con las credenciales correctas', () => {
+		cy.visit('/iniciarSesion');
+		cy.url().should('includes', 'iniciarSesion');
+		cy.get('#iniciarSesionTitulo').should('be.visible');
+		cy.get('#iniciarSesionTitulo').should('have.text', 'Inicio de Sesión');
+		cy.get('#formCorreoUsuario').type('EliGalindo@Gmail.com');
+		cy.get('#formContrasenaUsuario').type('EliGalindo123');
+		cy.get('#btnIniciarSesion').click();
+		cy.get('#alert-3-msg').contains('Inicio de sesión exitoso');
 	});
-	
-  });
+
+	it('Llenado de campo Correo	', () => {
+		cy.visit('/iniciarSesion');
+		cy.url().should('includes', 'iniciarSesion');
+		cy.get('#iniciarSesionTitulo').should('be.visible');
+		cy.get('#iniciarSesionTitulo').should('have.text', 'Inicio de Sesión');
+		cy.get('#formCorreoUsuario').type('EliGalindo@Gmail.com');
+		cy.get('#btnIniciarSesion').click();
+		cy.get('#alert-3-msg').contains('Ha ocurrido un error al iniciar sesión');
+	});
+
+	it('Llenado de campo Contraseña', () => {
+		cy.visit('/iniciarSesion');
+		cy.url().should('includes', 'iniciarSesion');
+		cy.get('#iniciarSesionTitulo').should('be.visible');
+		cy.get('#iniciarSesionTitulo').should('have.text', 'Inicio de Sesión');
+		cy.get('#formContrasenaUsuario').type('EliGalindo123');
+		cy.get('#btnIniciarSesion').click();
+		cy.get('#alert-3-msg').contains('Ha ocurrido un error al iniciar sesión');
+	});
+
+	it('El usuario llenará los input de "Correo Usuario" y "Contraseña" solicitados por el sistema con el correo incorrecto', () => {
+		cy.visit('/iniciarSesion');
+		cy.url().should('includes', 'iniciarSesion');
+		cy.get('#iniciarSesionTitulo').should('be.visible');
+		cy.get('#iniciarSesionTitulo').should('have.text', 'Inicio de Sesión');
+		cy.get('#formCorreoUsuario').type('EliGalindo1@Gmail.com');
+		cy.get('#formContrasenaUsuario').type('EliGalindo123');
+		cy.get('#btnIniciarSesion').click();
+		cy.get('#alert-3-msg').contains('La cuenta no existe');
+	});
+
+	it('El usuario llenará los input de "Correo Usuario" y "Contraseña" solicitados por el sistema con la contraseña incorrecta', () => {
+		cy.visit('/iniciarSesion');
+		cy.url().should('includes', 'iniciarSesion');
+		cy.get('#iniciarSesionTitulo').should('be.visible');
+		cy.get('#iniciarSesionTitulo').should('have.text', 'Inicio de Sesión');
+		cy.get('#formCorreoUsuario').type('EliGalindo@Gmail.com');
+		cy.get('#formContrasenaUsuario').type('EliGalindo12');
+		cy.get('#btnIniciarSesion').click();
+		cy.get('#alert-3-msg').contains('La contraseña no es valida');
+	});
+
+	it('El usuario realizar click en el botón de Registrar, permitiendo crear una cuenta', () => {
+		cy.visit('/iniciarSesion');
+		cy.url().should('includes', 'iniciarSesion');
+		cy.get('#iniciarSesionTitulo').should('be.visible');
+		cy.get('#iniciarSesionTitulo').should('have.text', 'Inicio de Sesión');
+		cy.get('#crearCuenta').click();
+	});
+
+});
