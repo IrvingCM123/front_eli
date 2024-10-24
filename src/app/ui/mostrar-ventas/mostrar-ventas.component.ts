@@ -49,7 +49,7 @@ export class MostrarVentasComponent implements OnInit {
 
   async cargarMesesUnicos() {
     const mesesUnicos = await this.obtenerMesesUnicosDeVentas();
-    this.mesesDisponibles = mesesUnicos; // Asigna el resultado directamente
+    this.mesesDisponibles = mesesUnicos;
     return mesesUnicos;
   }
 
@@ -80,7 +80,7 @@ export class MostrarVentasComponent implements OnInit {
 
   async onMesSeleccionado(event: any) {
     const mesNombre = event.target.value;
-    this.mesSeleccionado = mesNombre; // Guarda el mes seleccionado
+    this.mesSeleccionado = mesNombre;
     const mesNumero = new Date(`1 ${mesNombre} 2000`).getMonth();
 
     if (this.anioSeleccionado) {
@@ -88,7 +88,6 @@ export class MostrarVentasComponent implements OnInit {
         mesNumero,
         this.anioSeleccionado
       );
-      // Llamar a obtenerVentas para actualizar el filtrado cuando se seleccione un mes
       await this.obtenerVentas();
     } else {
       console.error('No se ha seleccionado un año todavía.');
@@ -112,10 +111,8 @@ export class MostrarVentasComponent implements OnInit {
     const anio = Number(event.target.value);
     if (!isNaN(anio)) {
       this.anioSeleccionado = anio;
-      // Llamar a obtenerVentas para actualizar el filtrado cuando se seleccione un año
       await this.obtenerVentas();
-      // También cargar los meses disponibles basados en el año seleccionado
-      this.mesesDisponibles = await this.cargarMesesUnicos(); // Actualiza los meses disponibles
+      this.mesesDisponibles = await this.cargarMesesUnicos();
     } else {
       console.error('El valor seleccionado no es un número:', anio);
     }
@@ -125,6 +122,5 @@ export class MostrarVentasComponent implements OnInit {
     this.diaSeleccionado = Number(event.target.value);
     console.log('Día seleccionado:', this.diaSeleccionado);
     await this.obtenerVentas();
-    // Aquí puedes agregar lógica adicional si es necesario
   }
 }
