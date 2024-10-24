@@ -1,3 +1,39 @@
+.contenedor {
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	height: 100vh;
+	min-width: 100vw;
+	background-color: #ce5555;
+}
+
+.tarjeta {
+	width: 90%;
+	margin-top: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: #f5f5f5;
+}
+
 .header {
-	
+	width: 100%;
+	display: grid;
+	grid-template-columns: 10% 10% 10% 55%;
+	align-items: center;
+	gap: 2%;
+}
+
+@media screen and (max-width: 790px) {
+	.header {
+		grid-template-columns:20% 30% 20% 30%;
+	}
+
+	select {
+		font-size: 90%;
+	}
+
+	option {
+		font-size: 90%;
+	}
 }

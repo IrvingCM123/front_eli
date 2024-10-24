@@ -1,36 +1,50 @@
-<main>
+<main class="contenedor">
 
-	<article>
+	<article class="tarjeta">
 
-		<header>
-
-			<section>
-				<h3>
-					Mes de ventas:
-				</h3>
-
-				<select name="" id="">
-
-				</select>
-			</section> 
-
-			<section>
-				<h3>
-					Día de ventas:
-				</h3>
-
-				<select name="" id="">
-
-				</select>
-			</section>
-
-		</header>
+		<header class="header">
+			<select [(ngModel)]="anioSeleccionado" (change)="onAnioSeleccionado($event)">
+			  <option *ngFor="let anio of aniosDisponibles" [value]="anio">{{ anio }}</option>
+			</select>
+		  
+			<select *ngIf="mesesDisponibles.length > 0" [(ngModel)]="mesSeleccionado" (change)="onMesSeleccionado($event)">
+			  <option *ngFor="let mes of mesesDisponibles" [value]="mes">{{ mes }}</option>
+			</select>
+		  
+		    <select *ngIf="diasDisponibles.length > 0" [(ngModel)]="diaSeleccionado" (change)="onDiaSeleccionado($event)">
+				<option *ngFor="let dia of diasDisponibles" [value]="dia">{{ dia }}</option>
+			</select>
+		  </header>
+		  
 
 		<body>
 			
 			<section>
 				
+				<table>
+					<thead>
+						<tr>
+							<th>Fecha</th>
+							<th>Producto</th>
+							<th>Cantidad</th>
+							<th>Precio</th>
+							<th>Total</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let venta of ventasObtenidas">
+							<td>{{ venta.venta_FechaRegistro }}</td>
+							<td>{{ venta.producto }}</td>
+							<td>{{ venta.venta_DetalleVenta_ID.detalleVenta_MontoTotal }}</td>
+							<td>{{ venta.precio }}</td>
+							<td>{{ venta.venta_EstadoVenta }}</td>
+						</tr>
+					</tbody>
+				</table>
+
+
 			</section>
+
 		</body>
 
 	</article>
