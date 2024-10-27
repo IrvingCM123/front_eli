@@ -102,6 +102,7 @@ import { VenderProductosComponent } from './ui/vender-productos/vender-productos
 import { ventaPuerto } from './config/puertos/venta.puerto';
 import { ventaAdaptador } from './config/adaptadores/venta.adaptador';
 import { MostrarVentasComponent } from './ui/mostrar-ventas/mostrar-ventas.component';
+import { VisualizarVentaComponent } from './ui/visualizar-venta/visualizar-venta.component';
 
 // Importación de los servicios de los puertos y adaptadores
 @NgModule({
@@ -124,6 +125,7 @@ import { MostrarVentasComponent } from './ui/mostrar-ventas/mostrar-ventas.compo
     VisualizarProductoComponent,
     VenderProductosComponent,
     MostrarVentasComponent,
+    VisualizarVentaComponent,
   ],
   // Importación de los módulos necesarios para el funcionamiento de la aplicación
   imports: [

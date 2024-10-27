@@ -18,6 +18,7 @@ import { VisualizarProveedorComponent } from './ui/visualizar-proveedor/visualiz
 import { VisualizarProductoComponent } from './ui/visualizar-producto/visualizar-producto.component';
 import { VenderProductosComponent } from './ui/vender-productos/vender-productos.component';
 import { MostrarVentasComponent } from './ui/mostrar-ventas/mostrar-ventas.component';
+import { VisualizarVentaComponent } from './ui/visualizar-venta/visualizar-venta.component';
 
 // Rutas de navegación del sistema
 const routes: Routes = [
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'agregar-proveedor', component: AgregarProveedorComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
   { path: 'visualizarproveedor', component: VisualizarProveedorComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN', 'SECRE'] } },
   { path: 'visualizarproducto', component: VisualizarProductoComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN', 'SECRE'] } },
+  { path: 'visualizarventa', component: VisualizarVentaComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN', 'SECRE'] } },
   { path: 'venderproductos', component: VenderProductosComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
   { path: 'proveedores', component: ProveedoresComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN', 'SECRE'] } },
   { path: 'mostrarVentas', component: MostrarVentasComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN', 'SECRE'] } },

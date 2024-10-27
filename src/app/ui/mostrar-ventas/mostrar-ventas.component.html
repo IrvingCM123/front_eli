@@ -3,50 +3,61 @@
 	<article class="tarjeta">
 
 		<header class="header">
-			<select [(ngModel)]="anioSeleccionado" (change)="onAnioSeleccionado($event)">
-			  <option *ngFor="let anio of aniosDisponibles" [value]="anio">{{ anio }}</option>
-			</select>
-		  
-			<select *ngIf="mesesDisponibles.length > 0" [(ngModel)]="mesSeleccionado" (change)="onMesSeleccionado($event)">
-			  <option *ngFor="let mes of mesesDisponibles" [value]="mes">{{ mes }}</option>
-			</select>
-		  
-		    <select *ngIf="diasDisponibles.length > 0" [(ngModel)]="diaSeleccionado" (change)="onDiaSeleccionado($event)">
-				<option *ngFor="let dia of diasDisponibles" [value]="dia">{{ dia }}</option>
-			</select>
-		  </header>
-		  
 
-		<body>
-			
-			<section>
-				
-				<table>
+			<div class="field">
+				<select [(ngModel)]="anioSeleccionado" (change)="onAnioSeleccionado($event)"  class="form-control">
+					<option value="" disabled selected>Seleccione un año de venta</option>
+					<option *ngFor="let anio of aniosDisponibles" [value]="anio">{{ anio }}</option>
+				</select>
+				<label>Año de Venta</label>
+			</div>
+
+			<div class="field" *ngIf="mesesDisponibles.length > 0 && anioSeleccionado">
+				<select  [(ngModel)]="mesSeleccionado"
+					(change)="onMesSeleccionado($event)"  class="form-control">
+					<option value="" disabled>Seleccione un mes de venta</option>
+					<option *ngFor="let mes of mesesDisponibles" [value]="mes">{{ mes }}</option>
+				</select>
+				<label>Mes de Venta</label>
+			</div>
+
+			<div class="field" *ngIf="mesSeleccionado">
+				<select *ngIf="diasDisponibles.length > 0" [(ngModel)]="diaSeleccionado"
+					(change)="onDiaSeleccionado($event)"  class="form-control">
+					<option value="" disabled>Seleccione un día de venta</option>
+					<option *ngFor="let dia of diasDisponibles" [value]="dia">{{ dia }}</option>
+				</select>
+				<label>Día de Venta</label>
+			</div>
+		</header>
+
+		<body class="datos">
+
+			<section class="tabla">
+
+				<table class="table table-striped table-hover">
 					<thead>
 						<tr>
-							<th>Fecha</th>
-							<th>Producto</th>
-							<th>Cantidad</th>
-							<th>Precio</th>
-							<th>Total</th>
+							<th scope="col">#</th>
+							<th scope="col">Fecha de Venta</th>
+							<th scope="col">Total Productos</th>
+							<th scope="col">Total Venta</th>
+							<th scope="col">Estado Venta</th>
+							<th scope="col">Encargado Venta</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr *ngFor="let venta of ventasObtenidas">
+						<tr *ngFor="let venta of ventasObtenidas; let id = index" style="cursor: pointer;" (click) = "enviarVentaSeleccionada(venta)">
+							<th scope="row">{{id + 1}}</th>
 							<td>{{ venta.venta_FechaRegistro }}</td>
-							<td>{{ venta.producto }}</td>
-							<td>{{ venta.venta_DetalleVenta_ID.detalleVenta_MontoTotal }}</td>
-							<td>{{ venta.precio }}</td>
+							<td>{{ venta.totalProductosVendidos }} Producto(s)</td>
+							<td> $ {{ venta.totalMontoVenta }}</td>
 							<td>{{ venta.venta_EstadoVenta }}</td>
+							<td>{{ venta.venta_DetalleVenta_ID.cuenta_ID[0].cuenta_Correo }}</td>
 						</tr>
 					</tbody>
 				</table>
-
-
 			</section>
-
 		</body>
-
 	</article>
-
 </main>

@@ -34,4 +34,8 @@ export class ventaAdaptador implements ventaPuerto {
 		    return this._http.delete( this.apiUrl + "/" + venta_ID );
 	  }
 
+	  actualizarEstadoVenta(venta_ID: number, venta_EstadoVenta: string): Observable<any> {
+		    return this._http.put( this.apiUrl + "/" + venta_ID, { venta_EstadoVenta });
+	  }
+
 }

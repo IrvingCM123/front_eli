@@ -27,4 +27,8 @@ export class ventaUseCase {
 		return this._ventaPuerto.eliminarVenta(venta_ID, estadoVenta);
 	}
 
+	actualizarEstadoVenta(venta_ID: number, venta_EstadoVenta: string): Observable<any> {
+		return this._ventaPuerto.actualizarEstadoVenta(venta_ID, venta_EstadoVenta);
+	}
+
 }

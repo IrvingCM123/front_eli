@@ -10,10 +10,9 @@ import { Venta } from 'src/app/domain/venta/venta.entity';
   providers: [claseVentas],
 })
 export class MostrarVentasComponent implements OnInit {
-  constructor(private claseVentas: claseVentas, private router: Router) {}
+  constructor(private claseVentas: claseVentas, private router: Router) { }
 
   ventasObtenidas!: Venta[] | any;
-  enviarIdVenta!: number | string;
   mesesDisponibles: string[] = [];
   aniosDisponibles: number[] = [];
   diasDisponibles: number[] = [];
@@ -30,22 +29,32 @@ export class MostrarVentasComponent implements OnInit {
   }
 
   async obtenerVentas() {
-    const todasLasVentas: any = await this.claseVentas.devolverVentas();
+    let todasLasVentas: any = await this.claseVentas.devolverVentas();
+
+    todasLasVentas.forEach((venta: any) => {
+      if (venta.venta_DetalleVenta_ID) {
+        venta.totalProductosVendidos = venta.venta_DetalleVenta_ID.detalleVenta_ProductoVenta_ID.reduce(
+          (acc: number, producto: any) => acc + producto.productoVenta_CantidadProducto,
+          0
+        );
+      } else {
+        venta.totalProductosVendidos = 0;
+      }
+      venta.totalMontoVenta = parseFloat(venta.venta_DetalleVenta_ID.detalleVenta_MontoTotal || '0');
+    });
 
     if (!this.anioSeleccionado && !this.mesSeleccionado && !this.diaSeleccionado) {
-        console.log('No se ha seleccionado un año, mes ni día.');
-        this.ventasObtenidas = todasLasVentas || [];
+      this.ventasObtenidas = todasLasVentas || [];
     } else {
-        console.log('Se ha seleccionado un año, mes y/o día.');
-        this.ventasObtenidas = (todasLasVentas || []).filter((venta: Venta) => {
-            const fechaVenta = new Date(venta.venta_FechaRegistro);
-            const cumpleAnio = this.anioSeleccionado ? fechaVenta.getFullYear() === this.anioSeleccionado : true;
-            const cumpleMes = this.mesSeleccionado ? fechaVenta.toLocaleString('default', { month: 'long' }) === this.mesSeleccionado : true;
-            const cumpleDia = this.diaSeleccionado ? fechaVenta.getDate() === this.diaSeleccionado : true;
-            return cumpleAnio && cumpleMes && cumpleDia;
-        });
+      this.ventasObtenidas = (todasLasVentas || []).filter((venta: Venta) => {
+        const fechaVenta = new Date(venta.venta_FechaRegistro);
+        const cumpleAnio = this.anioSeleccionado ? fechaVenta.getFullYear() === this.anioSeleccionado : true;
+        const cumpleMes = this.mesSeleccionado ? fechaVenta.toLocaleString('default', { month: 'long' }) === this.mesSeleccionado : true;
+        const cumpleDia = this.diaSeleccionado ? fechaVenta.getDate() === this.diaSeleccionado : true;
+        return cumpleAnio && cumpleMes && cumpleDia;
+      });
     }
-}
+  }
 
   async cargarMesesUnicos() {
     const mesesUnicos = await this.obtenerMesesUnicosDeVentas();
@@ -120,7 +129,11 @@ export class MostrarVentasComponent implements OnInit {
 
   async onDiaSeleccionado(event: any) {
     this.diaSeleccionado = Number(event.target.value);
-    console.log('Día seleccionado:', this.diaSeleccionado);
     await this.obtenerVentas();
+  }
+
+  async enviarVentaSeleccionada(informacionVenta: number) {
+    console.log('Venta seleccionada:', informacionVenta);
+    this.claseVentas.enviarVenta(informacionVenta);
   }
 }

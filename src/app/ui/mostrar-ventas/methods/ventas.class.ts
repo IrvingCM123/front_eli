@@ -3,13 +3,15 @@ import { ventaUseCase } from "src/app/domain/venta/venta.use-case";
 import { Venta, DetalleVenta, ProductoVenta } from "src/app/domain/venta/venta.entity";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
+import { Router } from "@angular/router";
 
 @Injectable()
 export class claseVentas {
 
 	constructor(
 		private ventaUseCase: ventaUseCase,
-		private cacheServicio: Cache_Service
+		private cacheServicio: Cache_Service,
+		private router: Router
 	) { }
 
 	private ventaID = new BehaviorSubject<number | null>(null);
@@ -62,6 +64,7 @@ export class claseVentas {
 	public async enviarVenta(venta: any) {
 		this.ventaID.next(venta);
 		this.cacheServicio.guardar_DatoLocal('ventaSeleccionada', venta);
+		this.router.navigate(['/visualizarventa']);
 	}
 
 }

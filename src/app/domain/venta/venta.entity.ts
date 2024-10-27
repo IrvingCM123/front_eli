@@ -3,7 +3,7 @@ export class Venta {
     public venta_ID: number,
     public venta_EstadoVenta: string,
     public venta_FechaRegistro: string,
-    public venta_DetalleVenta_ID: ProductoVenta[]
+    public venta_DetalleVenta_ID: DetalleVenta[]
   ) {}
 }
 
@@ -14,7 +14,8 @@ export class DetalleVenta {
 	public detalleVenta_MontoTotal: number,
 	public detalleVentaCorreoCliente: string,
 	public detalleVentaNombreCliente: string,
-	public detalleVenta_ProductoVenta_ID: ProductoVenta[]
+	public detalleVenta_ProductoVenta_ID: ProductoVenta[],
+  public cuenta_ID: any
   ) {}
 }
 

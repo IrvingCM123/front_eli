@@ -1,0 +1,113 @@
+<body class="contenedor">
+
+	<header class="header">
+
+		<section class="LogoNegocio">
+			<img src="https://firebasestorage.googleapis.com/v0/b/novedades-68953.appspot.com/o/klipartz.com.png?alt=media&token=09a6747a-e545-4222-840b-8879c97b65b2"
+				alt="">
+		</section>
+
+		<section class="NombreNegocio">
+			<p> Novedades y Hogar</p>
+			<p>Fraccionamiento Reserva Territorial calle 10 </p>
+			<p> Huatusco, Veracruz</p>
+		</section>
+
+		<section class="InformacionNegocio">
+			<p> Email: Novhogar76@gmail.com </p>
+			<p> Telefono: 273-688-4086 </p>
+		</section>
+
+	</header>
+
+	<section class="BarraDivisora">
+
+	</section>
+
+	<article class="DatosVenta">
+
+		<section class="InformacionVenta">
+			<h3> Venta realizada </h3>
+			<p> Fecha de la venta: {{ventaSeleccionada.venta_FechaRegistro}} </p>
+		</section>
+
+		<section class="InformacionPersonal">
+			<section class="InformacionVendedor">
+				<h3> Personal que realizó la venta: </h3>
+				<p> Nombre: <span> {{ventaSeleccionada.venta_DetalleVenta_ID.cuenta_ID[0].cuenta_Nombre}}
+						{{ventaSeleccionada.venta_DetalleVenta_ID.cuenta_ID[0].cuenta_Apellido}} </span> </p>
+				<p> Email: <span> {{ventaSeleccionada.venta_DetalleVenta_ID.cuenta_ID[0].cuenta_Correo}} </span> </p>
+				<p> Puesto: <span> {{ventaSeleccionada.venta_DetalleVenta_ID.cuenta_ID[0].cuenta_Rol}} </span> </p>
+				<p> Estado del personal: <span>
+						{{ventaSeleccionada.venta_DetalleVenta_ID.cuenta_ID[0].cuenta_Estado_Cuenta}} </span> </p>
+			</section>
+
+			<section class="InformacionCliente">
+				<h3> Cliente que realizó la compra: </h3>
+				<p> Nombre: <span> {{ventaSeleccionada.venta_DetalleVenta_ID.detalleVentaNombreCliente || 'No se ha
+						registrado el nombre del cliente'}} </span> </p>
+				<p> Email: <span> {{ventaSeleccionada.venta_DetalleVenta_ID.detalleVentaCorreoCliente || 'No se ha
+						registrado el email del cliente' }} </span> </p>
+			</section>
+		</section>
+
+		<section class="InformacionDetalleVenta">
+			<table class="table  table-hover">
+				<thead>
+					<tr>
+						<th scope="col"> Folio de Venta </th>
+						<th scope="col"> Estado</th>
+						<th scope="col"> Total</th>
+						<th scope="col"> Términos de pago</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td> {{ventaSeleccionada.venta_ID}} </td>
+						<td>
+							<select [(ngModel)]="ventaSeleccionada.venta_EstadoVenta"
+								(change)="actualizarEstadoVenta()" >
+								<option value="PAGADO">PAGADO</option>
+								<option value="REEMBOLSADO">REEMBOLSADO</option>
+							</select>
+						</td>
+						<td> ${{ventaSeleccionada.totalMontoVenta}} </td>
+						<td> Pago en una exhibición </td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+
+		<section class="InformacionProductos">
+			<h3> Productos vendidos </h3>
+			<table class="table  table-hover">
+				<thead>
+					<tr>
+						<th scope="col"> # </th>
+						<th scope="col"> Nombre </th>
+						<th scope="col"> Precio </th>
+						<th scope="col"> Cantidad </th>
+						<th scope="col"> Subtotal </th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr
+						*ngFor="let producto of ventaSeleccionada.venta_DetalleVenta_ID.detalleVenta_ProductoVenta_ID; let id = index">
+						<td> {{id + 1}} </td>
+						<td> {{producto.productoVenta_NombreProducto}} </td>
+						<td> ${{producto.productoVenta_PrecioProducto}} </td>
+						<td> {{producto.productoVenta_CantidadProducto}} </td>
+						<td> ${{producto.productoVenta_SubtotalVenta}} </td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+
+	</article>
+
+	<footer>
+
+	</footer>
+
+
+</body>
