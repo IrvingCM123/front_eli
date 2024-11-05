@@ -2,9 +2,9 @@
 export class inventarioEntity {
   constructor(
     public id_Producto: number,
-    public producto_nombre: string,
-    public producto_categoria: string,
-    public producto_precio: number,
+    public producto_Nombre: string,
+    public producto_Categoria: string,
+    public producto_Precio: number,
     public producto_stock: number,
     public producto_proveedor: any,
     public producto_imagen: string

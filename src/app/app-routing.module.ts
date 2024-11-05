@@ -19,6 +19,8 @@ import { VisualizarProductoComponent } from './ui/visualizar-producto/visualizar
 import { VenderProductosComponent } from './ui/vender-productos/vender-productos.component';
 import { MostrarVentasComponent } from './ui/mostrar-ventas/mostrar-ventas.component';
 import { VisualizarVentaComponent } from './ui/visualizar-venta/visualizar-venta.component';
+import { GenerarCompraComponent } from './ui/generar-compra/generar-compra.component';
+import { CarritoCompraComponent } from './ui/carrito-compra/carrito-compra.component';
 
 // Rutas de navegación del sistema
 const routes: Routes = [
@@ -35,7 +37,8 @@ const routes: Routes = [
   { path: 'venderproductos', component: VenderProductosComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
   { path: 'proveedores', component: ProveedoresComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN', 'SECRE'] } },
   { path: 'mostrarVentas', component: MostrarVentasComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN', 'SECRE'] } },
-
+  { path: 'ordenCompra', component: GenerarCompraComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN', 'SECRE'] } },
+  { path: 'carritoCompras', component: CarritoCompraComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN', 'SECRE'] } },
   // Ruta por defecto para la redirección al inicio de sesión
   { path: '', redirectTo: 'iniciarSesion', pathMatch: 'full' }
 ];

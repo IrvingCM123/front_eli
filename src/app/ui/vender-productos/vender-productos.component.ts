@@ -45,7 +45,10 @@ export class VenderProductosComponent implements OnInit {
 
   public async buscarProductoNombre(event: any): Promise<void> {
     const query = event.query;
-    if (query) { this.productosFiltrados = await this.claseObtenerProductos.buscarProductoNombre(query); }
+    if (query) { 
+      this.productosFiltrados = await this.claseObtenerProductos.buscarProductoNombre(query); 
+      this.productosFiltrados =  this.productosFiltrados.filter((producto: any) => producto.inventario_ProductoID.producto_Status !== 'INACTIVO');
+    }
   }
 
   public productoSeleccionado(event: any): void {

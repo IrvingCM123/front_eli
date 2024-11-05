@@ -5,7 +5,7 @@ import { Cache_Service } from 'src/app/common/services/cache.Service';
 import { inventarioUseCase } from 'src/app/domain/inventario/inventario.use-case';
 
 // Importación de la entidad de inventario para poder utilizarla en la clase de obtener productos de inventario
-import { inventarioEntity } from 'src/app/domain/inventario/inventario.entity';
+import { inventarioEntity, Inventario } from 'src/app/domain/inventario/inventario.entity';
 
 // Importación de la librería Injectable, para poder inyectar servicios en la clase de obtener productos de inventario
 import { Injectable } from '@angular/core';
@@ -20,7 +20,7 @@ export class claseObtenerProductos {
   constructor(
     private inventarioUseCase: inventarioUseCase,
     private cacheServicio: Cache_Service
-  ) {}
+  ) { }
 
   // Declaración de las variables necesarias para crear un observable de un solo valor, permitiendo enviar el ID del producto seleccionado a otros componentes
   private productoID = new BehaviorSubject<number | null>(null);
@@ -51,12 +51,12 @@ export class claseObtenerProductos {
   }
 
   // Método para buscar un producto por su nombre, recibe el nombre del producto y retorna un arreglo de productos
-  public async buscarProductoNombre( nombre: string ): Promise<inventarioEntity[]> {
+  public async buscarProductoNombre(nombre: string): Promise<inventarioEntity[]> {
 
     try {
 
       // Se declara una variable, de tipo arreglo, para obtener los productos del inventario almacenados en caché del navegador
-      const productos: inventarioEntity[] = (await this.cacheServicio.obtener_DatoLocal('productos')) ?? [];
+      const productos: inventarioEntity[] = await this.obtenerDatosProductos() ?? [];
 
       // Si la cantidad de productos es mayor a 0 y el nombre del producto no es nulo, se filtran los productos por el nombre del producto
       if (productos.length > 0 && nombre) {
@@ -82,9 +82,10 @@ export class claseObtenerProductos {
 
     try {
       // Se declara una variable, de tipo arreglo, para obtener los productos del inventario almacenados en caché del navegador
-      const productos: inventarioEntity[] = (await this.cacheServicio.obtener_DatoLocal('productos')) ?? [];
+      const productos: inventarioEntity[] = await this.obtenerDatosProductos() ?? [];
       // Si la cantidad de productos es mayor a 0, se obtienen las categorías de los productos
       if (productos.length > 0) {
+        console.log(productos);
         // Se obtienen las categorías de los productos, almacenando el resultado en la variable categorias y se eliminan las categorías duplicadas
         const categorias = productos.map((producto: any) => producto.inventario_ProductoID.producto_Categoria);
         // Se eliminan las categorías duplicadas, almacenando el resultado en la variable categoriasUnicas
@@ -107,12 +108,13 @@ export class claseObtenerProductos {
 
     try {
       // Se declara una variable, de tipo arreglo, para obtener los productos del inventario almacenados en caché del navegador
-      const productos: inventarioEntity[] = (await this.cacheServicio.obtener_DatoLocal('productos')) ?? [];
+      const productos: Inventario[] = await this.obtenerDatosProductos() ?? [];
       // Si la cantidad de productos es mayor a 0 y la categoría no es nula, se filtran los productos por la categoría del producto
       if (productos.length > 0 && categoria) {
         // Se filtran los productos por la categoría del producto, almacenando el resultado en la variable productosFiltrados
-        const productosFiltrados = productos.filter(
-          (producto) => producto.producto_Categoria === categoria
+        const productosFiltrados = productos.filter((producto: any) =>
+          // Se convierte el nombre del producto y el nombre ingresado a minúsculas, para poder compararlos sin importar las mayúsculas
+          producto.inventario_ProductoID.producto_Categoria.toLowerCase().includes(categoria.toLowerCase())
         );
         // Se retornan los productos filtrados por la categoría del producto
         return productosFiltrados;
@@ -151,7 +153,7 @@ export class claseObtenerProductos {
   private async obtenerProductosCache() {
     try {
       // Se obtienen los productos del inventario almacenados en caché del navegador, almacenando el resultado en la variable resultado
-      const resultado: inventarioEntity[] = this.cacheServicio.obtener_DatoLocal('productos') ?? [];
+      const resultado: inventarioEntity[] = await this.obtenerDatosProductos() ?? [];
       // Si la cantidad de productos es mayor a 0, se retornan los productos del inventario almacenados
       if (resultado.length > 0) {
         // Se retorna el arreglo de productos del inventario almacenados en caché
@@ -164,10 +166,92 @@ export class claseObtenerProductos {
     }
   }
 
+  public async obtenerProveedores() {
+    try {
+      const productos: Inventario[] = await this.obtenerDatosProductos() ?? [];
+
+      if (productos.length > 0) {
+        const proveedores = productos.map((producto: any) => producto.inventario_ProductoID.producto_ProveedorID[0].proveedor_Nombre);
+        const proveedoresUnicos = proveedores.filter(
+          (proveedor, index) => proveedores.indexOf(proveedor) === index
+        );
+        return proveedoresUnicos;
+      } else {
+        return [];
+      }
+
+    } catch (error) {
+      return [];
+    }
+  }
+
+  public async obtenerProductosProveedor(proveedor: string) {
+
+    try {
+      const productos: Inventario[] = await this.obtenerDatosProductos() ?? [];
+
+      if (productos.length > 0 && proveedor) {
+        const productosFiltrados = productos.filter((producto: any) =>
+          producto.inventario_ProductoID.producto_ProveedorID[0].proveedor_Nombre.toLowerCase().includes(proveedor.toLowerCase())
+        );
+        return productosFiltrados;
+      } else {
+        return productos;
+      }
+    } catch (error) {
+      return [];
+    }
+  }
+
+  public async buscarProductos(
+    nombre: string = '',
+    categoria: string = '',
+    proveedor: string = ''
+  ): Promise<inventarioEntity[]> {
+    try {
+
+      // Obtiene los productos del caché (si existen), o un arreglo vacío en caso contrario
+      const productos: inventarioEntity[] = await this.obtenerDatosProductos();
+      // Filtra los productos basándose en los criterios proporcionados
+      const productosFiltrados = productos.filter((producto: any) => {
+        // Convertimos los campos a minúsculas para comparaciones sin distinción de mayúsculas/minúsculas
+        const nombreProducto = producto.inventario_ProductoID.producto_Nombre.toLowerCase();
+        const categoriaProducto = producto.inventario_ProductoID.producto_Categoria?.toLowerCase() || '';
+        const proveedorProducto = producto.inventario_ProductoID.producto_ProveedorID[0]?.proveedor_Nombre?.toLowerCase() || '';
+
+        // Verifica cada criterio de búsqueda (nombre, categoría y proveedor)
+        const coincideNombre = nombre ? nombreProducto.includes(nombre.toLowerCase()) : true;
+        const coincideCategoria = categoria ? categoriaProducto.includes(categoria.toLowerCase()) : true;
+        const coincideProveedor = proveedor ? proveedorProducto.includes(proveedor.toLowerCase()) : true;
+
+        // Retorna true si el producto coincide con todos los filtros aplicados
+        return coincideNombre && coincideCategoria && coincideProveedor;
+      });
+
+      return productosFiltrados;
+    } catch (error) {
+      console.error('Error al buscar productos con filtros:', error);
+      return [];
+    }
+  }
+
   // Método para enviar el ID del producto seleccionado a otros componentes
   public async enviarIdProductoSeleccionado(producto: any): Promise<void> {
     this.productoID.next(producto);
     this.cacheServicio.guardar_DatoLocal('productoSeleccionado', producto);
+  }
+
+  public async obtenerDatosProductos() {
+    try {
+      let productos: any[] = (await this.cacheServicio.obtener_DatoLocal('productos')) ?? [];
+      productos = productos
+        .map((producto) => ({ ...producto, cantidadCarrito: 0 }))
+        .filter((producto) => producto.inventario_ProductoID.producto_Status !== 'INACTIVO');
+
+      return productos;
+    } catch (error) {
+      return [];
+    }
   }
 
 }
