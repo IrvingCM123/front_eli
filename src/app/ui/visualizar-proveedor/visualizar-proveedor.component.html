@@ -4,9 +4,9 @@
 			<h3> Proveedor ID: <span> {{ proveedorSeleccionado.proveedor_ID }} </span> </h3>
 			<button *ngIf="!modoEdicion" class="btn btn-primary" (click)="habilitarEdicion()">Editar</button>
 			<span *ngIf="modoEdicion" class="p-buttonset">
-				<button pButton type="button"  (click)="guardarCambios()" icon="pi pi-check"></button>
-				<button pButton type="button" (click)="eliminarProveedor()" icon="pi pi-trash"></button>
-				<button pButton type="button" (click)="cancelarEdicion()" icon="pi pi-times"></button>
+				<button pButton type="button"  (click)="guardarCambios()" icon="pi pi-check" id="actualizarInfo"></button>
+				<button pButton type="button" (click)="eliminarProveedor()" icon="pi pi-trash" id="eliminarInfo"></button>
+				<button pButton type="button" (click)="cancelarEdicion()" icon="pi pi-times" id="cancelarCambio"></button>
 			</span>
 		</div>
 		<div class="card-body">
@@ -32,7 +32,7 @@
 				.
 			</p>
 
-			<p-fieldset legend="Información Bancaria" [toggleable]="true" [collapsed]="true">
+			<p-fieldset legend="Información Bancaria" [toggleable]="true" [collapsed]="true" id="DesplegarInformación">
 				<p> 
 					Cuenta Bancaria: 
 					<span class="span" *ngIf="!modoEdicion"> {{ proveedorSeleccionado?.proveedorBanco_ID?.proveedorBanco_CuentaBancaria ?? 'Sin Información' }} </span>

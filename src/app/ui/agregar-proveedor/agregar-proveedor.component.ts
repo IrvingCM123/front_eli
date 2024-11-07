@@ -68,7 +68,7 @@ export class AgregarProveedorComponent implements OnInit {
     // Mostrar un mensaje de carga mientras se agrega el proveedor
     const loading = await this.claseMostrarAlerta.crearLoading('Agregando proveedor...');
     await loading.present();
-
+    console.log(this.datosFormulario);
     try {
       // Agregar un proveedor a la base de datos con los datos del formulario en la subclase de agregar proveedor
       await this.claseAgregarProveedor.agregarProveedor(this.datosFormulario);

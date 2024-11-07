@@ -43,6 +43,7 @@ export class VisualizarProveedorComponent implements OnInit {
     this.modoEdicion = false;
     this.proveedorBackup = null;
     this.proveedorSeleccionado.proveedor_Telefono = Number(this.proveedorSeleccionado.proveedor_Telefono);
+    console.log(this.proveedorSeleccionado);
     const resultado = await this.claseProveedor.actualizarProveedor(this.proveedorSeleccionado);
     console.log(resultado);
     if (resultado.status == 201) {

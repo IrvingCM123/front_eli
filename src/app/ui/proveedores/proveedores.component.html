@@ -1,5 +1,5 @@
 <p-virtualScroller [value]="proveedoresObtenidos" scrollHeight="450px" [itemSize]="100" >
-  <ng-template pTemplate="header" > Proveedores </ng-template>
+  <ng-template pTemplate="header" id="proveedoresTitulo" >Proveedores</ng-template>
   <ng-template let-proveedor pTemplate="item">
     <div class="product-item" (click) = "enviarProveedorSeleccionado(proveedor)" >
       <div class="product-list-detail">

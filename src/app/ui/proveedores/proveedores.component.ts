@@ -43,7 +43,7 @@ export class ProveedoresComponent implements OnInit {
     // Crear un loading controller para mostrar un mensaje de carga mientras se obtienen los proveedores
     const loading = await this.claseMostrarAlerta.crearLoading('Obteniendo proveedores...');
     await loading.present();
-
+    
     try {
       // Obtener los proveedores de la base de datos con el método devolverProveedores de la clase de proveedor
       this.proveedoresObtenidos = await this.claseProveedor.devolverProveedores();
