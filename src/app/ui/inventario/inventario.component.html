@@ -16,40 +16,41 @@
     <ng-template let-product pTemplate="listItem">
       <div class="p-col-12" >
         <div class="product-list-item" (click)="enviarIdProductoSeleccionado(product)">
-          <img src={{product.inventario_ProductoID.producto_ImagenURL}} [alt]="product.name"/>
+          <img src={{product.inventario_ProductoID.producto_ImagenURL}} [alt]="product.image" id="productoImagen"/>
           <div class="product-list-detail">
-            <div class="product-name">{{product.inventario_ProductoID.producto_Nombre}}</div>
-            <div class="product-description">{{product.inventario_ProductoID.producto_Status}} </div>
+            <div id="productoNombre" class="product-name">{{product.inventario_ProductoID.producto_Nombre}}</div>
+            <div id="productoStatus" class="product-description">{{product.inventario_ProductoID.producto_Status}} </div>
             <i class="pi pi-tag product-category-icon"></i><span
-              class="product-category">{{product.inventario_ProductoID.producto_Categoria}}</span>
+              class="product-category" id="productoCategoria">{{product.inventario_ProductoID.producto_Categoria}}</span>
           </div>
           <div class="product-list-action">
-            <span class="product-price">${{product.inventario_ProductoID.producto_Precio}}</span>
-            <span  *ngIf="product.inventario_ProductoID.producto_Status != 'INACTIVO' "  [class]="'product-badge status-' + product.inventario_Status.toLowerCase()">{{product.inventario_Status}}</span>
+            <span class="product-price" id="productoPrecio">${{product.inventario_ProductoID.producto_Precio}}</span>
+            <span id="inventarioStatus"  *ngIf="product.inventario_ProductoID.producto_Status != 'INACTIVO' "  [class]="'product-badge status-' + product.inventario_Status.toLowerCase()">{{product.inventario_Status}}</span>
           </div>
         </div>
       </div>
     </ng-template>
-    <ng-template let-product pTemplate="gridItem">
+    <ng-template let-product let-i="rowIndex" pTemplate="gridItem">
       <div class="col-12 md:col-4">
         <div class="product-grid-item card" (click)="enviarIdProductoSeleccionado(product)">
           <div class="product-grid-item-top">
             <div>
               <i class="pi pi-tag product-category-icon"></i>
-              <span class="product-category">{{product.inventario_ProductoID.producto_Status}}</span>
+              <span id="productoStatus-{{i}}" class="product-category">{{product.inventario_ProductoID.producto_Status}}</span>
             </div>
-            <span  *ngIf="product.inventario_ProductoID.producto_Status != 'INACTIVO' " [class]="'product-badge status-' + product.inventario_Status.toLowerCase()">{{product.inventario_Status}}</span>
+            <span id="inventarioStatus-{{i}}" *ngIf="product.inventario_ProductoID.producto_Status != 'INACTIVO'" [class]="'product-badge status-' + product.inventario_Status.toLowerCase()">{{product.inventario_Status}}</span>
           </div>
           <div class="product-grid-item-content">
-            <img src={{product.inventario_ProductoID.producto_ImagenURL}} [alt]="product.name"/>
-            <div class="product-name">{{product.inventario_ProductoID.producto_Nombre}}</div>
-            <div class="product-description">{{product.inventario_ProductoID.producto_Categoria}}</div>
+            <img src={{product.inventario_ProductoID.producto_ImagenURL}} [alt]="product.name" id="productoImagen-{{i}}"/>
+            <div id="productoNombre-{{i}}" class="product-name">{{product.inventario_ProductoID.producto_Nombre}}</div>
+            <div id="productoCategoria-{{i}}" class="product-description">{{product.inventario_ProductoID.producto_Categoria}}</div>
           </div>
           <div class="product-grid-item-bottom">
-            <span class="product-price">${{product.inventario_ProductoID.producto_Precio}}</span>
+            <span id="productoPrecio-{{i}}" class="product-price">${{product.inventario_ProductoID.producto_Precio}}</span>
           </div>
         </div>
       </div>
     </ng-template>
+    
   </p-dataView>
 </div>

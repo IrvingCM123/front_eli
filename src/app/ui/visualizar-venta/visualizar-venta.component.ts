@@ -31,7 +31,7 @@ export class VisualizarVentaComponent implements OnInit {
         const fechaCompleta = new Date(this.ventaSeleccionada.venta_FechaRegistro);
         const soloFecha = fechaCompleta.toISOString().split('T')[0];
         const soloHora = fechaCompleta.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        this.ventaSeleccionada.venta_FechaRegistro = `${soloFecha} ${soloHora}`;  
+        this.ventaSeleccionada.venta_FechaRegistro = `${soloFecha} ${soloHora}`; 
         return this.ventaSeleccionada;
     } catch (error) {
       return false;
@@ -44,10 +44,8 @@ export class VisualizarVentaComponent implements OnInit {
     
     try {
       const resultado = await this.ventaUseCase.actualizarEstadoVenta(this.ventaSeleccionada.venta_ID, this.ventaSeleccionada.venta_EstadoVenta).toPromise();
-      console.log(resultado);
       if (resultado.status == 201) {
-        await this.claseMostrarAlerta.mostrarAlerta("Éxito", "Se ha actualizado el estado de la venta correctamente");
-        await this.router.navigate(['/mostrarVentas']);
+        await this.claseMostrarAlerta.mostrarAlertaRuta("Éxito", "Se ha actualizado el estado de la venta correctamente", "/mostrarVentas");
       } else {
         await this.claseMostrarAlerta.mostrarAlerta("Error", "Ha ocurrido un error al actualizar el estado de la venta");
       }

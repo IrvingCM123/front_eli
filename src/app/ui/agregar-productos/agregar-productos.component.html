@@ -46,19 +46,19 @@
   <main class="card-section">
     <div class="card">
       <div class="card-img-holder">
-        <img [src]="datosFormulario.producto_ImagenURL" alt="Imagen Producto">
+        <img [src]="datosFormulario.producto_ImagenURL" alt="Imagen Producto" id="ImagenProductoMostrar">
       </div>
-      <h3 class="blog-title"> {{datosFormulario.producto_Nombre}} </h3>
-      <span class="blog-time"> {{datosFormulario.producto_ProveedorID}} </span>
-      <p class="description">
+      <h3 class="blog-title" id="NombreProductoMostrar"> {{datosFormulario.producto_Nombre}} </h3>
+      <span class="blog-time" id="ProveedorProductoMostrar"> {{datosFormulario.producto_ProveedorID}} </span>
+      <p class="description" id="DescripcionProductoMostrar">
         El producto {{datosFormulario.producto_Nombre}} es un producto de la categoría {{datosFormulario.producto_Categoria}} y tiene un
         precio de ${{datosFormulario.producto_Precio}}.
       </p>
       <div class="options">
-        <span>
+        <span id="CategoriaProductoMostrar">
           {{datosFormulario.producto_Categoria}}
         </span>
-        <span>
+        <span id="PrecioProductoMostrar">
           $ {{datosFormulario.producto_Precio}}
         </span>
       </div>

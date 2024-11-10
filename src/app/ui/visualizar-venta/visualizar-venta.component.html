@@ -8,14 +8,14 @@
 		</section>
 
 		<section class="NombreNegocio">
-			<p> Novedades y Hogar</p>
-			<p>Fraccionamiento Reserva Territorial calle 10 </p>
-			<p> Huatusco, Veracruz</p>
+			<p id="NombreNegocio">Novedades y Hogar</p>
+			<p id="DireccionNegocio">Fraccionamiento Reserva Territorial calle 10</p>
+			<p id="LocalidadNegocio">Huatusco, Veracruz</p>
 		</section>
 
 		<section class="InformacionNegocio">
-			<p> Email: Novhogar76@gmail.com </p>
-			<p> Telefono: 273-688-4086 </p>
+			<p id="EmailNegocio">Email: Novhogar76@gmail.com</p>
+			<p id="TelefonoNegocio">Telefono: 273-688-4086</p>
 		</section>
 
 	</header>
@@ -27,27 +27,23 @@
 	<article class="DatosVenta">
 
 		<section class="InformacionVenta">
-			<h3> Venta realizada </h3>
-			<p> Fecha de la venta: {{ventaSeleccionada.venta_FechaRegistro}} </p>
+			<h3>Venta realizada</h3>
+			<p id="FechaVenta">Fecha de la venta: {{ventaSeleccionada.venta_FechaRegistro}}</p>
 		</section>
 
 		<section class="InformacionPersonal">
 			<section class="InformacionVendedor">
 				<h3> Personal que realizó la venta: </h3>
-				<p> Nombre: <span> {{ventaSeleccionada.venta_DetalleVenta_ID.cuenta_ID[0].cuenta_Nombre}}
-						{{ventaSeleccionada.venta_DetalleVenta_ID.cuenta_ID[0].cuenta_Apellido}} </span> </p>
-				<p> Email: <span> {{ventaSeleccionada.venta_DetalleVenta_ID.cuenta_ID[0].cuenta_Correo}} </span> </p>
-				<p> Puesto: <span> {{ventaSeleccionada.venta_DetalleVenta_ID.cuenta_ID[0].cuenta_Rol}} </span> </p>
-				<p> Estado del personal: <span>
-						{{ventaSeleccionada.venta_DetalleVenta_ID.cuenta_ID[0].cuenta_Estado_Cuenta}} </span> </p>
+				<p id="NombrePersonal">Nombre: <span>{{ventaSeleccionada.venta_DetalleVenta_ID.cuenta_ID[0].cuenta_Nombre}} {{ventaSeleccionada.venta_DetalleVenta_ID.cuenta_ID[0].cuenta_Apellido}}</span> </p>
+				<p id="EmailPersonal">Email: <span>{{ventaSeleccionada.venta_DetalleVenta_ID.cuenta_ID[0].cuenta_Correo}}</span> </p>
+				<p id="PuestoPersonal">Puesto: <span>{{ventaSeleccionada.venta_DetalleVenta_ID.cuenta_ID[0].cuenta_Rol}}</span> </p>
+				<p id="EstadoPersonal">Estado del personal: <span>{{ventaSeleccionada.venta_DetalleVenta_ID.cuenta_ID[0].cuenta_Estado_Cuenta}}</span></p>
 			</section>
 
 			<section class="InformacionCliente">
-				<h3> Cliente que realizó la compra: </h3>
-				<p> Nombre: <span> {{ventaSeleccionada.venta_DetalleVenta_ID.detalleVentaNombreCliente || 'No se ha
-						registrado el nombre del cliente'}} </span> </p>
-				<p> Email: <span> {{ventaSeleccionada.venta_DetalleVenta_ID.detalleVentaCorreoCliente || 'No se ha
-						registrado el email del cliente' }} </span> </p>
+				<h3>Cliente que realizó la compra: </h3>
+				<p id="NombreCliente">Nombre: <span>{{ventaSeleccionada.venta_DetalleVenta_ID.detalleVentaNombreCliente || 'No se ha registrado el nombre del cliente'}} </span></p>
+				<p id="EmailCliente">Email: <span>{{ventaSeleccionada.venta_DetalleVenta_ID.detalleVentaCorreoCliente || 'No se ha registrado el email del cliente' }}</span></p>
 			</section>
 		</section>
 
@@ -55,23 +51,23 @@
 			<table class="table  table-hover">
 				<thead>
 					<tr>
-						<th scope="col"> Folio de Venta </th>
-						<th scope="col"> Estado</th>
-						<th scope="col"> Total</th>
-						<th scope="col"> Términos de pago</th>
+						<th scope="col">Folio de Venta</th>
+						<th scope="col">Estado</th>
+						<th scope="col">Total</th>
+						<th scope="col">Términos de pago</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<td> {{ventaSeleccionada.venta_ID}} </td>
-						<td>
+						<td id="EstadoVenta">
 							<select [(ngModel)]="ventaSeleccionada.venta_EstadoVenta"
-								(change)="actualizarEstadoVenta()" >
+								(change)="actualizarEstadoVenta()" name="EstadoVenta" id="EstadoVenta">
 								<option value="PAGADO">PAGADO</option>
 								<option value="REEMBOLSADO">REEMBOLSADO</option>
 							</select>
 						</td>
-						<td> ${{ventaSeleccionada.totalMontoVenta}} </td>
+						<td id="TotalVenta"> ${{ventaSeleccionada.totalMontoVenta}} </td>
 						<td> Pago en una exhibición </td>
 					</tr>
 				</tbody>
@@ -83,21 +79,20 @@
 			<table class="table  table-hover">
 				<thead>
 					<tr>
-						<th scope="col"> # </th>
-						<th scope="col"> Nombre </th>
-						<th scope="col"> Precio </th>
-						<th scope="col"> Cantidad </th>
-						<th scope="col"> Subtotal </th>
+						<th scope="col">#</th>
+						<th scope="col">Nombre</th>
+						<th scope="col">Precio</th>
+						<th scope="col">Cantidad</th>
+						<th scope="col">Subtotal</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr
-						*ngFor="let producto of ventaSeleccionada.venta_DetalleVenta_ID.detalleVenta_ProductoVenta_ID; let id = index">
-						<td> {{id + 1}} </td>
-						<td> {{producto.productoVenta_NombreProducto}} </td>
-						<td> ${{producto.productoVenta_PrecioProducto}} </td>
-						<td> {{producto.productoVenta_CantidadProducto}} </td>
-						<td> ${{producto.productoVenta_SubtotalVenta}} </td>
+					<tr	*ngFor="let producto of ventaSeleccionada.venta_DetalleVenta_ID.detalleVenta_ProductoVenta_ID; let id = index" id="tr-{{id}}">
+						<td id="venta-id-{{id}}">{{id + 1}}</td>
+						<td id="venta-nombreprod-{{id}}">{{producto.productoVenta_NombreProducto}}</td>
+						<td id="venta-precioprod-{{id}}">${{producto.productoVenta_PrecioProducto}}</td>
+						<td id="venta-cantidadprod-{{id}}">{{producto.productoVenta_CantidadProducto}}</td>
+						<td id="venta-subtotalprod-{{id}}">${{producto.productoVenta_SubtotalVenta}}</td>
 					</tr>
 				</tbody>
 			</table>

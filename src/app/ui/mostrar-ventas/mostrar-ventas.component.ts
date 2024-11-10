@@ -2,15 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { claseVentas } from './methods/ventas.class';
 import { Router } from '@angular/router';
 import { Venta } from 'src/app/domain/venta/venta.entity';
+import { claseMostrarAlerta } from 'src/app/common/services/alerta.service';
 
 @Component({
   selector: 'app-mostrar-ventas',
   templateUrl: './mostrar-ventas.component.html',
   styleUrls: ['./mostrar-ventas.component.css'],
-  providers: [claseVentas],
+  providers: [claseVentas, claseMostrarAlerta],
 })
 export class MostrarVentasComponent implements OnInit {
-  constructor(private claseVentas: claseVentas, private router: Router) { }
+  constructor(
+    private claseVentas: claseVentas,
+    private router: Router,
+    private claseAlerta: claseMostrarAlerta
+  ) { }
 
   ventasObtenidas!: Venta[] | any;
   mesesDisponibles: string[] = [];
@@ -25,10 +30,11 @@ export class MostrarVentasComponent implements OnInit {
     await this.obtenerVentas();
     await this.cargarMesesUnicos();
     await this.cargarAniosUnicos();
-    console.log('Ventas obtenidas:', this.ventasObtenidas);
   }
 
   async obtenerVentas() {
+    const loading = await this.claseAlerta.crearLoading('Obteniendo ventas...');
+    await loading.present();
     let todasLasVentas: any = await this.claseVentas.devolverVentas();
 
     todasLasVentas.forEach((venta: any) => {
@@ -54,6 +60,8 @@ export class MostrarVentasComponent implements OnInit {
         return cumpleAnio && cumpleMes && cumpleDia;
       });
     }
+
+    await loading.dismiss();
   }
 
   async cargarMesesUnicos() {

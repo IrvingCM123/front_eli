@@ -45,9 +45,9 @@ export class VenderProductosComponent implements OnInit {
 
   public async buscarProductoNombre(event: any): Promise<void> {
     const query = event.query;
-    if (query) { 
-      this.productosFiltrados = await this.claseObtenerProductos.buscarProductoNombre(query); 
-      this.productosFiltrados =  this.productosFiltrados.filter((producto: any) => producto.inventario_ProductoID.producto_Status !== 'INACTIVO');
+    if (query) {
+      this.productosFiltrados = await this.claseObtenerProductos.buscarProductoNombre(query);
+      this.productosFiltrados = this.productosFiltrados.filter((producto: any) => producto.inventario_ProductoID.producto_Status !== 'INACTIVO');
     }
   }
 
@@ -93,15 +93,21 @@ export class VenderProductosComponent implements OnInit {
     this.objeto_Venta.detalleVentaCorreoCliente = datos.correo || '';
     this.objeto_Venta.detalleVentaNombreCliente = datos.nombre || '';
     this.objeto_Venta.producto_ID = this.productos_Venta;
-    const resultado: any = await this.ventaUseCase.registrarVenta(this.objeto_Venta).toPromise();
-    console.log(resultado);
-    if (resultado.status == 201) {
-      this.vaciarDatos();
-      await this.claseMostrarAlerta.mostrarAlertaRuta('Venta realizada', 'La venta ha sido realizada con éxito', 'inventario');
+
+    if (this.productos_Venta.length < 1 || this.productos_Venta == null) {
+      await this.claseMostrarAlerta.mostrarAlerta('Error', 'No hay productos que vender')
       loading.dismiss();
     } else {
-      await this.claseMostrarAlerta.mostrarAlerta('Error', resultado.message);
-      loading.dismiss();
+      const resultado: any = await this.ventaUseCase.registrarVenta(this.objeto_Venta).toPromise();
+
+      if (resultado.status == 201) {
+        this.vaciarDatos();
+        await this.claseMostrarAlerta.mostrarAlertaRuta('Venta realizada', 'La venta ha sido realizada con éxito', 'inventario');
+        loading.dismiss();
+      } else {
+        await this.claseMostrarAlerta.mostrarAlerta('Error', resultado.message);
+        loading.dismiss();
+      }
     }
   }
 

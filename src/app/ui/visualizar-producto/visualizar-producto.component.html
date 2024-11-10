@@ -3,13 +3,13 @@
   
 	<main class="form-section">
 	  <section class="input-group mb-3">
-		<span class="input-group-text">Nombre</span>
-		<input type="text" class="form-control" [(ngModel)]="informacionInventario.inventario_ProductoID.producto_Nombre" name="nombre" />
+		<span class="input-group-text" >Nombre</span>
+		<input id="nombreProductoInput" type="text" class="form-control" [(ngModel)]="informacionInventario.inventario_ProductoID.producto_Nombre" name="nombre" />
 	  </section>
   
 	  <section class="input-group mb-3">
 		<span class="input-group-text">Categoría</span>
-		<select class="form-control" [(ngModel)]="informacionInventario.inventario_ProductoID.producto_Categoria" name="categoria">
+		<select id="categoriaProductoInput" class="form-control" [(ngModel)]="informacionInventario.inventario_ProductoID.producto_Categoria" name="categoria">
 		  <option *ngFor="let categoria of categoriaProductos" [value]="categoria">{{ categoria }}</option>
 		</select>
 	  </section>
@@ -17,18 +17,18 @@
 	  <section class="input-group mb-3">
 		<span class="input-group-text">Precio</span>
 		<span class="input-group-text">$</span>
-		<input type="number" class="form-control" [(ngModel)]="informacionInventario.inventario_ProductoID.producto_Precio" name="precio" />
+		<input id="precioProductoInput" type="number" class="form-control" [(ngModel)]="informacionInventario.inventario_ProductoID.producto_Precio" name="precio" />
 	  </section>
   
 	  <section class="mb-3">
-		<input class="form-control form-control-sm" id="formFileSm" type="file" (change)="almacenarImagen($event)"
+		<input class="form-control form-control-sm" id="imagenProducto" type="file" (change)="almacenarImagen($event)"
 		  name="imagen" />
 	  </section>
   
 	  <section>
-		<button type="button" (click)="ActualizarProducto()">Actualizar</button>
-		<button *ngIf="informacionInventario.inventario_ProductoID.producto_Status != 'INACTIVO' " style="margin-left: 2%;" type="button" (click)="EliminarProducto()">Eliminar</button>
-		<button *ngIf="informacionInventario.inventario_ProductoID.producto_Status == 'INACTIVO' " style="margin-left: 2%;" type="button" (click)="ActivarProducto()">Activar</button>
+		<button id="botonActualizar" type="button" (click)="ActualizarProducto()">Actualizar</button>
+		<button id="botonEliminar" *ngIf="informacionInventario.inventario_ProductoID.producto_Status != 'INACTIVO' " style="margin-left: 2%;" type="button" (click)="EliminarProducto()">Eliminar</button>
+		<button id="botonActivar" *ngIf="informacionInventario.inventario_ProductoID.producto_Status == 'INACTIVO' " style="margin-left: 2%;" type="button" (click)="ActivarProducto()">Activar</button>
 	  </section>
   
 	</main>
@@ -38,22 +38,20 @@
 		<div class="card-img-holder">
 		  <img [src]="informacionInventario.inventario_ProductoID.producto_ImagenURL" alt="Imagen Producto">
 		</div>
-		<h3 class="blog-title"> {{informacionInventario.inventario_ProductoID.producto_Nombre}} </h3>
-		<span class="blog-time"> {{informacionInventario.inventario_ProductoID.producto_ProveedorID.proveedor_Nombre}} </span>
-		<p class="description">
+		<h3 class="blog-title" id="nombreProducto"> {{informacionInventario.inventario_ProductoID.producto_Nombre}} </h3>
+		<span class="blog-time" id="nombreProveedor"> {{informacionInventario.inventario_ProductoID.producto_ProveedorID.proveedor_Nombre}} </span>
+		<p class="description" id="descripcionProducto">
 		  El producto pertenece a la categoría {{informacionInventario.inventario_ProductoID.producto_Categoria}} y tiene un
 		  precio de ${{informacionInventario.inventario_ProductoID.producto_Precio}}.
 		</p>
 		<div class="options">
-		  <span>
+		  <span id="cantidadInventario">
 			Cantidad {{informacionInventario.inventario_Cantidad}}
 		  </span>
-		  <span *ngIf="informacionInventario.inventario_ProductoID.producto_Status != 'INACTIVO' " >
+		  <span id="statusActivo" *ngIf="informacionInventario.inventario_ProductoID.producto_Status != 'INACTIVO' " >
 			Status {{informacionInventario.inventario_Status}}
 		  </span>
-		  <span *ngIf="informacionInventario.inventario_ProductoID.producto_Status == 'INACTIVO' " >
-			Producto Inactivo
-		  </span>
+		  <span id="statusInactivo" *ngIf="informacionInventario.inventario_ProductoID.producto_Status == 'INACTIVO' " >Producto Inactivo</span>
 		</div>
 	  </div>
   

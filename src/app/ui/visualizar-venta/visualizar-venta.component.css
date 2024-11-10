@@ -61,13 +61,13 @@
 	margin-left: 2.5%;
 	height: 100%;
 	border-bottom: 7px solid black;
-	margin-top: 2%;
+	margin-top: 4%;
 }
 
 .DatosVenta {
 	display: grid;
 	width: 95%;
-	margin: 3% 1.7% 0 1.7%; ;
+	margin: 4% 1.7% 0 1.7%; ;
 	grid-template-rows: 10% 20% 20% 50%;
 }
 

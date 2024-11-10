@@ -47,14 +47,15 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr *ngFor="let venta of ventasObtenidas; let id = index" style="cursor: pointer;" (click) = "enviarVentaSeleccionada(venta)">
-							<th scope="row">{{id + 1}}</th>
-							<td>{{ venta.venta_FechaRegistro }}</td>
-							<td>{{ venta.totalProductosVendidos }} Producto(s)</td>
-							<td> $ {{ venta.totalMontoVenta }}</td>
-							<td>{{ venta.venta_EstadoVenta }}</td>
-							<td>{{ venta.venta_DetalleVenta_ID.cuenta_ID[0].cuenta_Correo }}</td>
-						</tr>
+						<tr *ngFor="let venta of ventasObtenidas; let id = index" style="cursor: pointer;" (click)="enviarVentaSeleccionada(venta)" id="tr-{{id}}">
+							<th id="venta-id-{{id}}" scope="row">{{id + 1}}</th>
+							<td id="venta-fecha-{{id}}">{{ venta.venta_FechaRegistro }}</td>
+							<td id="venta-productos-{{id}}">{{ venta.totalProductosVendidos }} Producto(s)</td>
+							<td id="venta-monto-{{id}}"> $ {{ venta.totalMontoVenta }}</td>
+							<td id="venta-estado-{{id}}">{{ venta.venta_EstadoVenta }}</td>
+							<td id="venta-correo-{{id}}">{{ venta.venta_DetalleVenta_ID.cuenta_ID[0].cuenta_Correo }}</td>
+						  </tr>
+						  
 					</tbody>
 				</table>
 			</section>

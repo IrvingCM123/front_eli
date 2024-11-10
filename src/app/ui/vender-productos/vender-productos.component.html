@@ -11,11 +11,10 @@
 					<i class="pi pi-search"></i>
 					<p-autoComplete [(ngModel)]="producto_Buscar_Nombre" (completeMethod)="buscarProductoNombre($event)"
 						[suggestions]="productosFiltrados" field="inventario_ProductoID.producto_Nombre"
-						(onSelect)="productoSeleccionado($event)">
+						(onSelect)="productoSeleccionado($event)" id="buscarProducto" name="buscarProducto">
 					</p-autoComplete>
 				</span>
 			</section>
-
 		</header>
 
 		<article class="card-body">
@@ -24,28 +23,28 @@
 					<table class="table">
 					  <thead>
 						<tr>
-						  <th>#</th>
-						  <th>Nombre Producto</th>
-						  <th>Precio</th>
-						  <th>Cantidad</th>
-						  <th>Subtotal</th>
-						  <th>Eliminar</th>
+						  <th id="tablaID">#</th>
+						  <th id="tablaNombre">Nombre Producto</th>
+						  <th id="tablaPrecio">Precio</th>
+						  <th id="tablaCantidad">Cantidad</th>
+						  <th id="tablaSubtotal">Subtotal</th>
+						  <th id="tablaEliminar">Eliminar</th>
 						</tr>
 					  </thead>
 					  <tbody>
-						<tr async *ngFor="let producto of productos_Venta; let i = index">
-						  <th scope="row">{{ i + 1 }}</th>
-						  <td>{{ producto.productoVenta_NombreProducto }}</td>
-						  <td> $ {{ producto.productoVenta_PrecioProducto }}</td>
-						  <td>
+						<tr async *ngFor="let producto of productos_Venta; let i = index" id="tr-{{i}}">
+						  <th id="venta-id-{{i}}" scope="row">{{ i + 1 }}</th>
+						  <td id="venta-nombre-{{i}}">{{ producto.productoVenta_NombreProducto }}</td>
+						  <td id="venta-precio-{{i}}"> $ {{ producto.productoVenta_PrecioProducto }}</td>
+						  <td id="venta-cantidadprod-{{i}}">
 							<input style="font-size: 95%; font-weight: 600" class="input_productos"
-								   id="input_cantidad-producto" #inputDinamicoCantidad type="number"
+								   id="input_cantidad-producto" #inputDinamicoCantidad type="number" name="cantidadProducto"
 								   [(ngModel)]="producto.productoVenta_CantidadProducto" (change)="actualizarSubtotal(producto)"
 								   min="1" />
 						  </td>
-						  <td>	$ {{ producto.productoVenta_SubtotalVenta }} </td>
+						  <td id="venta-subtotal-{{i}}">	$ {{ producto.productoVenta_SubtotalVenta }} </td>
 						  <td>
-							<img src="assets/basura.png" #botonEliminarProducto alt="" (click)="eliminar_VentaProducto(producto)" style="width: 15%;">
+							<img src="assets/basura.png" #botonEliminarProducto id="EliminarProducto-{{i}}" alt="" (click)="eliminar_VentaProducto(producto)" style="width: 15%;">
 						  </td>
 						</tr>
 					  </tbody>
@@ -60,20 +59,16 @@
 				<div class="total_venta">
 					<p>
 						Total:
-						<span style="color: rgb(18, 20, 137); font-weight: 600; font-size: 120%">
+						<span style="color: rgb(18, 20, 137); font-weight: 600; font-size: 120%" id="TotalVenta">
 							$ {{ total_Venta }}
 						</span>
 					</p>
 				</div>
 
-				<button id="botonRealizarVenta" class="generar_ticket" (click)="realizarVenta()" >
+				<button id="botonRealizarVenta" class="generar_ticket" (click)="realizarVenta()"  >
 					Realizar Venta
 				</button>
-
-
 			</section>
 		</footer>
-
 	</body>
-
 </main>

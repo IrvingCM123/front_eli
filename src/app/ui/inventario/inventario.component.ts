@@ -9,19 +9,22 @@ import { inventarioEntity } from 'src/app/domain/inventario/inventario.entity';
 // Importación del componente Router para redireccionar a otro componente
 import { Router } from '@angular/router';
 
+import { claseMostrarAlerta } from 'src/app/common/services/alerta.service';
+
 @Component({
   selector: 'app-inventario',
   templateUrl: './inventario.component.html',
   styleUrls: ['./inventario.component.css'],
   // Declaración de la subclase de inventario para establecerlo como provider en el componente Inventario
-  providers: [claseObtenerProductos],
+  providers: [claseObtenerProductos, claseMostrarAlerta],
 })
 export class InventarioComponent implements OnInit {
 
   // Constructor del componente Inventario
   constructor(
     private claseObtenerProductos: claseObtenerProductos,
-    private router: Router
+    private router: Router,
+    private claseMostrarAlerta: claseMostrarAlerta
   ) {
   }
 
@@ -59,12 +62,15 @@ export class InventarioComponent implements OnInit {
 
   // Método que obtiene los productos del inventario
   async obtenerProductos() {
+    const loading = await this.claseMostrarAlerta.crearLoading('Obteniendo Productos...');
+    await loading.present();
     try {
       // Llamado al método que obtiene los productos del inventario declarado en la subclase
       this.productosObtenidos = await this.claseObtenerProductos.devolverProductos();
-      console.log(this.productosObtenidos); 
     } catch (error) {
       this.productosObtenidos = false;
+    } finally {
+      loading.dismiss();
     }
   }
 

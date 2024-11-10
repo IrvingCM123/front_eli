@@ -108,7 +108,6 @@ export class VisualizarProductoComponent implements OnInit {
     try {
       this.informacionInventario.inventario_ProductoID.producto_Precio = Number(this.informacionInventario.inventario_ProductoID.producto_Precio);
       const resultado: any = await this.claseVisualizarProd.ActualizarProducto(this.informacionInventario);
-      console.log(resultado); 
       // Mostrar un mensaje de alerta indicando que el producto ha sido agregado correctamente
       await loading.dismiss();
 
