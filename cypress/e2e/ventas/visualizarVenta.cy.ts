@@ -312,7 +312,6 @@ describe('Componente Productos', () => {
 			cy.wrap(venta).as('ventaSeleccionada');
 
 			if (ventaInformacion.venta_EstadoVenta != venta.venta_EstadoVenta) {
-				console.log("no es igual")
 				cy.get('select[name="EstadoVenta"]')
 					.scrollIntoView()
 					.select('PAGADO', { force: true });

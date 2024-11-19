@@ -21,6 +21,8 @@ import { MostrarVentasComponent } from './ui/mostrar-ventas/mostrar-ventas.compo
 import { VisualizarVentaComponent } from './ui/visualizar-venta/visualizar-venta.component';
 import { GenerarCompraComponent } from './ui/generar-compra/generar-compra.component';
 import { CarritoCompraComponent } from './ui/carrito-compra/carrito-compra.component';
+import { MostrarComprasComponent } from './ui/mostrar-compras/mostrar-compras.component';
+import { VisualizarCompraComponent } from './ui/visualizar-compra/visualizar-compra.component';
 
 // Rutas de navegación del sistema
 const routes: Routes = [
@@ -39,6 +41,8 @@ const routes: Routes = [
   { path: 'mostrarVentas', component: MostrarVentasComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN', 'SECRE'] } },
   { path: 'ordenCompra', component: GenerarCompraComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN', 'SECRE'] } },
   { path: 'carritoCompras', component: CarritoCompraComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN', 'SECRE'] } },
+  { path: 'mostrarCompras', component: MostrarComprasComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN', 'SECRE'] } },
+  { path: 'visualizarCompra', component: VisualizarCompraComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN', 'SECRE'] } },
   // Ruta por defecto para la redirección al inicio de sesión
   { path: '', redirectTo: 'iniciarSesion', pathMatch: 'full' }
 ];

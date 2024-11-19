@@ -13,7 +13,7 @@ describe('Pruebas de Iniciar Sesion', () => {
 		cy.get('#iniciarSesionTitulo').should('be.visible');
 		cy.get('#iniciarSesionTitulo').should('have.text', 'Inicio de Sesión');
 		cy.get('#formCorreoUsuario').type('EliGalindo@Gmail.com');
-		cy.get('#formContrasenaUsuario').type('EliGalindo123');
+		cy.get('#formContrasenaUsuario').type('ElizabethGalindo123');
 		cy.get('#btnIniciarSesion').click();
 		cy.get('#alert-3-msg').contains('Inicio de sesión exitoso');
 	});

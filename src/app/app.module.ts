@@ -107,6 +107,8 @@ import { GenerarCompraComponent } from './ui/generar-compra/generar-compra.compo
 import { CarritoCompraComponent } from './ui/carrito-compra/carrito-compra.component';
 import { MostrarComprasComponent } from './ui/mostrar-compras/mostrar-compras.component';
 import { VisualizarCompraComponent } from './ui/visualizar-compra/visualizar-compra.component';
+import { generarOrdenPuerto } from './config/puertos/compras.puerto';
+import { generarOrdenAdaptador } from './config/adaptadores/compras.adaptador';
 
 // Importación de los servicios de los puertos y adaptadores
 @NgModule({
@@ -178,7 +180,8 @@ import { VisualizarCompraComponent } from './ui/visualizar-compra/visualizar-com
     { provide: crearCuentaPuerto, useClass: crearCuentaAdaptador},
     { provide: ProductosPuerto, useClass: productosAdaptador},
     { provide: ProveedorPuerto, useClass: proveedorAdaptador},
-    { provide: ventaPuerto, useClass: ventaAdaptador}
+    { provide: ventaPuerto, useClass: ventaAdaptador},
+    { provide: generarOrdenPuerto, useClass: generarOrdenAdaptador}
   ],
   bootstrap: [AppComponent]
 })

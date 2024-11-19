@@ -1,0 +1,231 @@
+.contenedor {
+	display: grid;
+	grid-template-rows: 10% 1% 30% 20% 49% ;
+	max-height: 87vh;
+	width: 100vw;
+	overflow-y: auto;
+}
+
+.header {
+	display: grid;
+	grid-template-columns: 10% 30% 30%;
+	min-height: 100%;
+	align-items: center;
+	justify-content: center;
+}
+
+.LogoNegocio {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+}
+
+.LogoNegocio img {
+	width: 80%;
+	height: 100%;
+}
+
+.NombreNegocio {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	word-wrap: break-word;
+	height: 100%;
+}
+
+.NombreNegocio p {
+	font-size: 100%;
+	margin: 0;
+	padding: 0%;
+}
+
+.InformacionNegocio {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	word-wrap: break-word;
+	height: 100%;
+}
+
+.InformacionNegocio p {
+	font-size: 100%;
+	margin: 0;
+	padding: 0%;
+}
+
+.BarraDivisora{
+	width: 95%;
+	margin-left: 2.5%;
+	height: 100%;
+	border-bottom: 7px solid black;
+	margin-top: 4%;
+}
+
+.DatosVenta {
+	display: grid;
+	width: 95%;
+	margin: 4% 1.7% 0 1.7%; ;
+	grid-template-rows: 10% 20% 20% 50%;
+}
+
+.InformacionVenta{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: flex-start;
+	margin: 0 2%;
+}
+
+.InformacionVenta h3 {
+	font-size: 150%;
+}
+
+h3 {
+	color: #5e60ce;
+}
+
+.InformacionVenta p {
+	font-size: 100%;
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+}
+
+.InformacionPersonal {
+	display: grid;
+	grid-template-columns: 45% 45%;
+	gap: 5%;
+	margin: 2%;
+}
+
+.InformacionVendedor, .InformacionCliente {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+}
+
+.InformacionVendedor h3, .InformacionCliente h3 {
+	font-size: 120%;
+}
+
+.InformacionVendedor p, .InformacionCliente p {
+	font-size: 100%;
+	font-weight: bold;
+}
+
+.InformacionVendedor p span, .InformacionCliente p span {
+	font-weight: normal;
+}
+
+.InformacionDetalleVenta {
+	margin-top: 14%;
+	margin-left: 2%;
+	width: 98%;
+	height: fit-content;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.InformacionProductos {
+	margin-top: 20%;
+	width: 98%;
+	margin-left: 2%;
+}
+
+@media screen and (max-width: 790px) { 
+
+	.DatosVenta {
+		margin: 4% 1.7% 0 1.7%; ;
+	}
+
+	.InformacionPersonal {
+		margin: 5% 3%;
+	}
+
+	.InformacionDetalleVenta {
+		margin-top: 50%;
+	}
+
+	.header {
+		height: 70%;
+		grid-template-columns: 10% 40% 40%;
+	}
+
+	.NombreNegocio p {
+		font-size: 60%;
+	}
+
+	.InformacionNegocio p {
+		font-size: 60%;
+	}
+
+	.LogoNegocio img {
+		width: 100%;
+		height: 70%;
+	}
+
+	.InformacionVenta {
+		margin: 1% 3% ;
+	}
+
+	.InformacionVenta h3 {
+		font-size: 90%;
+		margin: 0;
+		padding: 0;
+	}
+
+	.InformacionVenta p {
+		font-size: 70%;
+		margin: 0;
+		padding: 0;
+	}
+
+	.InformacionVendedor h3, .InformacionCliente h3 {
+		font-size: 90%;
+	}
+
+	.InformacionVendedor p, .InformacionCliente p {
+		font-size: 70%;
+	}
+
+	th, td {
+		font-size: 70%;
+		padding: 1px;
+		text-align: center;
+		vertical-align: middle;
+	  }
+
+	  .InformacionProductos {
+		margin-top:69%;
+	  }
+
+	  .InformacionProductos h3 {
+		font-size: 90%;
+	  }
+}
+
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+  }
+  
+  th, td {
+	padding: 10px;
+	text-align: center;
+	vertical-align: middle;
+  }
+  
+  th {
+	font-weight: bold;
+  }
+  
+  td {
+	word-wrap: break-word;
+  }

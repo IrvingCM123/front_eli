@@ -1,1 +1,107 @@
-<p>visualizar-compra works!</p>
+<body class="contenedor">
+
+	<header class="header">
+
+		<section class="LogoNegocio">
+			<img src="https://firebasestorage.googleapis.com/v0/b/novedades-68953.appspot.com/o/klipartz.com.png?alt=media&token=09a6747a-e545-4222-840b-8879c97b65b2"
+				alt="">
+		</section>
+
+		<section class="NombreNegocio">
+			<p id="NombreNegocio">Novedades y Hogar</p>
+			<p id="DireccionNegocio">Fraccionamiento Reserva Territorial calle 10</p>
+			<p id="LocalidadNegocio">Huatusco, Veracruz</p>
+		</section>
+
+		<section class="InformacionNegocio">
+			<p id="EmailNegocio">Email: Novhogar76@gmail.com</p>
+			<p id="TelefonoNegocio">Telefono: 273-688-4086</p>
+		</section>
+
+	</header>
+
+	<section class="BarraDivisora">
+
+	</section>
+
+	<article class="DatosVenta">
+
+		<section class="InformacionVenta">
+			<h3>Órden de compra</h3>
+			<p id="FechaVenta">Generada el: {{compraSeleccionada.orden_compra_fecha_ordenado}}</p>
+			<p id="FechaVenta">Entregada el: {{compraSeleccionada.orden_compra_fecha_entregado || 'No ha sido entregado'}}</p>
+		</section>
+
+		<section class="InformacionPersonal">
+			<section class="InformacionVendedor">
+				<h3> Personal que ordenó la compra: </h3>
+				<p id="NombrePersonal">Nombre: <span>{{compraSeleccionada?.detalle_orden_compra_ID?.detalleOC_Cuenta_ID?.cuenta_Nombre}} {{compraSeleccionada?.detalle_orden_compra_ID?.detalleOC_Cuenta_ID?.cuenta_Apellido}} </span> </p>
+				<p id="EmailPersonal">Email: <span>{{compraSeleccionada.detalle_orden_compra_ID.detalleOC_Cuenta_ID?.cuenta_Correo}}</span> </p>
+				<p id="PuestoPersonal">Puesto: <span>{{compraSeleccionada.detalle_orden_compra_ID.detalleOC_Cuenta_ID?.cuenta_Rol}}</span> </p>
+				<p id="EstadoPersonal">Estado del personal: <span>{{compraSeleccionada.detalle_orden_compra_ID.detalleOC_Cuenta_ID?.cuenta_Estado_Cuenta}}</span></p>
+			</section>
+
+			<section class="InformacionCliente">
+				<h3>Proveedor solicitado: </h3>
+				<p id="NombreCliente">Nombre: <span>{{compraSeleccionada.detalle_orden_compra_ID.detalleOC_Proveedor_ID?.proveedor_Nombre}} </span></p>
+				<p id="EmailCliente">Email: <span>{{compraSeleccionada.detalle_orden_compra_ID.detalleOC_Proveedor_ID?.proveedor_Email }}</span></p>
+			</section>
+		</section>
+
+		<section class="InformacionDetalleVenta">
+			<table class="table  table-hover">
+				<thead>
+					<tr>
+						<th scope="col">Folio de Compra</th>
+						<th scope="col">Estado</th>
+						<th scope="col">Cantidad Prod.</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td> {{compraSeleccionada.orden_compra_ID}} </td>
+						<td id="EstadoCompra">
+							<select [(ngModel)]="compraSeleccionada.orden_compra_estado"
+								(change)="actualizarEstadoCompra()" name="orden_compra_estado" id="orden_compra_estado">
+								<option value="PAGADO">PAGADO</option>
+								<option value="PENDIENTE">PENDIENTE</option>
+								<option value="CANCELADO">CANCELADO</option>
+								<option value="REEMBOLSADO">REEMBOLSADO</option>
+								<option value="ENTREGADO">ENTREGADO</option>
+								<option value="ENVIADO">ENVIADO</option>
+							</select>
+						</td>
+						<td> {{compraSeleccionada.detalle_orden_compra_ID.detalleOC_Cantidad_Producto}} </td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+
+		<section class="InformacionProductos">
+			<h3> Productos solicitados </h3>
+			<table class="table  table-hover">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Nombre</th>
+						<th scope="col">Cantidad</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr	*ngFor="let producto of compraSeleccionada.detalle_orden_compra_ID.detalleOC_ProductoOC_ID; let id = index" id="tr-{{id}}">
+						<td id="venta-id-{{id}}">{{id + 1}}</td>
+						<td id="venta-nombreprod-{{id}}">{{producto.productoOC_Nombre_Producto}}</td>
+						<td id="venta-cantidadprod-{{id}}">{{producto.productoOC_Cantidad_Producto}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+
+	</article>
+
+	<footer>
+
+	</footer>
+
+
+</body>

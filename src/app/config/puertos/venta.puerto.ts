@@ -6,4 +6,4 @@ export abstract class ventaPuerto {
 	  abstract obtenerVentas(): Observable<Venta[]>;
 	  abstract eliminarVenta(venta_ID: number, estadoVenta: string): Observable<any>;
 	  abstract actualizarEstadoVenta(venta_ID: number, venta_EstadoVenta: string): Observable<any>;
-}
+} 

@@ -1,0 +1,75 @@
+.contenedor {
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	height: 90vh;
+	min-width: 98vw;
+	overflow-y: auto;
+}
+
+.tarjeta {
+	margin-top: 1%;
+	width: 99%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	overflow-y: auto;
+}
+ 
+.header {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 10% 10% 10% 55%;
+	align-items: center;
+	gap: 2%;
+}
+
+.datos {
+	margin-top: 2px;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.tabla {
+	min-width: 100%;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+  }
+  
+  th, td {
+	padding: 10px;
+	text-align: left;
+	vertical-align: middle;
+  }
+  
+  th {
+	font-weight: bold;
+  }
+  
+  tr:nth-child(even) {
+	background-color: #f9f9f9;
+  }
+  
+  td {
+	word-wrap: break-word;
+  }
+  
+
+@media screen and (max-width: 790px) {
+	.header {
+		grid-template-columns:20% 30% 20% 30%;
+	}
+
+	select {
+		font-size: 90%;
+	}
+
+	option {
+		font-size: 90%;
+	}
+}

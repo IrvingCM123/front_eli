@@ -198,3 +198,10 @@ button:hover {
 	color: #5c1f5c;
 	font-weight: 600;
 }
+
+.MensajeVacio {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-items: center;
+}

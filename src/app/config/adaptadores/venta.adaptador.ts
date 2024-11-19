@@ -1,5 +1,5 @@
 import { Observable } from "rxjs";
-
+  
 // Importación del módulo HttpClient para poder realizar peticiones HTTP
 import { HttpClient } from "@angular/common/http";
 

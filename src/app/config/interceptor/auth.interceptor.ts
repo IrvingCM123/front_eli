@@ -22,6 +22,7 @@ export class AuthInterceptor implements HttpInterceptor {
       this.cacheService.eliminar_DatoLocal('categorias');
       this.cacheService.eliminar_DatoLocal('proveedores');
       this.cacheService.eliminar_DatoLocal('ventas');
+      this.cacheService.eliminar_DatoLocal('compras');
     }
 
     // Obtener el token de autenticación almacenado en la caché local

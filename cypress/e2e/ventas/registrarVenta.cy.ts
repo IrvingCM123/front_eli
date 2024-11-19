@@ -1,4 +1,4 @@
-describe('Componente Productos', () => {
+describe('Componente Ventas', () => {
 
 	beforeEach(() => {
 		cy.visit('/iniciarSesion');

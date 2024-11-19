@@ -6,7 +6,7 @@ import { inventarioUseCase } from 'src/app/domain/inventario/inventario.use-case
 
 // Importación de la entidad de inventario para poder utilizarla en la clase de obtener productos de inventario
 import { inventarioEntity, Inventario } from 'src/app/domain/inventario/inventario.entity';
-
+ 
 // Importación de la librería Injectable, para poder inyectar servicios en la clase de obtener productos de inventario
 import { Injectable } from '@angular/core';
 
@@ -85,7 +85,6 @@ export class claseObtenerProductos {
       const productos: inventarioEntity[] = await this.obtenerDatosProductos() ?? [];
       // Si la cantidad de productos es mayor a 0, se obtienen las categorías de los productos
       if (productos.length > 0) {
-        console.log(productos);
         // Se obtienen las categorías de los productos, almacenando el resultado en la variable categorias y se eliminan las categorías duplicadas
         const categorias = productos.map((producto: any) => producto.inventario_ProductoID.producto_Categoria);
         // Se eliminan las categorías duplicadas, almacenando el resultado en la variable categoriasUnicas
@@ -230,7 +229,6 @@ export class claseObtenerProductos {
 
       return productosFiltrados;
     } catch (error) {
-      console.error('Error al buscar productos con filtros:', error);
       return [];
     }
   }
