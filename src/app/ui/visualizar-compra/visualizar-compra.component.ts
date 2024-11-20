@@ -70,7 +70,7 @@ export class VisualizarCompraComponent implements OnInit {
     try {
       const resultado = await this.compraUseCase.actualizarEstadoCompra(this.compraSeleccionada.orden_compra_ID, this.compraSeleccionada.orden_compra_estado).toPromise();
       if (resultado.status == 201) {
-        await this.claseMostrarAlerta.mostrarAlertaRuta("Éxito", "Se ha actualizado el estado de la venta correctamente", "/mostrarVentas");
+        await this.claseMostrarAlerta.mostrarAlertaRuta("Éxito", "Se ha actualizado el estado de la venta correctamente", "/mostrarCompras");
       } else {
         await this.claseMostrarAlerta.mostrarAlerta("Error", "Ha ocurrido un error al actualizar el estado de la venta");
       }

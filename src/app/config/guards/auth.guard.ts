@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 // Importar el servicio AuthService para verificar si el usuario está autenticado y obtener el rol del usuario
 import { AuthService } from './auth.service';
+import { claseMostrarAlerta } from 'src/app/common/services/alerta.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,11 @@ import { AuthService } from './auth.service';
 export class AuthGuard implements CanActivate {
 
   // Inyectar el servicio AuthService y el módulo Router
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService, 
+    private router: Router,
+    private alertaClase: claseMostrarAlerta
+  ) {}
 
   // Método para verificar si el usuario está autenticado y tiene el rol necesario para acceder a la ruta
   canActivate(
@@ -26,8 +31,9 @@ export class AuthGuard implements CanActivate {
     if (this.authService.isAuthenticated() && (roles.length === 0 || roles.includes(userRole))) {
       return true;
     } else {
+      this.alertaClase.mostrarAlerta('Acceso Denegado', 'La ruta no existe o no tiene permiso para visitarla')
       // Redirigir al usuario a la página de inicio de sesión si no está autenticado o no tiene el rol necesario
-      this.router.navigate(['/iniciarSesion']);
+      this.router.navigate(['/inventario']);
       return false;
     }
   }

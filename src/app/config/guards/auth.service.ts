@@ -34,4 +34,5 @@ export class AuthService {
     const decodedToken: any = jwt_decode(token);
     return decodedToken.ID;
   }
+
 }

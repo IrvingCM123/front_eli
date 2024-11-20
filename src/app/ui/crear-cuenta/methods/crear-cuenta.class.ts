@@ -28,7 +28,6 @@ export class claseCrearCuenta {
     // Llamada al caso de uso para la creación de una cuenta de usuario, utilizando la nueva cuenta creada
     try {
       const resultado: any = await this.crearCuentaUseCase.crearCuenta(nueva_cuenta).toPromise();
-      console.log(resultado, 'resultado');
       // Si el resultado es incorrecto, se retorna un false para gestionar el mensaje de error en la clase principal
       if (resultado?.status == 201) {
         return {

@@ -200,3 +200,16 @@ nav ul li .dropdown-toggle:hover {
     display: none;
   }
 }
+
+button {
+	cursor: pointer;
+	background-color: #5c1f5c;
+	color: #fff;
+	font-weight: 600;
+}
+
+button:hover {
+	background-color: #fdfdfd;
+	color: #5c1f5c;
+	font-weight: 600;
+}

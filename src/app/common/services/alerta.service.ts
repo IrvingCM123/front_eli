@@ -13,7 +13,9 @@ import { LoadingController } from '@ionic/angular';
 import { Cache_Service } from "./cache.Service";
 
 // Decorador Injectable para inyectar servicios en otros componentes o servicios
-@Injectable()
+@Injectable({
+  providedIn: 'root', // Esto lo hace disponible en toda la aplicación
+})
 // Exportar la clase para mostrar alertas en el sistema
 export class claseMostrarAlerta {
 

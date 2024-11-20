@@ -30,21 +30,31 @@ const routes: Routes = [
   { path: 'crearCuenta', component: CrearCuentaComponent },
   // Rutas de navegación del sistema con la seguridad de autenticación y autorización, mostrando el contenido correspondiente a la ruta solicitada y los roles permitidos
   // En este caso, la ruta de inventario es para todos los usuarios, mientras que las demás rutas son exclusivas para los roles declarados
-  { path: 'inventario', component: InventarioComponent, canActivate: [AuthGuard], data: { roles: []} },
-  { path: 'agregar-producto', component: AgregarProductosComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
-  { path: 'agregar-proveedor', component: AgregarProveedorComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
-  { path: 'visualizarproveedor', component: VisualizarProveedorComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN', 'SECRE'] } },
-  { path: 'visualizarproducto', component: VisualizarProductoComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN', 'SECRE'] } },
-  { path: 'visualizarventa', component: VisualizarVentaComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN', 'SECRE'] } },
-  { path: 'venderproductos', component: VenderProductosComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
-  { path: 'proveedores', component: ProveedoresComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN', 'SECRE'] } },
-  { path: 'mostrarVentas', component: MostrarVentasComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN', 'SECRE'] } },
-  { path: 'ordenCompra', component: GenerarCompraComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN', 'SECRE'] } },
-  { path: 'carritoCompras', component: CarritoCompraComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN', 'SECRE'] } },
-  { path: 'mostrarCompras', component: MostrarComprasComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN', 'SECRE'] } },
-  { path: 'visualizarCompra', component: VisualizarCompraComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN', 'SECRE'] } },
+
+  //Ruta para la parte de inventario
+  { path: 'inventario', component: InventarioComponent, canActivate: [AuthGuard], data: { roles: []} }, // Mostrar todos los productos registrados
+  { path: 'agregar-producto', component: AgregarProductosComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } }, // Registrar un nuevo producto en el sistema
+  { path: 'visualizarproducto', component: VisualizarProductoComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN', 'SECRE'] } }, //Visualizar un producto especifico 
+
+  // Rutas para componente proveedores
+  { path: 'proveedores', component: ProveedoresComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN', 'SECRE'] } }, // Mostrar todos los proveedores registrados
+  { path: 'agregar-proveedor', component: AgregarProveedorComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } }, // Registrar un nuevo proveedor en el sistema
+  { path: 'visualizarproveedor', component: VisualizarProveedorComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN', 'SECRE'] } }, //Visuzalizar un proveedor especifico
+
+  // Rutas para componente ventas
+  { path: 'mostrarVentas', component: MostrarVentasComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN', 'SECRE'] } }, // Mostrar todas las ventas registradas
+  { path: 'venderproductos', component: VenderProductosComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } }, // Realizar venta de productos a clientes
+  { path: 'visualizarventa', component: VisualizarVentaComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN', 'SECRE'] } }, // Visualizar una venta especifica
+
+  //Rutas para componente compras
+  { path: 'mostrarCompras', component: MostrarComprasComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN', 'SECRE'] } }, // Mostrar todas las compras registradas
+  { path: 'ordenCompra', component: GenerarCompraComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN', 'SECRE'] } }, // Generar una nueva orden de compra, agregando los productos al carrit
+  { path: 'carritoCompras', component: CarritoCompraComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN', 'SECRE'] } }, // Visualizar el carrito de compras, enviando la orden de compra al servidor
+  { path: 'visualizarCompra', component: VisualizarCompraComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN', 'SECRE'] } }, // Visualizar una orden de compra especifica
+  
   // Ruta por defecto para la redirección al inicio de sesión
-  { path: '', redirectTo: 'iniciarSesion', pathMatch: 'full' }
+  { path: '', redirectTo: 'iniciarSesion', pathMatch: 'full' },
+  { path: '**', redirectTo: 'inventario' } // Si la ruta es inexistente o denegada, enviar a inventario
 ];
 
 // Módulo de rutas del sistema para la navegación entre los componentes

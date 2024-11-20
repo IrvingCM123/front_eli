@@ -41,7 +41,6 @@
 							<th scope="col">#</th>
 							<th scope="col">Fecha de Compra</th>
 							<th scope="col">Total Productos</th>
-							<th scope="col">Total Compra</th>
 							<th scope="col">Estado Compra</th>
 							<th scope="col">Encargado Compra</th>
 						</tr>
@@ -51,7 +50,6 @@
 							<th id="compra-id-{{id}}" scope="row">{{id + 1}}</th>
 							<td id="compra-fecha-{{id}}">{{ compra.orden_compra_fecha_ordenado }}</td>
 							<td id="compra-productos-{{id}}">{{ compra.detalle_orden_compra_ID.detalleOC_Cantidad_Producto }} Producto(s)</td>
-							<td id="compra-monto-{{id}}"> $ {{  compra.detalle_orden_compra_ID.detalleOC_MontoTotal }}</td>
 							<td id="compra-estado-{{id}}">{{ compra.orden_compra_estado }}</td>
 							<td id="compra-correo-{{id}}">{{ compra.detalle_orden_compra_ID.detalleOC_Cuenta_ID.cuenta_Correo }}</td>
 						</tr>
