@@ -53,10 +53,15 @@ export class VisualizarCompraComponent implements OnInit {
   async obtenerCompraSeleccionada() {
     try {
       this.compraSeleccionada = (await this.cacheServicio.obtener_DatoLocal('compraSeleccionada')) ?? [];
-        const fechaCompleta = new Date(this.compraSeleccionada.orden_compra_fecha_ordenado);
-        const soloFecha = fechaCompleta.toISOString().split('T')[0];
-        const soloHora = fechaCompleta.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        let fechaCompleta = new Date(this.compraSeleccionada.orden_compra_fecha_ordenado);
+        let soloFecha = fechaCompleta.toISOString().split('T')[0];
+        let soloHora = fechaCompleta.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         this.compraSeleccionada.orden_compra_fecha_ordenado = `${soloFecha} ${soloHora}`; 
+
+        fechaCompleta = new Date(this.compraSeleccionada.orden_compra_fecha_entregado);
+        soloFecha = fechaCompleta.toISOString().split('T')[0];
+        soloHora = fechaCompleta.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        this.compraSeleccionada.orden_compra_fecha_entregado = `${soloFecha} ${soloHora}`; 
         return this.compraSeleccionada;
     } catch (error) {
       return false;
@@ -70,14 +75,14 @@ export class VisualizarCompraComponent implements OnInit {
     try {
       const resultado = await this.compraUseCase.actualizarEstadoCompra(this.compraSeleccionada.orden_compra_ID, this.compraSeleccionada.orden_compra_estado).toPromise();
       if (resultado.status == 201) {
-        await this.claseMostrarAlerta.mostrarAlertaRuta("Éxito", "Se ha actualizado el estado de la venta correctamente", "/mostrarCompras");
+        await this.claseMostrarAlerta.mostrarAlertaRuta("Éxito", "Se ha actualizado el estado de la compra correctamente", "/mostrarCompras");
       } else {
-        await this.claseMostrarAlerta.mostrarAlerta("Error", "Ha ocurrido un error al actualizar el estado de la venta");
+        await this.claseMostrarAlerta.mostrarAlerta("Error", "Ha ocurrido un error al actualizar el estado de la  compra");
       }
 
     } catch (error) {
       await loading.dismiss();
-      await this.claseMostrarAlerta.mostrarAlerta("Error", "Ha ocurrido un error al actualizar el estado de la venta");
+      await this.claseMostrarAlerta.mostrarAlerta("Error", "Ha ocurrido un error al actualizar el estado de la  compra");
     } finally {
       await loading.dismiss();
     }

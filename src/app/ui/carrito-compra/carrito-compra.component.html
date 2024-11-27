@@ -1,27 +1,26 @@
 <div class="card">
 
-	<section *ngFor="let carrito of carritoCompras">
+	<section *ngFor="let carrito of carritoCompras; let id = index">
 		<p-dataView #dv [value]="carrito.productos" [paginator]="false" [rows]="9" filterBy="name" layout="list">
 
 			<ng-template pTemplate="header">
-				<div class="flex flex-column md:flex-row md:justify-content-between">
+				<div class="flex flex-column md:flex-row md:justify-content-between" id="productoProveedor-{{id}}" >
 					{{carrito.proveedor}}
 				</div>
 			</ng-template>
 
-			<ng-template let-product pTemplate="listItem">
-
+			<ng-template let-product pTemplate="listItem" let-i="rowIndex">
 
 				<div class="p-col-12">
 					<div class="product-list-item">
 						<img src="{{product.imagen}}" [alt]="product.producto" />
-						<div class="product-list-detail">
+						<div id="productoNombre-{{i}}" class="product-list-detail">
 							<div class="product-name">{{product.producto}}</div>
 						</div>
 						<div class="product-list-action" class="imagen">
-							<img src="assets/basura.png" #botonEliminarProducto alt=""
+							<img id="botonEliminar-{{i}}" src="assets/basura.png" #botonEliminarProducto alt=""
 								(click)="eliminar_VentaProducto(product)" style="width: 15%;">
-							<input class="inputCantidad" type="number" [(ngModel)]="product.cantidad" min="1">
+							<input name="cantidadProducto-{{i}}" class="inputCantidad" type="number" [(ngModel)]="product.cantidad" min="1">
 						</div>
 					</div>
 
@@ -35,13 +34,13 @@
 
 	<section>
 		<button *ngIf="carritoCompras.length > 0" class="form-control" style="margin-top: 2%;"
-			(click)="generarOrdenCompra()">
+			(click)="generarOrdenCompra()" id="GenerarOrden">
 			Generar orden de compra
 		</button>
 
 		<section *ngIf="carritoCompras.length == 0" class="MensajeVacio">
-			<h3>¡El carrito de compras está vacío!</h3>
-			<span>Agrega productos para realizar una orden de compra</span>
+			<h3 id="TituloVacio">¡El carrito de compras está vacío!</h3>
+			<span id="CuerpoVacio">Agrega productos para realizar una orden de compra</span>
 		</section>
 	</section>
 

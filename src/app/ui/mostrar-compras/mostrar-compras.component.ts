@@ -35,7 +35,7 @@ export class MostrarComprasComponent implements OnInit {
   }
 
   async obtenerCompras() {
-    const loading = await this.claseAlerta.crearLoading('Obteniendo ventas...');
+    const loading = await this.claseAlerta.crearLoading('Obteniendo compras...');
     await loading.present();
     let obtenerCompras: any = await this.claseCompras.devolverCompras();
 

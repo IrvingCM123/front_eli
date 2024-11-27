@@ -10,7 +10,7 @@
 					(onChange)="OrdenarPrecios($event)" styleClass="mb-2 md:mb-0"></p-dropdown>
 				<span class="p-input-icon-left mb-2 md:mb-0">
 					<i class="pi pi-search"></i>
-					<input type="search" [(ngModel)]="productoBuscar" pInputText
+					<input type="search" [(ngModel)]="productoBuscar" pInputText name="buscarProducto"
 						(ngModelChange)="buscarProductoNombre(productoBuscar)" placeholder="Buscar producto" />
 				</span>
 
@@ -39,25 +39,23 @@
 
 		</ng-template>
 
-		<ng-template let-product pTemplate="listItem">
+		<ng-template let-product pTemplate="listItem" let-i="rowIndex">
 
 			<div class="p-col-12">
 				<div class="product-list-item" (click)="enviarIdProductoSeleccionado(product)">
 					<img src="{{product.inventario_ProductoID.producto_ImagenURL}}" [alt]="product.name" />
 					<div class="product-list-detail">
-						<div class="product-name">{{product.inventario_ProductoID.producto_Nombre}}</div>
+						<div id="productoNombre-{{i}}" class="product-name">{{product.inventario_ProductoID.producto_Nombre}}</div>
 						<i class="pi pi-tag product-category-icon"></i>
-						<span class="product-category">{{product.inventario_ProductoID.producto_Categoria}}</span>
+						<span  id="productoCategoria-{{i}}" class="product-category">{{product.inventario_ProductoID.producto_Categoria}}</span>
 					</div>
 					<div class="product-list-action">
-						<span *ngIf="product.inventario_ProductoID.producto_Status != 'INACTIVO'"
+						<span  id="inventarioStaus-{{i}}" *ngIf="product.inventario_ProductoID.producto_Status != 'INACTIVO'"
 							  [class]="'product-badge status-' + product.inventario_Status.toLowerCase()">
 							{{product.inventario_Status}}
 						</span>
 						<section>
-							<button class="form-control" (click)="agregarProductoCarrito(product); $event.stopPropagation()">
-								Ordenar
-							</button>
+							<button id="botonOrdenar-{{i}}" class="form-control" (click)="agregarProductoCarrito(product); $event.stopPropagation()">Ordenar</button>
 						</section>
 					</div>
 				</div>

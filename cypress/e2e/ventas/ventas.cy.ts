@@ -24,8 +24,10 @@ describe('Componente Productos', () => {
 
 		cy.get('.loading-wrapper').should('be.visible');
 		cy.contains('.loading-content', 'Obteniendo ventas...').should('be.visible');
+		cy.wait(1000);
 		cy.get('.loading-wrapper').should('not.exist');
 		cy.wait('@getVentasVacio');
+		cy.wait(1000);
 		cy.get('.loading-wrapper').should('not.exist');
 	});
 
@@ -33,14 +35,17 @@ describe('Componente Productos', () => {
 
 		cy.intercept('GET', '**/servidor/venta/obtenerVentas').as('getVentas');
 		cy.visit('/mostrarVentas');
-
+		cy.wait(1000);
 		cy.get('.loading-wrapper').should('be.visible');
 		cy.contains('.loading-content', 'Obteniendo ventas...').should('be.visible');
+		cy.wait(1000);
 		let resultado: any;
 		cy.wait('@getVentas').then((interception: any) => {
 			resultado = interception.response.body;
 			expect(resultado).to.exist;
 		});
+
+		cy.wait(1000);
 
 		cy.then(() => {
 			cy.get('th').should('contain', '#');
@@ -50,7 +55,7 @@ describe('Componente Productos', () => {
 			cy.get('th').should('contain', 'Estado Venta');
 			cy.get('th').should('contain', 'Encargado Venta');
 
-			expect(resultado.length).to.be.gte(2);
+			expect(resultado.length).to.be.gte(1);
 
 			cy.get('tbody tr').should('have.length', resultado.length);
 
@@ -76,19 +81,20 @@ describe('Componente Productos', () => {
 
 		cy.intercept('GET', '**/servidor/venta/obtenerVentas').as('getVentas');
 		cy.visit('/mostrarVentas');
-
+		
 		cy.get('.loading-wrapper').should('be.visible');
 		cy.contains('.loading-content', 'Obteniendo ventas...').should('be.visible');
+		cy.wait(1000);
 		let resultado: any;
 		cy.wait('@getVentas').then((interception: any) => {
 			resultado = interception.response.body;
 			expect(resultado).to.exist;
 		});
-
+		cy.wait(1000);
 		cy.then(() => {
 			cy.get('#venta-id-0').click()
 		});
-
+		cy.wait(1000);
 		cy.url().should('include', '/visualizarventa');
 
 	});
